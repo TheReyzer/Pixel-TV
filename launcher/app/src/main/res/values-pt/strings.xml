@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Início</string>
+    <string name="inputs">Entradas</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="settings">Ajustes</string>
+    <string name="choose_input">Entradas</string>
+    <string name="connected">Conectado</string>
+    <string name="standby">Em espera</string>
+    <string name="not_connected">Sem sinal</string>
+    <string name="live_tv">TV ao vivo</string>
+    <string name="no_inputs">Nenhuma entrada encontrada</string>
+    <string name="good_morning">Bom dia</string>
+    <string name="good_afternoon">Boa tarde</string>
+    <string name="good_evening">Boa noite</string>
+    <string name="good_night">Boa noite</string>
+    <string name="ethernet">Rede cabeada</string>
+    <string name="offline">Sem conexão</string>
+    <string name="not_available">Indisponível nesta TV</string>
+    <string name="cant_open">Não foi possível abrir %1$s</string>
+    <string name="date_format">EEEE  d \'de\' MMMM</string>
+    <string name="dream_name">Relógio</string>
+    <string name="menu_move">Mover aplicativo (usar setas)</string>
+    <string name="menu_pin_dock">Colocar nos Favoritos (Dock)</string>
+    <string name="menu_app_info">Forçar parada / Info do app</string>
+    <string name="menu_reset_order">Restaurar ordem padrão</string>
+    <string name="moving_hint">Movendo %1$s  •  Setas movem, OK salva</string>
+    <string name="order_saved">Ordem salva</string>
+    <string name="close_trailer">Fechar trailer</string>
+    <string name="trailer_fullscreen">Tela cheia</string>
+    <string name="hdmi_switch_question">%1$s conectado. Deseja mudar de entrada?</string>
+    <string name="hdmi_not_now">Agora não</string>
+    <string name="hdmi_switch">Mudar para %1$s</string>
+    <string name="profile_account">Trocar ou editar perfil</string>
+    <string name="rate_title">Avaliar</string>
+    <string name="no_profile_recommendations">Sem sugestões disponíveis para este perfil nesta categoria. Títulos assistidos ficam ocultos por 21 dias.</string>
+    <string name="filter_all">Todos</string>
+    <string name="discover">Descobrir</string>
+    <string name="edit_discovery">Editar escolhas de Descobrir</string>
+</resources>

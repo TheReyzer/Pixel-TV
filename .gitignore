@@ -1,0 +1,34 @@
+tools/venv/
+tools/adbkey/
+tools/__pycache__/
+launcher/.gradle/
+launcher/build/
+launcher/app/build/
+launcher/local.properties
+# your own TV's dumps (serial, android_id, device names) stay local
+backup/
+.DS_Store
+
+# Local/private configuration and publication output
+.env
+.env.*
+*.keystore
+*.jks
+*.p12
+*.pem
+*.apk
+*.aab
+*.log
+**/__pycache__/
+**/*.pyc
+/dist/
+/launcher/*.png
+/launcher/*.jpg
+/launcher/*.jpeg
+/launcher/profile-assets/*.png
+/launcher/discovery-assets/*.png
+/tools/test_*.py
+/examples/tcl-beyondtv/
+**/device-config.local.json
+.vscode/
+.idea/

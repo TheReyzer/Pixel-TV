@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:orientation="horizontal" android:gravity="center_vertical"
+    android:background="@drawable/glass_panel" android:paddingStart="16dp" android:paddingEnd="16dp"
+    android:paddingTop="12dp" android:paddingBottom="12dp">
+    <ImageView android:id="@+id/icon" android:layout_width="20dp" android:layout_height="20dp"
+        android:layout_marginEnd="12dp" android:contentDescription="@null"/>
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+        <TextView android:id="@+id/title" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="#FFF2F2F2" android:textSize="15sp" android:fontFamily="@font/outfit"/>
+        <LinearLayout android:id="@+id/noticeStatus" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <View android:id="@+id/dot" android:layout_width="7dp" android:layout_height="7dp"
+                android:layout_marginEnd="8dp" android:background="@drawable/status_dot"/>
+            <TextView android:id="@+id/status" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="#FFBCBCC7" android:textSize="11sp" android:fontFamily="@font/outfit" android:letterSpacing="0.04"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

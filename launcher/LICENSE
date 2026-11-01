@@ -1,0 +1,5 @@
+The combined Android application, including NewPipeExtractor, is distributed under GNU GPL version 3 or later. See COPYING and THIRD_PARTY_NOTICES.md.
+
+Original project portions retain the MIT copyright/license notice in ../LICENSE. Preserve those notices with the source. Contributions in this derivative launcher are supplied under GPL-3.0-or-later for distribution of the combined application. Fonts, animations and other third-party assets retain their identified licenses.
+
+Redistribution of the APK requires the corresponding source and build material for that exact version, including applicable dependency source requirements. An unrelated upstream version does not substitute for modified source.

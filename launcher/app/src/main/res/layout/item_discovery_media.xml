@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:clipChildren="false" android:focusable="true"
+    android:focusableInTouchMode="true" android:clickable="true">
+    <FrameLayout android:id="@+id/discoverySurface" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="top" android:background="@drawable/tile_bg" android:duplicateParentState="true">
+    <ImageView android:id="@+id/discoveryArtwork" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:layout_gravity="top" android:scaleType="centerCrop" android:contentDescription="@null" />
+    <View android:id="@+id/discoveryScrim" android:alpha="0" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_gravity="top" android:background="@drawable/grid_card_scrim" />
+    <TextView android:id="@+id/discoveryBadge" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_margin="8dp" android:textColor="#FFFFFF" android:textSize="11sp" android:fontFamily="@font/outfit"
+        android:background="@drawable/media_badge_bg" android:paddingStart="6dp" android:paddingEnd="6dp" />
+    <LinearLayout android:id="@+id/discoveryCaption" android:alpha="0" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom"
+        android:orientation="vertical" android:padding="8dp" android:descendantFocusability="blocksDescendants">
+        <TextView android:id="@+id/discoveryTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="#FFFFFF" android:textSize="13sp" android:fontFamily="@font/outfit" android:singleLine="true" android:ellipsize="marquee" android:marqueeRepeatLimit="marquee_forever" android:includeFontPadding="false" />
+        <TextView android:id="@+id/discoveryOriginal" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#F0FFFFFF" android:textSize="11sp" android:fontFamily="@font/outfit" android:singleLine="true" android:ellipsize="marquee" android:marqueeRepeatLimit="marquee_forever" android:visibility="gone"/>
+    </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

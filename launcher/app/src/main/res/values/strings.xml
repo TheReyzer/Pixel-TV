@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_welcome" translatable="false">Bem-vindo</string>
+    <string name="home_preparing" translatable="false">Preparando sua tela inicial…</string>
+    <string name="home_preparing_detail" translatable="false">Organizando seus aplicativos e recomendações</string>
+    <string name="app_name">Home</string>
+    <string name="inputs">Inputs</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="settings">Settings</string>
+    <string name="choose_input">Inputs</string>
+    <string name="connected">Connected</string>
+    <string name="standby">Standby</string>
+    <string name="not_connected">No device</string>
+    <string name="live_tv">Live TV</string>
+    <string name="no_inputs">No inputs found</string>
+    <string name="good_morning">Good morning</string>
+    <string name="good_afternoon">Good afternoon</string>
+    <string name="good_evening">Good evening</string>
+    <string name="good_night">Good night</string>
+    <string name="ethernet">Ethernet</string>
+    <string name="offline">Offline</string>
+    <string name="not_available">Not available on this TV</string>
+    <string name="cant_open">Can\'t open %1$s</string>
+    <string name="date_format">EEEE  d MMMM</string>
+    <string name="dream_name">Clock</string>
+    <string name="menu_move">Move app (use arrows)</string>
+    <string name="menu_pin_dock">Pin to Dock (Favorites)</string>
+    <string name="menu_app_info">Force stop / App info</string>
+    <string name="menu_reset_order">Reset default order</string>
+    <string name="moving_hint">Moving %1$s • Arrows to move, OK to save</string>
+    <string name="order_saved">App order saved</string>
+    <string name="close_trailer">Close trailer</string>
+    <string name="trailer_fullscreen">Fullscreen</string>
+    <string name="hdmi_switch_question">%1$s connected. Switch input?</string>
+    <string name="hdmi_not_now">Not now</string>
+    <string name="hdmi_switch">Switch to %1$s</string>
+    <string name="profile_account">Switch or edit profile</string>
+    <string name="rate_title">Rate</string>
+    <string name="no_profile_recommendations">No suggestions available for this profile in this category. Watched titles stay hidden for 21 days.</string>
+    <string name="filter_all">All</string>
+    <string name="discover">Discover</string>
+    <string name="edit_discovery">Edit discovery choices</string>
+    <string name="watch_search_minimum" translatable="false">Digite pelo menos 2 caracteres.</string>
+    <string name="watch_search_loading" translatable="false">Buscando filmes e séries…</string>
+    <string name="watch_details_loading" translatable="false">Carregando o título…</string>
+    <string name="title_voice_unavailable" translatable="false">Voz indisponível nesta TV. Digite o título para buscar.</string>
+    <string name="title_voice_empty" translatable="false">Não foi possível ouvir o título. Tente novamente ou digite.</string>
+    <string name="title_search" translatable="false">Pesquisar filme ou série</string>
+    <string name="watch_search_failed" translatable="false">Não foi possível buscar. Verifique a conexão e tente novamente.</string>
+    <string name="title_voice_permission" translatable="false">Permita o microfone para pesquisar por voz. Você também pode digitar.</string>
+    <string name="title_voice_preparing" translatable="false">Preparando microfone…</string>
+    <string name="title_voice_listening" translatable="false">Ouvindo… diga o título em português ou inglês.</string>
+    <string name="title_voice_processing" translatable="false">Reconhecendo o título…</string>
+    <string name="title_voice_stopped" translatable="false">Escuta encerrada. Clique no microfone para tentar novamente.</string>
+    <string name="title_voice_network" translatable="false">Não foi possível reconhecer pela rede. Verifique a conexão e tente novamente.</string>
+    <string name="title_voice_pair_hint" translatable="false">Não captei sua voz. Se o microfone do controle parou, tente pareá-lo novamente. Em controles TCL, segure Home (casinha) + OK perto da TV até iniciar o pareamento. Isso também pode resolver a busca do YouTube.</string>
+    <string name="title_voice_retry" translatable="false">Clique no microfone para testar o controle novamente.</string>
+    <string name="title_voice_pair_manually" translatable="false">Abra Ajustes → Controles remotos e acessórios para parear o controle.</string>
+    <string name="title_voice_language_auto" translatable="false">Idioma: Automático · clique para trocar</string>
+    <string name="title_voice_language_en" translatable="false">Idioma: English · clique para trocar</string>
+    <string name="title_voice_language_pt" translatable="false">Idioma: Português · clique para trocar</string>
+</resources>

@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF000000">
+
+    <FrameLayout android:id="@+id/homeBackgroundLayers" android:layout_width="match_parent" android:layout_height="match_parent">
+    <!-- Full-bleed media backdrop artwork (subtle on card focus, vivid in Detail View). -->
+    <ImageView
+        android:id="@+id/mediaBackdropBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0"
+        android:contentDescription="@null" />
+
+    <View
+        android:id="@+id/mediaBackdropScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/detail_scrim"
+        android:alpha="0" />
+
+    <!-- Ambient glow in the colour of the focused dock app. -->
+    <View
+        android:id="@+id/ambient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/heroName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:alpha="0"
+        android:visibility="gone"
+        android:textColor="#FFFFFFFF"
+        android:textSize="32sp"
+        android:fontFamily="@font/outfit"
+        android:fontVariationSettings="'wght' 300"
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:id="@+id/mainContentColumn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"
+        android:paddingTop="18dp"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <!-- Top Bar: Greeting, Clock, Date/Weather, and Action Pills -->
+        <RelativeLayout
+            android:id="@+id/topHeaderBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/leftBlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/topButtons"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#8CFFFFFF"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/outfit"
+                    android:fontVariationSettings="'wght' 500"
+                    android:letterSpacing="0.22"
+                    android:textAllCaps="true" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:baselineAligned="true">
+
+                        <TextClock
+                            android:id="@+id/clock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:format12Hour="h:mm"
+                            android:format24Hour="HH:mm"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="44sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 300"
+                            android:letterSpacing="-0.04"
+                            android:includeFontPadding="false" />
+
+                        <TextClock
+                            android:id="@+id/ampm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="6dp"
+                            android:format12Hour="a"
+                            android:format24Hour=""
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 500"
+                            android:letterSpacing="0.08"
+                            android:textAllCaps="true" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        android:background="#33FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#D9FFFFFF"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 500"
+                            android:letterSpacing="0.10"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textAllCaps="true" />
+
+                        <TextView
+                            android:id="@+id/weatherText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="#9EFFFFFF"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 400"
+                            android:letterSpacing="0.06"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textAllCaps="true"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/topButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@id/leftBlock"
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/home_control_group"
+                android:padding="3dp"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <TextView android:id="@+id/btnInputs" style="@style/HomeTopSegment" android:text="@string/inputs" android:drawableStart="@drawable/ic_input" />
+                <TextView android:id="@+id/btnWifi" style="@style/HomeTopSegment" android:text="@string/wifi" android:drawableStart="@drawable/ic_wifi" />
+                <TextView android:id="@+id/btnSettings" style="@style/HomeTopSegment" android:text="@string/settings" android:drawableStart="@drawable/ic_settings" />
+                <View android:layout_width="1dp" android:layout_height="22dp" android:layout_marginHorizontal="4dp" android:background="#33FFFFFF" android:importantForAccessibility="no" />
+                <ImageView
+                    android:id="@+id/btnProfile"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="3dp"
+                    android:background="@drawable/profile_circle_bg"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/profile_account"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- Center & Bottom Area: Switches between Normal Home (Filter Bar + 3 Media Cards + Apps) and Full Media Detail View -->
+        <FrameLayout
+            android:id="@+id/homeBody"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <!-- STATE A: Normal Home View -->
+            <LinearLayout
+                android:id="@+id/normalHomeContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <!-- Media Showcase Section: Floating Glass Filter Bar + ‹ [    ] [  ] [  ] › -->
+                <LinearLayout
+                    android:id="@+id/mediaSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+
+                    <!-- Shared capsules: category / format, and compact content actions. -->
+                    <LinearLayout
+                        android:id="@+id/mediaFilterBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:id="@+id/recommendationFilters"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/home_control_group"
+                            android:padding="3dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView android:id="@+id/tabNovidades" style="@style/HomeFilterSegment" android:text="Novidades" />
+                            <TextView android:id="@+id/tabEmAlta" style="@style/HomeFilterSegment" android:text="Em alta" />
+                            <View android:id="@+id/filterCategoryDivider" android:layout_width="1dp" android:layout_height="22dp" android:layout_marginHorizontal="7dp" android:background="#4DFFFFFF" android:importantForAccessibility="no" />
+                            <TextView android:id="@+id/tabTodos" style="@style/HomeFilterSegment" android:text="@string/filter_all" />
+                            <TextView android:id="@+id/tabFilmes" style="@style/HomeFilterSegment" android:text="Filmes" />
+                            <TextView android:id="@+id/tabSeries" style="@style/HomeFilterSegment" android:text="Séries" />
+                        </LinearLayout>
+                        <Space android:id="@+id/filterActionsSpacer" android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="0" android:visibility="gone" />
+                        <FrameLayout
+                            android:id="@+id/contentActions"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="@drawable/home_control_group"
+                            android:padding="3dp">
+                            <LinearLayout android:id="@+id/contentActionButtons" android:layout_gravity="end|center_vertical" android:layout_width="wrap_content" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center_vertical">
+                            <TextView android:id="@+id/btnSearchMedia" style="@style/HomeActionSegment" android:text="@string/title_search" android:drawableStart="@drawable/ic_search" />
+                            <TextView android:id="@+id/btnDiscover" style="@style/HomeActionSegment" android:text="@string/discover" android:drawableStart="@drawable/ic_explore" />
+                            <View android:id="@+id/discoveryEditDivider" android:layout_width="1dp" android:layout_height="22dp" android:background="#4DFFFFFF" android:visibility="gone" android:importantForAccessibility="no" />
+                            <ImageView
+                                android:id="@+id/btnEditDiscovery"
+                                android:layout_width="34dp"
+                                android:layout_height="match_parent"
+                                android:padding="8dp"
+                                android:scaleType="fitCenter"
+                                android:background="@drawable/discovery_edit_bg"
+                                android:src="@drawable/ic_edit"
+                                android:tint="@drawable/pill_text"
+                                android:contentDescription="@string/edit_discovery"
+                                android:visibility="gone"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:clickable="true" />
+                            <TextView android:id="@+id/btnHistoryFilter" style="@style/HomeActionSegment" android:text="Assistidos e avaliações" android:drawableStart="@drawable/ic_star" />
+                            <TextView android:id="@+id/btnTasteFilter" style="@style/HomeActionSegment" android:text="Gostos do perfil" android:drawableStart="@drawable/ic_thumb_up" />
+                            <TextView android:id="@+id/btnWatchLaterFilter" style="@style/HomeActionSegment" android:text="Assistir mais tarde" android:drawableStart="@drawable/ic_watch_later" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/inlineSearchFeedback" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone" android:layout_marginTop="5dp" />
+                    <TextView android:id="@+id/recommendationNotice" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textSize="11sp" android:textColor="#DDFFFFFF" android:fontFamily="@font/outfit" android:visibility="gone" android:accessibilityLiveRegion="polite"/>
+                    <FrameLayout android:id="@+id/mediaCardsRow" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:layout_marginTop="8dp" android:clipChildren="false" android:clipToPadding="false">
+                        <TextView android:id="@+id/mediaEmpty" android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:text="@string/no_profile_recommendations" android:textColor="#DDFFFFFF" android:textSize="15sp" android:fontFamily="@font/outfit" android:visibility="gone" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <!-- Top arrow indicator shown only when scrolled down into the Other Apps drawer -->
+                <ImageView
+                    android:id="@+id/btnScrollUpHome"
+                    android:layout_width="56dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/media_next_btn_bg"
+                    android:src="@drawable/ic_chevron_up_wide"
+                    android:scaleType="center"
+                    android:tint="@drawable/pill_text"
+                    android:contentDescription="@null"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:clickable="true" />
+
+                <!-- The favourites and the apps indicator share one bottom capsule. -->
+                <FrameLayout android:id="@+id/gridWrapper" android:layout_width="match_parent" android:layout_height="118dp" android:layout_marginTop="10dp" android:clipChildren="false" android:clipToPadding="false">
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/grid" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingTop="0dp" android:paddingBottom="18dp" android:clipToPadding="false" android:clipChildren="false" android:overScrollMode="never" android:scrollbars="none" android:descendantFocusability="afterDescendants" />
+                    <ImageView android:id="@+id/btnScrollDownApps" android:layout_width="40dp" android:layout_height="18dp" android:layout_gravity="bottom|center_horizontal" android:paddingHorizontal="12dp" android:paddingVertical="5dp" android:background="@drawable/dock_indicator_bg" android:src="@drawable/ic_chevron_down_wide" android:scaleType="fitCenter" android:tint="#FFFFFF" android:alpha="0.5" android:contentDescription="Todos os aplicativos" android:focusable="true" android:clickable="true" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- STATE B: Clean Full Media Detail View (shown when clicking any of the 3 media cards) -->
+            <ScrollView
+                android:id="@+id/mediaDetailContainer"
+                android:fillViewport="true"
+                android:scrollbars="vertical"
+                android:overScrollMode="never"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:paddingTop="12dp"
+                android:paddingBottom="4dp"
+                android:visibility="gone"
+                android:clipChildren="true"
+                android:clipToPadding="true">
+
+                <LinearLayout android:id="@+id/detailContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingBottom="32dp" android:orientation="vertical" android:clipChildren="false" android:clipToPadding="false">
+                <LinearLayout android:id="@+id/detailMainContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="340dp" android:orientation="horizontal" android:gravity="center_vertical" android:clipChildren="false" android:clipToPadding="false">
+                <FrameLayout
+                    android:id="@+id/detailPosterCard"
+                    android:layout_width="184dp"
+                    android:layout_height="274dp"
+                    android:background="@drawable/tile_bg">
+
+                    <ImageView
+                        android:id="@+id/detailPoster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/detailInfoColumn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="28dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/detailTypeBadge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/media_badge_bg"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:text="FILME"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="11.5sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 600"
+                            android:letterSpacing="0.06" />
+
+                        <TextView
+                            android:id="@+id/detailRatingBadge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/media_badge_bg"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:text="★ 8.5 IMDb"
+                            android:textColor="#FFFFD452"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 600" />
+
+                        <TextView
+                            android:id="@+id/detailYearGenre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="13.5sp"
+                            android:fontFamily="@font/outfit"
+                            android:fontVariationSettings="'wght' 500" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/detailTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="32sp"
+                        android:fontFamily="@font/outfit"
+                        android:fontVariationSettings="'wght' 600"
+                        android:letterSpacing="-0.02" />
+<TextView android:id="@+id/detailOriginal" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="13sp" android:textColor="#F0FFFFFF" android:fontFamily="@font/outfit" android:singleLine="true" android:ellipsize="end" android:visibility="gone"/>
+                    <TextView android:id="@+id/detailRecommendationReason" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:maxLines="2" android:textSize="11sp" android:textColor="#DDFFFFFF" android:fontFamily="@font/outfit"/>
+                    <TextView android:id="@+id/detailProfileStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:maxLines="3" android:textSize="12sp" android:textColor="#EEEEEE" android:fontFamily="@font/outfit" android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/detailSynopsis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="7"
+                        android:ellipsize="end"
+                        android:lineSpacingMultiplier="1.20"
+                        android:textColor="#E0FFFFFF"
+                        android:textSize="14.5sp"
+                        android:fontFamily="@font/outfit"
+                        android:fontVariationSettings="'wght' 400" />
+
+                    <LinearLayout
+                        android:id="@+id/detailMainActions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical">
+<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/btnWatchMedia"
+                            style="@style/TopButton"
+                            android:layout_marginStart="0dp"
+                            android:paddingStart="22dp"
+                            android:paddingEnd="24dp"
+                            android:text="▶  Assistir" />
+
+                        <TextView
+                            android:id="@+id/btnWatchTrailer"
+                            style="@style/TopButton"
+                            android:layout_marginStart="10dp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="20dp"
+                            android:drawableStart="@drawable/ic_video"
+                            android:text="Trailer" />
+
+                        <TextView
+                            android:id="@+id/btnRateMedia"
+                            style="@style/TopButton"
+                            android:drawableStart="@drawable/ic_thumb_up"
+                            android:text="@string/rate_title" />
+
+                        </LinearLayout><LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
+<TextView android:id="@+id/btnWatchLater" style="@style/TopButton" android:layout_marginStart="0dp" android:drawableStart="@drawable/ic_watch_later" android:text="Assistir mais tarde"/>
+<TextView
+                            android:id="@+id/btnCloseDetail"
+                            style="@style/TopButton"
+                            android:layout_marginStart="10dp"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="22dp"
+                            android:text="←  Voltar" />
+                    </LinearLayout></LinearLayout>
+
+
+                </LinearLayout>
+                </LinearLayout>
+                <TextView android:id="@+id/relatedHeading" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Continuações e relacionados" android:textSize="20sp" android:textColor="#FFFFFF" android:fontFamily="@font/outfit" />
+                <TextView android:id="@+id/relatedStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Buscando continuações e derivados…" android:textSize="12sp" android:textColor="#CCFFFFFF" android:fontFamily="@font/outfit" android:accessibilityLiveRegion="polite" />
+                <FrameLayout android:id="@+id/relatedCardsRow" android:layout_width="match_parent" android:layout_height="260dp" android:layout_marginTop="8dp" android:layout_marginBottom="16dp" android:clipChildren="false" android:clipToPadding="false" />
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+    </LinearLayout>
+
+    <ViewStub android:id="@+id/trailerStub" android:layout_width="match_parent" android:layout_height="match_parent" android:layout="@layout/view_trailer_modal" />
+
+    <!-- The single floating glass highlight that springs between tiles and media cards. -->
+    <com.gathin.tvhome.GlassView
+        android:id="@+id/glass"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:alpha="0"
+        android:importantForAccessibility="no" />
+</FrameLayout>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full-screen dimming overlay + Centered Floating Glass Trailer Menu -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/trailerModalOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B8000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <!-- Centered Floating Glass Panel -->
+        <LinearLayout
+            android:id="@+id/trailerModalPanel"
+            android:layout_width="660dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/glass_panel"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:elevation="24dp">
+
+            <!-- Modal title and close action -->
+            <RelativeLayout
+                android:id="@+id/trailerModalHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/trailerModalTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/btnModalClose"
+                    android:layout_marginEnd="12dp"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="Trailer Oficial"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/outfit"
+                    android:fontVariationSettings="'wght' 600"
+                    android:drawableStart="@drawable/ic_video"
+                    android:drawablePadding="10dp" />
+
+                <ImageView
+                    android:id="@id/btnModalClose"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/pill_bg"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_close_x"
+                    android:tint="@drawable/pill_text"
+                    android:contentDescription="@string/close_trailer"
+                    android:focusable="true"
+                    android:clickable="true" />
+            </RelativeLayout>
+
+            <!-- 16:9 Video Box (clipped to 14dp rounded corners) -->
+            <FrameLayout
+                android:id="@+id/trailerVideoBox"
+                android:layout_width="match_parent"
+                android:layout_height="352dp"
+                android:background="#FF000000">
+
+                <androidx.media3.ui.PlayerView
+                    android:id="@+id/trailerModalPlayerView"
+                    app:surface_type="texture_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"
+                    android:overScrollMode="never"
+                    android:focusable="false"
+                    android:clickable="false" />
+
+                <!-- Reveal the native player only after its first rendered frame. -->
+                <FrameLayout
+                    android:id="@+id/trailerCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FF000000">
+
+                    <ImageView
+                        android:id="@+id/trailerCoverImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.35"
+                        android:contentDescription="@null" />
+
+                    <ImageView
+                        android:id="@+id/trailerCoverIcon"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:padding="18dp"
+                        android:background="@drawable/media_badge_bg"
+                        android:src="@drawable/ic_play"
+                        android:visibility="gone"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/trailerCoverMsg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginBottom="28dp"
+                        android:textColor="#D9FFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/outfit"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/trailerLoadingGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:id="@+id/trailerSpinner"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:indeterminateTint="#FFFFFFFF" />
+
+                    <TextView
+                        android:id="@+id/trailerLoadingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Procurando trailer..."
+                        android:textColor="#D9FFFFFF"
+                        android:textSize="13.5sp"
+                        android:fontFamily="@font/outfit"
+                        android:shadowColor="#CC000000"
+                        android:shadowRadius="4" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/trailerFullscreenControls"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/btnFullscreenClose"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="24dp"
+                        android:background="@drawable/pill_bg"
+                        android:padding="14dp"
+                        android:src="@drawable/ic_close_x"
+                        android:tint="@drawable/pill_text"
+                        android:contentDescription="@string/close_trailer"
+                        android:focusable="true"
+                        android:clickable="true" />
+
+                    <LinearLayout
+                        android:id="@+id/trailerFullscreenBottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="24dp"
+                        android:gravity="center"
+                        android:background="@drawable/trailer_controls_scrim"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/btnFullscreenRewind"
+                            style="@style/TopButton"
+                            android:layout_marginStart="0dp"
+                            android:drawableStart="@drawable/ic_rewind"
+                            android:text="-10s" />
+
+                        <TextView
+                            android:id="@+id/btnFullscreenPlayPause"
+                            style="@style/TopButton"
+                            android:drawableStart="@drawable/ic_pause"
+                            android:text="Pausar" />
+
+                        <TextView
+                            android:id="@+id/btnFullscreenForward"
+                            style="@style/TopButton"
+                            android:drawableStart="@drawable/ic_forward"
+                            android:text="+10s" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/trailerProgressRow"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/trailerElapsed"
+                    android:layout_width="42dp"
+                    android:layout_height="wrap_content"
+                    android:text="0:00"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/outfit" />
+
+                <ProgressBar
+                    android:id="@+id/trailerProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:layout_weight="1"
+                    android:max="1000"
+                    android:progressTint="#FFFFFFFF"
+                    android:secondaryProgressTint="#66FFFFFF"
+                    android:progressBackgroundTint="#33FFFFFF"
+                    android:importantForAccessibility="no" />
+
+                <TextView
+                    android:id="@+id/trailerDuration"
+                    android:layout_width="42dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="0:00"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/outfit" />
+            </LinearLayout>
+
+            <!-- Playback, language and fullscreen controls -->
+            <LinearLayout
+                android:id="@+id/trailerModalControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnModalRewind"
+                    style="@style/TopButton"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:drawableStart="@drawable/ic_rewind"
+                    android:drawablePadding="6dp"
+                    android:text="-10s" />
+
+                <TextView
+                    android:id="@+id/btnModalPlayPause"
+                    style="@style/TopButton"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:drawableStart="@drawable/ic_pause"
+                    android:drawablePadding="6dp"
+                    android:text="Pausar" />
+
+                <TextView
+                    android:id="@+id/btnModalForward"
+                    style="@style/TopButton"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:drawableStart="@drawable/ic_forward"
+                    android:drawablePadding="6dp"
+                    android:text="+10s" />
+
+                <TextView
+                    android:id="@+id/btnModalLang"
+                    style="@style/TopButton"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:drawableStart="@drawable/ic_livetv"
+                    android:drawablePadding="6dp"
+                    android:text="Idioma" />
+
+                <TextView
+                    android:id="@+id/btnModalFullscreen"
+                    style="@style/TopButton"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:drawableStart="@drawable/ic_fullscreen"
+                    android:drawablePadding="6dp"
+                    android:text="@string/trailer_fullscreen" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>

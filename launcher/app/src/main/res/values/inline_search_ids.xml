@@ -1,0 +1,13 @@
+<resources>
+    <item name="inlineSearchQueryGroup" type="id" />
+    <item name="inlineSearchChrome" type="id" />
+    <item name="inlineSearchEditor" type="id" />
+    <item name="inlineSearchLanguage" type="id" />
+    <item name="inlineSearchFormat" type="id" />
+    <item name="inlineSearchInput" type="id" />
+    <item name="inlineSearchMic" type="id" />
+    <item name="inlineSearchSubmit" type="id" />
+    <item name="inlineSearchBack" type="id" />
+    <item name="inlineSearchStatus" type="id" />
+    <item name="inlineSearchSuggestions" type="id" />
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <item name="artworkAttachListener" type="id" />
+    <item name="artworkLoaded" type="id" />
+    <item name="marqueeState" type="id" />
+    <item name="marqueeIdentity" type="id" />
+    <item name="homeArtworkRequest" type="id" />
+    <item name="homePortraitArtwork" type="id" />
+    <item name="btnGridReturn" type="id" />
+</resources>

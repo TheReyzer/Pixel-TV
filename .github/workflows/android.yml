@@ -1,0 +1,23 @@
+name: Build and tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Android SDK
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+      - name: Python tools
+        run: python3 -m unittest discover -s tools/tests -v
+      - name: Android tests and APK
+        run: sh launcher/gradlew -p launcher testDebugUnitTest assembleDebug --console=plain
+      - name: Verify source export
+        run: python3 tools/export_source.py --output dist/ci-source
