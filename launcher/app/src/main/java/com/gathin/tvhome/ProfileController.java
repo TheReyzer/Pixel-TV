@@ -20,6 +20,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Calendar;
 
 /** TV dialogs and local persistence for profiles; no account/login integration. */
@@ -28,6 +34,7 @@ final class ProfileController {
     private final SharedPreferences prefs;
     final ViewerProfiles model;
     private final Runnable changed;
+    private final GoogleProfileSync googleSync;
     private final ImageView account;
     Dialog dialog;
     private MediaRepository media;
@@ -53,13 +60,16 @@ final class ProfileController {
             ThemedNotice.show(activity,R.drawable.ic_profile,"Não foi possível carregar os perfis","Uma cópia foi preservada",false,true);
         }
         model = loaded;
+        googleSync = new GoogleProfileSync(activity,model,this::persistFromSync);
         if (!recovered) prefs.edit().putString("data", model.toJson()).apply();
         updateAvatar();
     }
-    void destroy() { destroyed = true; steps.removeCallbacksAndMessages(null); if (dialog != null) dialog.dismiss(); for (int i=0;i<pixelAtlases.length;i++) if (pixelAtlases[i]!=null) { pixelAtlases[i].recycle(); pixelAtlases[i]=null; } }
+    void destroy() { destroyed = true; googleSync.destroy(); steps.removeCallbacksAndMessages(null); if (dialog != null) dialog.dismiss(); for (int i=0;i<pixelAtlases.length;i++) if (pixelAtlases[i]!=null) { pixelAtlases[i].recycle(); pixelAtlases[i]=null; } }
     void savedNotice(String message) { activity.showGlassNotice(R.drawable.ic_check,message,null,false); }
+    void syncNow() { googleSync.syncAll(); }
     int dp(int value) { return Math.round(value * density); }
-    private void persist() { prefs.edit().putString("data", model.toJson()).apply(); updateAvatar(); changed.run(); }
+    private void persistFromSync() { prefs.edit().putString("data", model.toJson()).apply(); updateAvatar(); changed.run(); }
+    private void persist() { persistFromSync(); googleSync.syncAll(); }
     private void updateAvatar() {
         avatar(account, model.selected());
         account.setContentDescription("Perfil " + model.selected().name + ". Trocar ou editar perfil");
@@ -213,9 +223,71 @@ final class ProfileController {
         }
         row(rows, "Criar perfil", "Nome, avatar e cor", R.drawable.ic_profile, this::createProfile);
         row(rows, "Editar perfis", "Alterar nome e foto", R.drawable.ic_settings, this::chooseEdit);
+        row(rows, "Contas Google e sincronização", "Vincular cada perfil e importar dados", R.drawable.ic_profile, this::showSyncProfiles);
         View selected=focus;
         back.setOnKeyListener((v,key,event) -> { if (event.getAction()==android.view.KeyEvent.ACTION_DOWN&&(key==android.view.KeyEvent.KEYCODE_DPAD_DOWN||key==android.view.KeyEvent.KEYCODE_DPAD_RIGHT)&&selected!=null) { selected.requestFocus(); return true; } return false; });
         show(panel, focus, account);
+    }
+
+    private void showSyncProfiles() {
+        LinearLayout panel=panel("Contas Google","Cada perfil pode usar uma conta diferente. Alterações locais continuam funcionando sem internet.");
+        LinearLayout rows=rows(panel); View focus=null;
+        for (ViewerProfiles.Profile p:model.profiles()) if (!p.aggregate()) {
+            View row=row(rows,p.name,googleSync.status(p.id),R.drawable.ic_profile,() -> showSyncProfile(p.id));
+            if (focus==null) focus=row;
+        }
+        if (rows.getChildCount()==0) row(rows,"Crie um perfil individual primeiro","O Geral não recebe uma conta Google",R.drawable.ic_profile,() -> {});
+        row(rows,"Sincronizar todos agora","Atualizar todos os perfis já vinculados",R.drawable.ic_check,() -> { dialog.dismiss(); googleSync.syncAll(); savedNotice("Sincronização iniciada"); });
+        show(panel,focus==null?rows.getChildAt(0):focus,account);
+    }
+
+    private void showSyncProfile(String id) {
+        ViewerProfiles.Profile profile=model.find(id); if (profile==null||profile.aggregate()) return;
+        LinearLayout panel=panel("Conta de "+profile.name,"Os dados deste perfil ficam separados dos demais."); LinearLayout rows=rows(panel); View focus=null;
+        if (googleSync.linked(id)) {
+            focus=row(rows,"Sincronizar agora",googleSync.status(id),R.drawable.ic_check,() -> { dialog.dismiss(); googleSync.syncAll(); savedNotice("Sincronização iniciada"); });
+            row(rows,"Desvincular conta","Manter os dados locais e parar a sincronização",R.drawable.ic_close_x,() -> { googleSync.unlink(id); dialog.dismiss(); savedNotice("Conta desvinculada"); });
+        } else {
+            focus=row(rows,"Vincular conta Google","Escanear QR Code para autorizar pelo celular",R.drawable.ic_profile,() -> linkGoogle(id));
+        }
+        row(rows,"Voltar","Escolher outro perfil",R.drawable.ic_back, this::showSyncProfiles);
+        show(panel,focus,account);
+    }
+
+    private void linkGoogle(String id) {
+        final GoogleProfileSync.LinkHandle[] handle={null};
+        LinearLayout waiting=panel("Vinculando conta Google","Preparando o código de autorização…"); LinearLayout rows=rows(waiting);
+        TextView status=text("Aguarde…",15); status.setTextColor(0xffbcbcc7); rows.addView(status);
+        View cancel=row(rows,"Cancelar","Não altera os dados deste perfil",R.drawable.ic_close_x,() -> { if (handle[0]!=null) handle[0].cancel(); dialog.dismiss(); });
+        show(waiting,status,account);
+        handle[0]=googleSync.link(id,new GoogleProfileSync.LinkListener() {
+            @Override public void code(String url,String userCode) { showGoogleCode(id,url,userCode,handle[0]); }
+            @Override public void status(String message) { status.setText(message); }
+            @Override public void success(String email) { if (dialog!=null) dialog.dismiss(); savedNotice("Conta vinculada"+(email.isEmpty()?"":" · "+email)); }
+            @Override public void error(String message) { if (dialog!=null) dialog.dismiss(); savedNotice(message); }
+        });
+    }
+
+    private void showGoogleCode(String id,String url,String userCode,GoogleProfileSync.LinkHandle handle) {
+        ViewerProfiles.Profile profile=model.find(id); if (profile==null) return;
+        LinearLayout panel=panel("Autorizar "+profile.name,"Escaneie o QR Code com o celular. Ele abrirá a página oficial do Google."); LinearLayout rows=rows(panel);
+        ImageView qr=new ImageView(activity); qr.setContentDescription("QR Code para autorizar a conta Google de "+profile.name); qr.setScaleType(ImageView.ScaleType.CENTER_INSIDE); qr.setImageBitmap(qrBitmap(url));
+        LinearLayout.LayoutParams qrSize=new LinearLayout.LayoutParams(dp(220),dp(220)); qrSize.gravity=android.view.Gravity.CENTER_HORIZONTAL; rows.addView(qr,qrSize);
+        TextView address=text(url.replace("https://",""),13); address.setTextColor(0xffbcbcc7); address.setGravity(android.view.Gravity.CENTER); address.setPadding(dp(10),dp(4),dp(10),dp(4)); rows.addView(address);
+        TextView code=text("Código alternativo: "+userCode,18); code.setGravity(android.view.Gravity.CENTER); code.setLetterSpacing(.06f); code.setPadding(0,dp(8),0,dp(12)); rows.addView(code);
+        TextView waiting=text("Aguardando aprovação…",14); waiting.setTextColor(0xffbcbcc7); waiting.setGravity(android.view.Gravity.CENTER); rows.addView(waiting);
+        row(rows,"Cancelar","A autorização continuará sem alterar o perfil",R.drawable.ic_close_x,() -> { handle.cancel(); dialog.dismiss(); });
+        show(panel,qr,account);
+    }
+    private Bitmap qrBitmap(String value) {
+        int size=dp(220); BitMatrix matrix;
+        try {
+            Map<EncodeHintType,Object> hints=new EnumMap<>(EncodeHintType.class); hints.put(EncodeHintType.MARGIN,1);
+            matrix=new MultiFormatWriter().encode(value,BarcodeFormat.QR_CODE,size,size,hints);
+        } catch (Exception e) { return Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888); }
+        Bitmap bitmap=Bitmap.createBitmap(size,size,Bitmap.Config.ARGB_8888);
+        for (int y=0;y<size;y++) for (int x=0;x<size;x++) bitmap.setPixel(x,y,matrix.get(x,y)?Color.BLACK:Color.WHITE);
+        return bitmap;
     }
     void chooseWatchLater(MediaRepository.MediaItem item,View anchor) {
         java.util.Set<String> people=new java.util.LinkedHashSet<>(java.util.Collections.singleton(model.selected().id));

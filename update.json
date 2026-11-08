@@ -1,0 +1,12 @@
+{
+  "versionCode": 3,
+  "versionName": "3.0.0",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.0/pixel-tv-3.0.0.apk",
+  "summary": "Retorno mais rápido à Home e atualização segura do sistema.",
+  "changelog": [
+    "A tela de boas-vindas aparece somente ao ligar a TV.",
+    "Avaliações atualizam as recomendações sem interromper a navegação.",
+    "O PIXEL TV verifica atualizações pela manhã e à noite e avisa quando há uma nova versão.",
+    "A atualização mostra um resumo simples das melhorias e o progresso do download."
+  ]
+}

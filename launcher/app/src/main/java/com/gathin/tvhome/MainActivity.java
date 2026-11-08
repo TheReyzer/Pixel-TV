@@ -61,6 +61,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.media3.common.AudioAttributes;
 import androidx.media3.common.C;
 import androidx.media3.common.MimeTypes;
@@ -148,6 +149,13 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private TextView btnWifi;
     private TextView btnSettings;
     private ImageView btnProfile;
+    private ImageView updateIndicator;
+    private UpdateManager.Update availableUpdate;
+    private PopupWindow updateNoticePopup;
+    private View updateWelcomeOverlay;
+    private ProgressBar updateDownloadProgress;
+    private TextView updateDownloadStatus;
+    private int updateNoticeVersion=-1;
     private ProfileController profiles;
     private WatchFeedbackController watchFeedback;
     private TitleSearchController titleSearch;
@@ -423,7 +431,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         long now=android.os.SystemClock.elapsedRealtime();
         if (contentReady&&startupContentReadyAt==0) startupContentReadyAt=now;
         if (startupCanReveal(contentReady,recommendationRail!=null&&recommendationRail.readyForStartup(true),startupContentReadyAt==0?0:now-startupContentReadyAt)) {
-            startupVisible=false; startupDismissedAt=now; startupMark("home-visible");
+            startupVisible=false; startupDismissedAt=now; markStartupShown(); startupMark("home-visible");
             startupOverlay.animate().alpha(0).setDuration(180).withEndAction(() -> {
                 if (startupOverlay.getParent() instanceof android.view.ViewGroup) ((android.view.ViewGroup)startupOverlay.getParent()).removeView(startupOverlay);
                 if (!activityResumed||isDestroyed()) return;
@@ -434,10 +442,22 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         } else handler.postDelayed(startupCheck,80);
     }
     private void startupMark(String stage) { android.util.Log.d("TVHomePerf",stage+" "+(android.os.SystemClock.elapsedRealtime()-startupBegan)+"ms"); }
+    private int startupBootCount() {
+        try { return Settings.Global.getInt(getContentResolver(),Settings.Global.BOOT_COUNT); }
+        catch (Exception ignored) { return 0; }
+    }
+    private boolean shouldShowStartup() {
+        return getSharedPreferences(PREFS_NAME,MODE_PRIVATE).getInt("welcome_boot_count",Integer.MIN_VALUE)!=startupBootCount();
+    }
+    private void markStartupShown() {
+        getSharedPreferences(PREFS_NAME,MODE_PRIVATE).edit().putInt("welcome_boot_count",startupBootCount()).apply();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         startupBegan=android.os.SystemClock.elapsedRealtime();
         super.onCreate(savedInstanceState);
+        startupVisible=shouldShowStartup();
+        if (!startupVisible) { initializeHome(); return; }
         startupOverlay=getLayoutInflater().inflate(R.layout.view_home_startup,null);
         int hour=java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
         ((TextView)startupOverlay.findViewById(R.id.startupGreeting)).setText(hour<5?R.string.good_night:hour<12?R.string.good_morning:hour<18?R.string.good_afternoon:R.string.good_evening);
@@ -455,8 +475,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private void initializeHome() {
         setContentView(R.layout.activity_main);
         root=findViewById(R.id.root);
-        if (startupOverlay.getParent() instanceof android.view.ViewGroup) ((android.view.ViewGroup)startupOverlay.getParent()).removeView(startupOverlay);
-        ((android.view.ViewGroup)root).addView(startupOverlay,new android.view.ViewGroup.LayoutParams(-1,-1));
+        if (startupOverlay!=null && startupOverlay.getParent() instanceof android.view.ViewGroup) ((android.view.ViewGroup)startupOverlay.getParent()).removeView(startupOverlay);
+        if (startupVisible && startupOverlay!=null) ((android.view.ViewGroup)root).addView(startupOverlay,new android.view.ViewGroup.LayoutParams(-1,-1));
         startupMark("layout");
         density = getResources().getDisplayMetrics().density;
         COLUMNS = DeviceConfig.columns(getResources().getDisplayMetrics().widthPixels,density,getResources().getInteger(R.integer.columns));
@@ -492,6 +512,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         btnSettings = findViewById(R.id.btnSettings);
         btnProfile = findViewById(R.id.btnProfile);
         profiles = new ProfileController(this, btnProfile, this::onProfilesChanged);
+        profiles.syncNow();
         startupMark("profiles");
         recommendationProfileId=profiles.model.selected().id;
         recommendationFeedbackVersion=profiles.model.feedbackVersion();
@@ -564,6 +585,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         }
 
         View btnInputs = findViewById(R.id.btnInputs);
+        updateIndicator=findViewById(R.id.updateIndicator);
+        if (updateIndicator!=null) updateIndicator.setOnClickListener(v -> showUpdatePrompt());
         for (int id:new int[]{R.id.btnInputs,R.id.btnWifi,R.id.btnSettings}) homeControls.add(findViewById(id),44);
         btnInputs.setOnClickListener(v -> showInputs());
         btnWifi.setOnClickListener(v -> showWifiDnsMenu());
@@ -603,7 +626,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 return true;
             }
             if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT||keyCode==KeyEvent.KEYCODE_DPAD_RIGHT) {
-                View[] controls={btnInputs,btnWifi,btnSettings,btnProfile};
+                View[] controls=updateIndicator!=null&&updateIndicator.getVisibility()==View.VISIBLE
+                        ? new View[]{updateIndicator,btnInputs,btnWifi,btnSettings,btnProfile}
+                        : new View[]{btnInputs,btnWifi,btnSettings,btnProfile};
                 for (int i=0;i<controls.length;i++) if (v==controls[i]) {
                     int next=i+(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT?1:-1);
                     if (next>=0&&next<controls.length) controls[next].requestFocus();
@@ -664,13 +689,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             public boolean onPreDraw(){ root.getViewTreeObserver().removeOnPreDrawListener(this); startupMark("home-layout-frame"); return true; }
         });
         homeInitialized=true;
+        UpdateManager.schedule(this);
         if (activityResumed) resumeHome();
     }
 
     @Override
     protected void onResume() {
         super.onResume(); activityResumed=true;
-        if (homeInitialized) resumeHome();
+        if (homeInitialized) { resumeHome(); UpdateManager.checkIfDue(this,this::onUpdateChecked); }
     }
     private void resumeHome() {
         long resumeBegan=android.os.SystemClock.elapsedRealtime();
@@ -741,6 +767,67 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 filterTabs[lastFilterTab].post(() -> filterTabs[lastFilterTab].requestFocus());
             }
         }
+    }
+
+    private int dp(float value) { return Math.round(value*density); }
+    private TextView updateAction(String label) {
+        TextView v=new TextView(this); v.setText(label); v.setTextColor(Color.WHITE); v.setTextSize(12); v.setGravity(Gravity.CENTER);
+        v.setTypeface(Typeface.create("sans",Typeface.BOLD)); v.setFocusable(true); v.setClickable(true); v.setPadding(dp(18),0,dp(18),0); v.setMinHeight(dp(42)); v.setBackgroundResource(R.drawable.home_top_segment);
+        return v;
+    }
+    private void onUpdateChecked(UpdateManager.Update update) {
+        if (update==null||isFinishing()||isDestroyed()) return;
+        availableUpdate=update;
+        if (updateIndicator!=null) {
+            updateIndicator.setVisibility(View.VISIBLE);
+            updateIndicator.animate().cancel();
+            updateIndicator.setAlpha(1f); updateIndicator.setScaleX(1f); updateIndicator.setScaleY(1f);
+            updateIndicator.animate().alpha(.55f).scaleX(1.08f).scaleY(1.08f).setDuration(900).withEndAction(() -> {
+                if (updateIndicator!=null&&availableUpdate!=null) updateIndicator.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(900).start();
+            }).start();
+        }
+        if (!startupVisible&&updateNoticeVersion!=update.versionCode) { updateNoticeVersion=update.versionCode; showUpdatePrompt(); }
+    }
+    private void showUpdatePrompt() {
+        if (availableUpdate==null||root==null||isFinishing()||isDestroyed()) return;
+        if (updateNoticePopup!=null&&updateNoticePopup.isShowing()) updateNoticePopup.dismiss();
+        LinearLayout panel=new LinearLayout(this); panel.setOrientation(LinearLayout.VERTICAL); panel.setPadding(dp(20),dp(16),dp(20),dp(14)); panel.setBackgroundResource(R.drawable.glass_panel);
+        TextView title=new TextView(this); title.setText("Nova atualização · v"+availableUpdate.versionName); title.setTextColor(Color.WHITE); title.setTextSize(17); title.setTypeface(Typeface.DEFAULT,Typeface.BOLD); panel.addView(title);
+        TextView summary=new TextView(this); summary.setText(availableUpdate.summary.isEmpty()?"O PIXEL TV recebeu melhorias para deixar sua experiência mais simples.":availableUpdate.summary); summary.setTextColor(0xffc9c9d2); summary.setTextSize(12); summary.setPadding(0,dp(6),0,dp(12)); panel.addView(summary);
+        LinearLayout actions=new LinearLayout(this); actions.setGravity(Gravity.END|Gravity.CENTER_VERTICAL); TextView later=updateAction("DEPOIS"); TextView now=updateAction("ATUALIZAR"); actions.addView(later,new LinearLayout.LayoutParams(-2,dp(42))); actions.addView(now,new LinearLayout.LayoutParams(-2,dp(42))); panel.addView(actions);
+        updateNoticePopup=new PopupWindow(panel,dp(430),ViewGroup.LayoutParams.WRAP_CONTENT,true); updateNoticePopup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); updateNoticePopup.setOutsideTouchable(true); updateNoticePopup.setElevation(dp(16));
+        later.setOnClickListener(v -> updateNoticePopup.dismiss()); now.setOnClickListener(v -> { updateNoticePopup.dismiss(); startUpdateDownload(); });
+        updateNoticePopup.setOnDismissListener(() -> updateNoticePopup=null);
+        updateNoticePopup.showAtLocation(root,Gravity.BOTTOM|Gravity.END,dp(48),dp(38)); now.requestFocus();
+    }
+    private void startUpdateDownload() {
+        if (availableUpdate==null||updateWelcomeOverlay!=null) return;
+        FrameLayout overlay=new FrameLayout(this); overlay.setBackgroundColor(0xe6000000); overlay.setFocusable(true); overlay.setFocusableInTouchMode(true);
+        LinearLayout panel=new LinearLayout(this); panel.setOrientation(LinearLayout.VERTICAL); panel.setPadding(dp(34),dp(28),dp(34),dp(30)); panel.setBackgroundResource(R.drawable.glass_panel);
+        TextView eyebrow=new TextView(this); eyebrow.setText("PIXEL TV  ·  ATUALIZAÇÃO"); eyebrow.setTextColor(0xff87e5a0); eyebrow.setTextSize(11); eyebrow.setLetterSpacing(.12f); panel.addView(eyebrow);
+        TextView title=new TextView(this); title.setText("Atualizando para v"+availableUpdate.versionName); title.setTextColor(Color.WHITE); title.setTextSize(25); title.setTypeface(Typeface.DEFAULT,Typeface.BOLD); title.setPadding(0,dp(8),0,dp(4)); panel.addView(title);
+        TextView summary=new TextView(this); summary.setText(availableUpdate.summary.isEmpty()?"Uma atualização do sistema está pronta.":availableUpdate.summary); summary.setTextColor(0xffd2d2dc); summary.setTextSize(13); summary.setPadding(0,0,0,dp(16)); panel.addView(summary);
+        TextView changesTitle=new TextView(this); changesTitle.setText("O que melhorou"); changesTitle.setTextColor(Color.WHITE); changesTitle.setTextSize(14); changesTitle.setTypeface(Typeface.DEFAULT,Typeface.BOLD); panel.addView(changesTitle);
+        LinearLayout changes=new LinearLayout(this); changes.setOrientation(LinearLayout.VERTICAL); changes.setPadding(dp(8),dp(8),0,dp(14));
+        for (String change:availableUpdate.changes) { TextView row=new TextView(this); row.setText("•  "+change); row.setTextColor(0xffc9c9d2); row.setTextSize(12); row.setPadding(0,dp(3),0,dp(3)); changes.addView(row); }
+        ScrollView scroll=new ScrollView(this); scroll.addView(changes); panel.addView(scroll,new LinearLayout.LayoutParams(-1,dp(130)));
+        updateDownloadProgress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal); updateDownloadProgress.setMax(100); updateDownloadProgress.setIndeterminate(true); panel.addView(updateDownloadProgress,new LinearLayout.LayoutParams(-1,dp(6)));
+        updateDownloadStatus=new TextView(this); updateDownloadStatus.setText("Baixando a atualização…"); updateDownloadStatus.setTextColor(0xffbcbcc7); updateDownloadStatus.setTextSize(12); updateDownloadStatus.setPadding(0,dp(10),0,0); panel.addView(updateDownloadStatus);
+        FrameLayout.LayoutParams pp=new FrameLayout.LayoutParams(dp(670),dp(410),Gravity.CENTER); overlay.addView(panel,pp); root.addView(overlay,new FrameLayout.LayoutParams(-1,-1)); updateWelcomeOverlay=overlay; overlay.requestFocus();
+        UpdateManager.download(this,availableUpdate,new UpdateManager.DownloadCallback() {
+            @Override public void progress(int percent) { if (updateDownloadProgress==null) return; if (percent<0) updateDownloadProgress.setIndeterminate(true); else { updateDownloadProgress.setIndeterminate(false); updateDownloadProgress.setProgress(percent); updateDownloadStatus.setText("Baixando a atualização… "+percent+"%"); } }
+            @Override public void success(java.io.File apk) { updateDownloadStatus.setText("Download concluído. Abrindo instalação…"); installUpdate(apk); }
+            @Override public void error(Exception error) { updateDownloadStatus.setText("Não foi possível baixar agora. Tente novamente mais tarde."); ThemedNotice.show(MainActivity.this,R.drawable.ic_wifi,"Atualização não concluída","Verifique a conexão e tente novamente",false,true); }
+        });
+    }
+    private void installUpdate(java.io.File apk) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT>=26 && !getPackageManager().canRequestPackageInstalls()) {
+                updateDownloadStatus.setText("Permita instalações do PIXEL TV e volte para concluir."); startActivity(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,Uri.parse("package:"+getPackageName()))); return;
+            }
+            Uri uri=FileProvider.getUriForFile(this,getPackageName()+".fileprovider",apk);
+            Intent intent=new Intent(Intent.ACTION_VIEW).setDataAndType(uri,"application/vnd.android.package-archive"); intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_ACTIVITY_NEW_TASK); startActivity(intent);
+        } catch (Exception e) { if (updateDownloadStatus!=null) updateDownloadStatus.setText("Não foi possível abrir o instalador nesta TV."); }
     }
 
     @Override

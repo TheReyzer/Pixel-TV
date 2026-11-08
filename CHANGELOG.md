@@ -1,0 +1,12 @@
+# Changelog do PIXEL TV
+
+## 3.0.0
+
+- A tela de boas-vindas aparece apenas uma vez por inicialização da TV.
+- Avaliações renovam as recomendações em segundo plano.
+- Verificação de atualização pela manhã e à noite, com aviso na Home.
+- Atualização com resumo simples das melhorias e progresso do download.
+
+## Regra para atualizações geradas pela IA
+
+Toda alteração publicada deve acrescentar uma entrada na versão correspondente. A IA deve sintetizar a mudança em linguagem simples, com no máximo quatro itens, explicando o benefício percebido pelo usuário — sem nomes de arquivos, termos internos ou detalhes de implementação.

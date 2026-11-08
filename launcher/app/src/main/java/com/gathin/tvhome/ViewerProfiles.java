@@ -31,7 +31,10 @@ final class ViewerProfiles {
         String name, avatar;
         int color;
         final Map<String, Vote> votes = new LinkedHashMap<>();
+        final Map<String,Long> voteRemoved=new LinkedHashMap<>();
         final Map<String,MediaRepository.MediaItem> watchLater=new LinkedHashMap<>();
+        final Map<String,Long> watchLaterAt=new LinkedHashMap<>();
+        final Map<String,Long> watchLaterRemoved=new LinkedHashMap<>();
         Profile(String id, String name, String avatar) {
             this.id = id; this.name = name; this.avatar = avatar.isEmpty() ? "cat" : avatar;
             color = Math.floorMod(id.hashCode(), COLORS.length);
@@ -131,6 +134,7 @@ final class ViewerProfiles {
                 old!=null&&item.genresPt.trim().isEmpty()?old.genres:item.genresPt,item.type,
                 old!=null&&item.year.trim().isEmpty()?old.year:item.year,rating,watchedAt,item.originalTitle.isEmpty()&&old!=null?old.originalTitle:item.originalTitle,
                 mergeFeatures(old==null?java.util.Collections.emptyList():old.contentFeatures,RecommendationFeatures.of(item)),ratedAt));
+        p.voteRemoved.remove(item.imdbId);
         revision++;
         feedbackRevision++;
     }
@@ -153,13 +157,17 @@ final class ViewerProfiles {
         long now=System.currentTimeMillis();
         for (java.util.Map.Entry<String,Integer> entry:ratings.entrySet()) { Vote old=vote(entry.getKey(),item.imdbId); int rating=entry.getValue(); record(entry.getKey(),item,rating==-1&&old!=null?old.rating:rating,now,rating==-1?(old==null?0:old.ratedAt):now); }
     }
-    synchronized void removeVote(String profile, String imdb) { Profile p = find(profile); if (p != null&&p.votes.remove(imdb)!=null) { revision++; feedbackRevision++; } }
+    synchronized void removeVote(String profile, String imdb) { Profile p = find(profile); if (p != null&&p.votes.remove(imdb)!=null) { p.voteRemoved.put(imdb,System.currentTimeMillis()); revision++; feedbackRevision++; } }
     synchronized Vote vote(String profile, String imdb) { Profile p = find(profile); return p == null ? null : p.votes.get(imdb); }
 
     synchronized void saveForLater(java.util.Set<String> people,MediaRepository.MediaItem item) {
         if (people.isEmpty()||people.contains(GENERAL)&&people.size()>1||item==null||!item.imdbId.matches("tt\\d{5,12}")||item.title.trim().isEmpty()) throw new IllegalArgumentException("Escolha ao menos um perfil.");
         for (String id:people) if (find(id)==null) throw new IllegalArgumentException("Perfil inválido.");
-        for (String id:people) find(id).watchLater.put(item.imdbId,item);
+        long now=System.currentTimeMillis();
+        for (String id:people) {
+            Profile person=find(id); person.watchLater.put(item.imdbId,item);
+            person.watchLaterAt.put(item.imdbId,now); person.watchLaterRemoved.remove(item.imdbId);
+        }
     }
     synchronized List<MediaRepository.MediaItem> watchLater(String profile) {
         Profile selected=find(profile); if (selected==null) throw new IllegalArgumentException("Perfil inválido.");
@@ -204,31 +212,111 @@ final class ViewerProfiles {
     }
     synchronized void removeWatchLater(String profile,String imdb) {
         Profile selected=find(profile); if (selected==null) return;
-        for (Profile p:profiles) if (selected.aggregate()||p==selected) p.watchLater.remove(imdb);
+        long now=System.currentTimeMillis();
+        for (Profile p:profiles) if (selected.aggregate()||p==selected) {
+            if (p.watchLater.remove(imdb)!=null || p.watchLaterRemoved.containsKey(imdb)) p.watchLaterRemoved.put(imdb,now);
+            p.watchLaterAt.remove(imdb);
+        }
     }
 
     synchronized String toJson() {
         JSONObject root = new JSONObject();
         JSONArray list = new JSONArray();
         try {
-            root.put("version", 5).put("selected", selected);
+            root.put("version", 6).put("selected", selected);
             for (Profile p : profiles) {
-                JSONArray votes = new JSONArray();
-                for (Vote v : p.votes.values()) votes.put(new JSONObject().put("imdb", v.imdb).put("title", v.title)
-                        .put("genres", v.genres).put("type", v.type).put("year", v.year).put("rating", v.rating).put("watchedAt", v.watchedAt).put("ratedAt",v.ratedAt).put("originalTitle",v.originalTitle).put("contentFeatures",new JSONArray(v.contentFeatures)));
-                JSONArray later=new JSONArray(); for (MediaRepository.MediaItem item:p.watchLater.values()) later.put(item.toJson());
-                list.put(new JSONObject().put("id", p.id).put("name", p.name).put("avatar", p.avatar).put("color", p.color).put("votes", votes).put("watchLater",later));
+                list.put(profileToJson(p));
             }
             root.put("profiles", list);
         } catch (org.json.JSONException e) { throw new IllegalStateException(e); }
         return root.toString();
+    }
+
+    private static JSONObject profileToJson(Profile p) throws org.json.JSONException {
+        JSONArray votes = new JSONArray();
+        for (Vote v : p.votes.values()) votes.put(new JSONObject().put("imdb", v.imdb).put("title", v.title)
+                .put("genres", v.genres).put("type", v.type).put("year", v.year).put("rating", v.rating).put("watchedAt", v.watchedAt).put("ratedAt",v.ratedAt).put("originalTitle",v.originalTitle).put("contentFeatures",new JSONArray(v.contentFeatures)));
+        JSONArray later=new JSONArray(); for (MediaRepository.MediaItem item:p.watchLater.values()) later.put(item.toJson());
+        JSONObject added=new JSONObject(); for (Map.Entry<String,Long> entry:p.watchLaterAt.entrySet()) added.put(entry.getKey(),entry.getValue());
+        JSONObject removed=new JSONObject(); for (Map.Entry<String,Long> entry:p.watchLaterRemoved.entrySet()) removed.put(entry.getKey(),entry.getValue());
+        JSONObject voteRemoved=new JSONObject(); for (Map.Entry<String,Long> entry:p.voteRemoved.entrySet()) voteRemoved.put(entry.getKey(),entry.getValue());
+        return new JSONObject().put("id", p.id).put("name", p.name).put("avatar", p.avatar).put("color", p.color)
+                .put("votes", votes).put("voteRemoved",voteRemoved).put("watchLater",later).put("watchLaterAt",added).put("watchLaterRemoved",removed);
+    }
+
+    synchronized String profileJson(String id) {
+        Profile profile=find(id); if (profile==null||profile.aggregate()) throw new IllegalArgumentException("Perfil inválido.");
+        try { return new JSONObject().put("version",1).put("profile",profileToJson(profile)).toString(); }
+        catch (org.json.JSONException e) { throw new IllegalStateException(e); }
+    }
+
+    /** Merge one cloud profile into the local profile without replacing unrelated local data. */
+    synchronized boolean mergeProfileJson(String targetId,String json) throws Exception {
+        if (json==null||json.length()>1_000_000) throw new IllegalArgumentException("Dados de sincronização muito grandes.");
+        JSONObject root=new JSONObject(json); int version=root.optInt("version",1);
+        if (version<1||version>1||!root.has("profile")) throw new IllegalArgumentException("Versão de sincronização inválida.");
+        Profile target=find(targetId); if (target==null||target.aggregate()) throw new IllegalArgumentException("Perfil inválido.");
+        Profile remote=readProfile(root.getJSONObject("profile")); boolean changed=false;
+        for (Vote incoming:remote.votes.values()) {
+            long eventAt=Math.max(incoming.ratedAt,incoming.watchedAt);
+            if (remote.voteRemoved.getOrDefault(incoming.imdb,0L)>=eventAt||target.voteRemoved.getOrDefault(incoming.imdb,0L)>=eventAt) continue;
+            Vote current=target.votes.get(incoming.imdb);
+            if (current==null || newer(incoming,current)) { target.votes.put(incoming.imdb,incoming); changed=true; }
+        }
+        for (Map.Entry<String,Long> entry:remote.voteRemoved.entrySet()) {
+            String imdb=entry.getKey(); long removed=entry.getValue(); Vote current=target.votes.get(imdb);
+            if (removed>Math.max(current==null?0:current.ratedAt,current==null?0:current.watchedAt)&&removed>target.voteRemoved.getOrDefault(imdb,0L)) {
+                if (current!=null) { target.votes.remove(imdb); changed=true; }
+                target.voteRemoved.put(imdb,removed); changed=true;
+            }
+        }
+        for (Map.Entry<String,MediaRepository.MediaItem> entry:remote.watchLater.entrySet()) {
+            String imdb=entry.getKey(); long added=remote.watchLaterAt.getOrDefault(imdb,0L), removed=remote.watchLaterRemoved.getOrDefault(imdb,0L);
+            long localAdded=target.watchLaterAt.getOrDefault(imdb,0L), localRemoved=target.watchLaterRemoved.getOrDefault(imdb,0L);
+            if (removed>Math.max(localAdded,localRemoved) && removed>=added) {
+                if (target.watchLater.remove(imdb)!=null) changed=true;
+                target.watchLaterAt.remove(imdb); target.watchLaterRemoved.put(imdb,removed); continue;
+            }
+            boolean legacyAdd=added==0&&localRemoved==0&&target.watchLater.get(imdb)==null;
+            if ((legacyAdd||added>localRemoved) && (target.watchLater.get(imdb)==null || added>localAdded)) {
+                target.watchLater.put(imdb,entry.getValue()); target.watchLaterAt.put(imdb,added); target.watchLaterRemoved.remove(imdb); changed=true;
+            }
+        }
+        for (Map.Entry<String,Long> entry:remote.watchLaterRemoved.entrySet()) {
+            String imdb=entry.getKey(); long removed=entry.getValue(), localAdded=target.watchLaterAt.getOrDefault(imdb,0L);
+            if (removed>localAdded && removed>target.watchLaterRemoved.getOrDefault(imdb,0L)) {
+                if (target.watchLater.remove(imdb)!=null) changed=true;
+                target.watchLaterAt.remove(imdb); target.watchLaterRemoved.put(imdb,removed); changed=true;
+            }
+        }
+        if (changed) { revision++; feedbackRevision++; }
+        return changed;
+    }
+
+    private static boolean newer(Vote incoming,Vote current) {
+        long a=Math.max(incoming.ratedAt,incoming.watchedAt), b=Math.max(current.ratedAt,current.watchedAt);
+        if (a!=b) return a>b;
+        return incoming.rating>=0&&current.rating<0;
+    }
+
+    private static Profile readProfile(JSONObject o) throws Exception {
+        String id=o.optString("id","remote"),name=o.optString("name","Perfil").trim();
+        if (name.isEmpty()||name.length()>64) throw new IllegalArgumentException("Perfil remoto inválido.");
+        String avatar=o.optString("avatar","dog"); if (!java.util.Arrays.asList(AVATARS).contains(avatar)) avatar="dog";
+        Profile p=new Profile(id,name,avatar); int color=o.optInt("color",p.color); if (color>=0&&color<COLORS.length) p.color=color;
+        JSONObject removedVotes=o.optJSONObject("voteRemoved"); if (removedVotes!=null) for (java.util.Iterator<String> keys=removedVotes.keys();keys.hasNext();) { String key=keys.next(); if (key.matches("tt\\d{5,12}")) p.voteRemoved.put(key,removedVotes.optLong(key,0)); }
+        JSONArray later=o.optJSONArray("watchLater"); JSONObject added=o.optJSONObject("watchLaterAt"),removed=o.optJSONObject("watchLaterRemoved");
+        if (later!=null) for (int j=0;j<later.length();j++) { JSONObject entry=later.optJSONObject(j); if (entry==null) continue; MediaRepository.MediaItem item=MediaRepository.MediaItem.fromJson(entry); if (!item.imdbId.matches("tt\\d{5,12}")||item.title.trim().isEmpty()||!(item.type.equals("movie")||item.type.equals("series"))) continue; p.watchLater.put(item.imdbId,item); p.watchLaterAt.put(item.imdbId,added==null?0:added.optLong(item.imdbId,0)); }
+        if (removed!=null) for (java.util.Iterator<String> keys=removed.keys();keys.hasNext();) { String key=keys.next(); if (key.matches("tt\\d{5,12}")) p.watchLaterRemoved.put(key,removed.optLong(key,0)); }
+        JSONArray votes=o.optJSONArray("votes"); if (votes!=null) for (int j=0;j<votes.length();j++) { JSONObject v=votes.getJSONObject(j); String imdb=v.optString("imdb"); int rating=v.optInt("rating",-1); if (!imdb.matches("tt\\d{5,12}")||rating<-1||rating>=RATINGS.length) continue; long watched=v.optLong("watchedAt",0),rated=rating<0?0:v.optLong("ratedAt",watched); if (p.voteRemoved.getOrDefault(imdb,0L)<Math.max(watched,rated)) p.votes.put(imdb,new Vote(imdb,v.optString("title"),v.optString("genres"),v.optString("type"),v.optString("year"),rating,watched,v.optString("originalTitle",""),RecommendationFeatures.read(v.optJSONArray("contentFeatures")),rated)); }
+        return p;
     }
     static ViewerProfiles fromJson(String json) throws Exception {
         ViewerProfiles model = new ViewerProfiles();
         if (json == null || json.isEmpty()) return model;
         JSONObject root = new JSONObject(json);
         int version = root.getInt("version");
-        if (version < 1 || version > 5) throw new IllegalArgumentException("Unknown profiles version");
+        if (version < 1 || version > 6) throw new IllegalArgumentException("Unknown profiles version");
         JSONArray list = root.getJSONArray("profiles");
         model.profiles.clear();
         for (int i = 0; i < list.length(); i++) {
@@ -242,8 +330,9 @@ final class ViewerProfiles {
             int color = o.optInt("color", p.color);
             if (color >= 0 && color < COLORS.length) p.color = color;
             model.profiles.add(p);
-            JSONArray later=o.optJSONArray("watchLater");
-            if (later!=null) for (int j=0;j<later.length();j++) { JSONObject entry=later.optJSONObject(j); if (entry==null) continue; MediaRepository.MediaItem item=MediaRepository.MediaItem.fromJson(entry); if (item.imdbId.matches("tt\\d{5,12}")&&!item.title.trim().isEmpty()&&(item.type.equals("movie")||item.type.equals("series"))) p.watchLater.put(item.imdbId,item); }
+            JSONArray later=o.optJSONArray("watchLater"); JSONObject added=o.optJSONObject("watchLaterAt"),removed=o.optJSONObject("watchLaterRemoved");
+            if (later!=null) for (int j=0;j<later.length();j++) { JSONObject entry=later.optJSONObject(j); if (entry==null) continue; MediaRepository.MediaItem item=MediaRepository.MediaItem.fromJson(entry); if (item.imdbId.matches("tt\\d{5,12}")&&!item.title.trim().isEmpty()&&(item.type.equals("movie")||item.type.equals("series"))) { long at=added==null?0:added.optLong(item.imdbId,0), deleted=removed==null?0:removed.optLong(item.imdbId,0); if (at==0&&deleted==0||at>deleted) { p.watchLater.put(item.imdbId,item); p.watchLaterAt.put(item.imdbId,at); } } }
+            if (removed!=null) for (java.util.Iterator<String> keys=removed.keys();keys.hasNext();) { String key=keys.next(); if (key.matches("tt\\d{5,12}")) p.watchLaterRemoved.put(key,removed.optLong(key,0)); }
             JSONArray votes = o.optJSONArray("votes");
             if (votes == null || version == 1 && p.aggregate()) continue;
             for (int j = 0; j < votes.length(); j++) {
@@ -254,6 +343,8 @@ final class ViewerProfiles {
                 p.votes.put(imdb, new Vote(imdb, v.optString("title"), v.optString("genres"),
                         v.optString("type"), v.optString("year"), rating, version == 1 ? System.currentTimeMillis() : v.optLong("watchedAt", 0),v.optString("originalTitle",""),RecommendationFeatures.read(v.optJSONArray("contentFeatures")),rating<0?0:v.optLong("ratedAt",version==1?System.currentTimeMillis():v.optLong("watchedAt",0))));
             }
+            JSONObject removedVotes=o.optJSONObject("voteRemoved"); if (removedVotes!=null) for (java.util.Iterator<String> keys=removedVotes.keys();keys.hasNext();) { String key=keys.next(); if (key.matches("tt\\d{5,12}")) p.voteRemoved.put(key,removedVotes.optLong(key,0)); }
+            if (!p.voteRemoved.isEmpty()) for (String key:new ArrayList<>(p.votes.keySet())) { Vote vote=p.votes.get(key); if (p.voteRemoved.getOrDefault(key,0L)>=Math.max(vote.ratedAt,vote.watchedAt)) p.votes.remove(key); }
         }
         if (model.find(GENERAL) == null) throw new IllegalArgumentException("Missing aggregate profile");
         model.select(root.optString("selected", GENERAL));
