@@ -10,19 +10,19 @@
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 78% -10%,#283b53 0,#090a0f 35%),var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;letter-spacing:.12em}.brand img{width:42px;height:42px;object-fit:cover;border-radius:12px}.nav{display:flex;gap:20px;color:var(--muted);font-size:.92rem}.nav a{text-decoration:none}.nav a:hover{color:var(--cyan)}
     .hero{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;padding:70px 0 96px}.eyebrow{color:var(--cyan);font:700 .8rem/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.17em;text-transform:uppercase}.hero h1{max-width:700px;margin:18px 0;font-size:clamp(3.2rem,7vw,6.7rem);line-height:.93;letter-spacing:-.065em}.hero h1 span{color:var(--pink)}.hero p{max-width:600px;color:var(--muted);font-size:1.15rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:#ffffff0d;text-decoration:none;font-weight:700}.button.primary{background:var(--cyan);border-color:var(--cyan);color:#071018}.button:hover{transform:translateY(-1px);filter:brightness(1.08)}.hero-art{position:relative}.hero-art img{display:block;width:min(100%,480px);margin:auto;border:1px solid var(--line);border-radius:32px;box-shadow:25px 28px 0 #ff5c9a20,0 30px 100px #000b;transform:rotate(2deg)}.hero-art:after{content:"";position:absolute;z-index:-1;inset:12% 0 0 16%;border:1px solid #70e1ff33;border-radius:32px;transform:rotate(-5deg)}
     .section{padding:82px 0;border-top:1px solid var(--line)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px}.section h2{max-width:700px;margin:0;font-size:clamp(2rem,4vw,3.5rem);line-height:1.02;letter-spacing:-.04em}.section-head p{max-width:430px;margin:0;color:var(--muted)}
-    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:25px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#ffffff0c,#ffffff03)}.feature .icon{font-size:1.7rem}.feature h3{margin:15px 0 7px;font-size:1.1rem}.feature p{margin:0;color:var(--muted)}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:25px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#ffffff0c,#ffffff03);transition:border-color .18s,background .18s,transform .18s}.feature:hover,.feature:focus-visible{border-color:#70e1ff88;background:linear-gradient(145deg,#70e1ff18,#ff5c9a0d);transform:translateY(-3px);outline:none}.feature .icon{font-size:1.7rem}.feature h3{margin:15px 0 7px;font-size:1.1rem}.feature p{margin:0;color:var(--muted)}.feature-preview{position:fixed;z-index:50;width:min(360px,32vw);overflow:hidden;border:1px solid #70e1ff99;border-radius:18px;background:#11141deF;box-shadow:0 20px 70px #000b;opacity:0;pointer-events:none;transform:translateY(8px) scale(.97);transition:opacity .13s,transform .13s}.feature-preview.visible{opacity:1;transform:translateY(0) scale(1)}.feature-preview img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.feature-preview span{display:block;padding:10px 13px;color:#dfe5f3;font-size:.82rem}.preview-mode .feature,.preview-mode .feature *{cursor:none}.integration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.integration{padding:25px;border:1px solid #70e1ff33;border-radius:22px;background:linear-gradient(145deg,#70e1ff12,#ff5c9a08)}.integration h3{margin:0 0 8px;color:var(--cyan)}.integration p{margin:0;color:var(--muted)}
     .screens{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}.shot{overflow:hidden;margin:0;border:1px solid var(--line);border-radius:24px;background:var(--panel)}.shot img{display:block;width:100%;height:100%;min-height:250px;object-fit:cover;object-position:center}.shot figcaption{padding:15px 18px;color:var(--muted);font-size:.93rem}.shot.large{grid-row:span 2}.shot.large img{min-height:510px}.shot img:hover{filter:saturate(1.15)}
     .compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;overflow:hidden;border:1px solid var(--line);border-radius:24px;background:var(--line)}.compare>div{padding:28px;background:var(--panel)}.compare h3{margin:0 0 20px}.compare .old h3{color:#a8adbd}.compare .new h3{color:var(--cyan)}.compare p{margin:14px 0;padding-top:14px;border-top:1px solid var(--line);color:var(--muted)}.compare strong{color:var(--ink)}
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:step}.step{padding:25px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}.step:before{counter-increment:step;content:"0" counter(step);display:block;margin-bottom:22px;color:var(--yellow);font:700 1rem ui-monospace,SFMono-Regular,Consolas,monospace}.step h3{margin:0 0 8px}.step p{margin:0;color:var(--muted)}
     .cta{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:34px;border:1px solid #70e1ff55;border-radius:26px;background:linear-gradient(110deg,#70e1ff18,#ff5c9a12)}.cta h2{font-size:clamp(1.7rem,3vw,2.7rem)}.cta p{max-width:590px;margin-bottom:0;color:var(--muted)}footer{padding:32px 0 50px;color:var(--muted);font-size:.9rem}footer .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}footer a{text-decoration:none}footer a:hover{color:var(--cyan)}
-    @media (max-width:800px){.nav{display:none}.hero{grid-template-columns:1fr;padding:48px 0 72px;gap:32px}.hero h1{font-size:clamp(3rem,15vw,5rem)}.feature-grid,.steps{grid-template-columns:1fr}.screens{grid-template-columns:1fr}.shot.large{grid-row:auto}.shot.large img{min-height:0}.compare{grid-template-columns:1fr}.cta{display:block}.cta .button{margin-top:18px}}
+    @media (max-width:800px){.nav{display:none}.hero{grid-template-columns:1fr;padding:48px 0 72px;gap:32px}.hero h1{font-size:clamp(3rem,15vw,5rem)}.feature-grid,.integration-grid,.steps{grid-template-columns:1fr}.screens{grid-template-columns:1fr}.shot.large{grid-row:auto}.shot.large img{min-height:0}.compare{grid-template-columns:1fr}.cta{display:block}.cta .button{margin-top:18px}}@media (hover:none){.feature-preview{display:none}}
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}.hero-art img{transform:none}}
   </style>
 </head>
 <body>
   <header class="wrap topbar">
     <a class="brand" href="./"><img src="pixel-tv-logo.jpg" alt="Logo PIXEL TV">PIXEL TV</a>
-    <nav class="nav" aria-label="Navegação principal"><a href="#recursos">Recursos</a><a href="#melhorias">Evolução</a><a href="#telas">Telas reais</a><a href="https://github.com/TheReyzer/Pixel-TV">GitHub</a></nav>
+    <nav class="nav" aria-label="Navegação principal"><a href="#recursos">Recursos</a><a href="#integracoes">Integrações</a><a href="#melhorias">Evolução</a><a href="#telas">Telas reais</a><a href="https://github.com/TheReyzer/Pixel-TV">GitHub</a></nav>
   </header>
 
   <main>
@@ -33,18 +33,33 @@
         <p>O PIXEL TV transforma a tela inicial em uma experiência de descoberta: recomendações que aprendem com cada perfil, atalhos para seus apps e uma biblioteca que não esquece o que você gosta.</p>
         <div class="actions"><a class="button primary" href="https://github.com/TheReyzer/Pixel-TV#instalar-com-uma-ia">Como instalar</a><a class="button" href="#recursos">Conheça os recursos</a></div>
       </div>
-      <div class="hero-art"><img src="pixel-tv-logo.jpg" alt="Televisão retrô em pixel art com barras coloridas"></div>
+      <div class="hero-art"><img src="screen-home.png" alt="Tela inicial completa do PIXEL TV em uma Android TV"></div>
     </section>
 
     <section id="recursos" class="section"><div class="wrap">
-      <div class="section-head"><h2>Uma Home que entende a casa inteira.</h2><p>Cada pessoa tem seu perfil. A tela continua simples para quem só quer sentar e assistir.</p></div>
+      <div class="section-head"><h2>Uma Home que entende a casa inteira.</h2><p>O sistema combina catálogo, disponibilidade, histórico e comportamento de cada pessoa para transformar a primeira tela em uma central de descoberta.</p></div>
       <div class="feature-grid">
-        <article class="feature"><div class="icon" aria-hidden="true">✦</div><h3>Recomendações por perfil</h3><p>Notas, gostos, assistidos e listas alimentam um ranking individual. O perfil Geral combina os gostos da casa.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">◉</div><h3>Sincronização Google</h3><p>Vincule cada perfil a uma conta Google e leve histórico, avaliações, gostos e listas para outra TV.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">⌕</div><h3>Busca rápida e por voz</h3><p>Pesquise filmes e séries, abra detalhes, trailers e opções de onde assistir sem sair da experiência.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">▣</div><h3>Conteúdo sem deformar</h3><p>Capas horizontais e verticais são preenchidas com prioridade para imagens regionais e melhor qualidade.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">◌</div><h3>Feito para o controle remoto</h3><p>Foco visível, navegação por D-pad, grades contínuas e retorno ao ponto anterior em detalhes e buscas.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">↗</div><h3>Seus apps, no mesmo lugar</h3><p>Atalhos para os aplicativos instalados, favoritos, TV ao vivo, Assistidos e Assistir mais tarde.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">✦</div><h3>Recomendação individual</h3><p>Cada perfil aprende com notas de “Odiei” a “Amei”, gêneros, formato, duração, direção, elenco, assistidos e listas. O ranking evita repetir o que acabou de aparecer.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">◎</div><h3>Geral e por perfil</h3><p>Use a Home no modo individual ou abra Descobrir para combinar duas ou mais pessoas. O Geral favorece afinidades em comum e reduz conflitos entre gostos.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">◒</div><h3>Estatísticas de gostos</h3><p>Veja afinidade de 0 a 100%, gêneros mais fortes, títulos registrados, assistidos e notas de cada perfil para entender como o gosto está evoluindo.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">⌕</div><h3>Busca por texto e voz</h3><p>Pesquise em português, filtre Tudo, Filme ou Série, explore o catálogo IMDb com a lupa vazia e abra detalhes relacionados sem perder a posição.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">▣</div><h3>Capas e catálogo em PT-BR</h3><p>O catálogo prioriza títulos, sinopses, disponibilidade e capas brasileiras. A Home prepara versões horizontal e vertical sem deformar a imagem.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">▶</div><h3>Trailers dentro do modal</h3><p>Assista ao trailer em tela cheia com D-pad, prioridade para PT-BR e carregamento progressivo, sem precisar abandonar o launcher.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">◌</div><h3>Feito para controle remoto</h3><p>Foco visível, grades contínuas, seis colunas na busca, retorno ao card anterior e avanço controlado ao voltar de outro aplicativo.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">↗</div><h3>Histórico e listas</h3><p>Assistidos, avaliações, Gostos, Favoritos e Assistir mais tarde ficam acessíveis pela barra da Home, separados do menu de perfis.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">☁</div><h3>Perfil que viaja</h3><p>Vincule cada perfil a uma conta Google e sincronize histórico, avaliações, gostos e listas em uma pasta própria do Drive.</p></article>
+      </div>
+    </div></section>
+
+    <section id="integracoes" class="section"><div class="wrap">
+      <div class="section-head"><h2>Do título à reprodução, sem caça ao aplicativo.</h2><p>O PIXEL TV usa a identidade IMDb do título para descobrir onde ele está disponível e encaminhar você para o app instalado.</p></div>
+      <div class="integration-grid">
+        <article class="integration"><h3>IMDb como identidade</h3><p>Filmes e séries são relacionados por seus IDs IMDb. Isso conecta busca, capas, trailers, obras relacionadas e ofertas de reprodução sem depender apenas do nome traduzido.</p></article>
+        <article class="integration"><h3>Stremio</h3><p>Quando instalado, o botão abre o título pelo deep link IMDb no Stremio, deixando o próprio aplicativo escolher a fonte disponível para aquele conteúdo.</p></article>
+        <article class="integration"><h3>UniTV</h3><p>O launcher abre o UniTV, injeta a busca pelo título e seleciona o resultado correspondente. O acompanhamento opcional reconhece o conteúdo assistido e sugere registrar a avaliação.</p></article>
+        <article class="integration"><h3>Disponibilidade por serviço</h3><p>Os detalhes consultam ofertas disponíveis no Brasil e mostram qual aplicativo pode abrir o título. A lista varia conforme região, catálogo e app instalado.</p></article>
+        <article class="integration"><h3>Outros aplicativos</h3><p>Netflix, Globoplay, YouTube, Spotify e os demais apps instalados aparecem no dock. Deep links e continuação dependem do que cada aplicativo expõe.</p></article>
+        <article class="integration"><h3>Escolha antes de abrir</h3><p>Você vê o serviço disponível e confirma a ação. O PIXEL TV não inicia reprodução paga automaticamente nem hospeda o conteúdo.</p></article>
       </div>
     </div></section>
 
@@ -74,5 +89,49 @@
   </main>
 
   <footer class="wrap"><div>PIXEL TV · projeto para Android TV e Google TV</div><div class="footer-links"><a href="privacy.html">Política de Privacidade</a><a href="terms.html">Termos de Uso</a><a href="https://github.com/TheReyzer/Pixel-TV">Código-fonte</a></div></footer>
+  <aside id="feature-preview" class="feature-preview" aria-hidden="true"><img alt=""><span></span></aside>
+  <script>
+    (() => {
+      const cards = [...document.querySelectorAll('.feature')];
+      const preview = document.getElementById('feature-preview');
+      const image = preview.querySelector('img');
+      const caption = preview.querySelector('span');
+      const screenshots = ['screen-home.png','screen-profiles.png','screen-home.png','screen-home.png','screen-home.png','screen-home.png','screen-home.png','screen-home.png','screen-sync.png'];
+      let active = null;
+      function place(x, y) {
+        const margin = 18, width = preview.offsetWidth, height = preview.offsetHeight;
+        let left = x + margin, top = y + margin;
+        if (left + width > innerWidth - margin) left = x - width - margin;
+        if (top + height > innerHeight - margin) top = y - height - margin;
+        preview.style.left = `${Math.max(margin, left)}px`;
+        preview.style.top = `${Math.max(margin, top)}px`;
+      }
+      function show(card, x, y) {
+        const title = card.querySelector('h3')?.textContent || 'Recurso do PIXEL TV';
+        image.src = screenshots[cards.indexOf(card)] || 'screen-home.png';
+        image.alt = `Screenshot relacionado a ${title}`;
+        caption.textContent = title;
+        active = card;
+        preview.classList.add('visible');
+        document.body.classList.add('preview-mode');
+        place(x, y);
+      }
+      function hide(card) {
+        if (card && active !== card) return;
+        active = null;
+        preview.classList.remove('visible');
+        document.body.classList.remove('preview-mode');
+      }
+      cards.forEach(card => {
+        card.tabIndex = 0;
+        card.addEventListener('pointerenter', event => show(card, event.clientX, event.clientY));
+        card.addEventListener('pointermove', event => { if (active === card) place(event.clientX, event.clientY); });
+        card.addEventListener('pointerleave', () => hide(card));
+        card.addEventListener('focus', () => { const box = card.getBoundingClientRect(); show(card, box.right, box.top); });
+        card.addEventListener('blur', () => hide(card));
+      });
+      addEventListener('keydown', event => { if (event.key === 'Escape') hide(); });
+    })();
+  </script>
 </body>
 </html>
