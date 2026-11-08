@@ -227,8 +227,8 @@ public class MediaRepository {
             //noinspection ResultOfMethodCallIgnored
             this.diskCacheDir.mkdirs();
         }
-        // 18 MB bitmap cache (safe and fast on 2 GB RAM TV)
-        this.memCache = new LruCache<String, Bitmap>(18 * 1024 * 1024) {
+        // Keep the launcher light while another app is playing on small TV boxes.
+        this.memCache = new LruCache<String, Bitmap>(10 * 1024 * 1024) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
                 return value.getByteCount();
@@ -994,6 +994,16 @@ public class MediaRepository {
         android.util.Log.d("TVHomeDiscover","ARTWORK ready="+ready+" requested="+tasks.size());
     }
     void cancelDiscoveryPrefetch() { prefetchGeneration++; }
+    synchronized void trimForBackground() {
+        if (pendingRecommendations != null) pendingRecommendations.cancel(true);
+        pendingRecommendations = null;
+        recommendationGeneration++;
+        recommendations.clear();
+        metadataDetails.clear();
+        memCache.evictAll();
+        synchronized (trailerCache) { trailerCache.clear(); trailerCacheTimes.clear(); }
+        synchronized (providersCache) { providersCache.clear(); providerCacheTimes.clear(); }
+    }
     void destroyDiscoveryPrefetch() { imagesClosed=true; imagePool.shutdownNow(); mainHandler.removeCallbacksAndMessages(null); prefetchGeneration++; discoveryImagePool.shutdownNow(); synchronized(this) { recommendationGeneration++; recommendationsUpdated=null; recommendationPool.shutdownNow(); } synchronized(titleCallbacks) { titlesClosed=true; titleCallbacks.clear(); titlePool.shutdownNow(); } }
 
     private Bitmap cachedImage(String url,int width,int height) throws Exception {

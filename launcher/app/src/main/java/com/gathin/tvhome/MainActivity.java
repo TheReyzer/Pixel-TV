@@ -730,7 +730,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (pendingAutoKillPkg != null) {
             final String pkgToKill = pendingAutoKillPkg;
             pendingAutoKillPkg = null;
-            if (isAutoKillEnabled() && !pkgToKill.equals(getPackageName())) {
+            if (isAutoKillEnabled() && !pkgToKill.equals(getPackageName()) && !PlaybackJournal.APPS.containsKey(pkgToKill)) {
                 handler.postDelayed(() -> {
                     try {
                         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -857,6 +857,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // Native TV menus can cover Home without stopping its Activity.
         if (!startupVisible&&(titleSearch==null||!titleSearch.isKeepingSearch())) pendingHomePageAdvance=true;
         if (mediaBackground!=null) mediaBackground.cancel();
+        if (mediaRepo!=null) mediaRepo.trimForBackground();
         if (titleSearch==null||!titleSearch.isKeepingSearch()) {
             WatchMonitor.get(this).outside();
             if (titleSearch!=null) titleSearch.pause();

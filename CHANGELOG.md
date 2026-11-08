@@ -1,5 +1,12 @@
 # Changelog do PIXEL TV
 
+## 3.0.3
+
+- O PIXEL TV libera capas e caches de memória ao sair para outro aplicativo.
+- UniTV e outros apps de reprodução não são encerrados pelo recurso de limpeza automática.
+- A observação de reprodução usa menos processamento enquanto o conteúdo está aberto.
+- A Home continua pronta para voltar sem perder perfis, histórico ou recomendações.
+
 ## 3.0.2
 
 - Perfis podem conectar sua conta Google e levar histórico, gostos e listas para outra TV.

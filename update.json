@@ -1,12 +1,12 @@
 {
-  "versionCode": 5,
-  "versionName": "3.0.2",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.2/pixel-tv-3.0.2.apk",
-  "summary": "Conexão Google para perfis e atualização guiada com menos passos.",
+  "versionCode": 6,
+  "versionName": "3.0.3",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.3/pixel-tv-3.0.3.apk",
+  "summary": "Mais memória livre para o app que está reproduzindo.",
   "changelog": [
-    "Perfis podem conectar sua conta Google e levar histórico, gostos e listas para outra TV.",
-    "O QR code de conexão mostra o código alternativo para concluir o login pelo celular.",
-    "O modal de atualização orienta a permissão necessária e retoma a instalação automaticamente.",
-    "A Home volta direto para as recomendações, sem repetir a saudação ao sair de um app."
+    "O PIXEL TV libera capas e caches de memória ao sair para outro aplicativo.",
+    "UniTV e outros apps de reprodução não são encerrados pelo recurso de limpeza automática.",
+    "A observação de reprodução usa menos processamento enquanto o conteúdo está aberto.",
+    "A Home continua pronta para voltar sem perder perfis, histórico ou recomendações."
   ]
 }

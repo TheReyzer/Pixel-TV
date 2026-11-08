@@ -28,7 +28,7 @@ public class AutoSearchService extends AccessibilityService {
     private final Runnable watchTick=new Runnable() {
         @Override public void run() {
             try { observeUniTv(); } catch (RuntimeException e) { android.util.Log.w("TVHomePlayback","UniTV observation unavailable",e); }
-            handler.postDelayed(this,10_000);
+            handler.postDelayed(this,30_000);
         }
     };
     private static String visibleText(AccessibilityNodeInfo root,String id) {

@@ -22,7 +22,7 @@ public final class PlaybackMonitorService extends NotificationListenerService {
         @Override public void onMetadataChanged(MediaMetadata metadata) { read(); }
         @Override public void onSessionDestroyed() { refresh(); }
     };
-    private final Runnable tick=new Runnable() { @Override public void run() { read(); handler.postDelayed(this,10_000); } };
+    private final Runnable tick=new Runnable() { @Override public void run() { read(); handler.postDelayed(this,30_000); } };
     @Override public void onListenerConnected() {
         super.onListenerConnected(); manager=(MediaSessionManager)getSystemService(MEDIA_SESSION_SERVICE);
         if (manager==null) return;
