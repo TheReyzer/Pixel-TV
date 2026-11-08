@@ -39,14 +39,14 @@
       <div class="section-head"><h2>Uma Home que entende a casa inteira.</h2><p>O sistema combina catálogo, disponibilidade, histórico e comportamento de cada pessoa para transformar a primeira tela em uma central de descoberta.</p></div>
       <div class="feature-grid">
         <article class="feature"><div class="icon" aria-hidden="true">✦</div><h3>Recomendação individual</h3><p>Cada perfil aprende com notas de “Odiei” a “Amei”, gêneros, formato, duração, direção, elenco, assistidos e listas. O ranking evita repetir o que acabou de aparecer.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">◎</div><h3>Geral e por perfil</h3><p>Use a Home no modo individual ou abra Descobrir para combinar duas ou mais pessoas. O Geral favorece afinidades em comum e reduz conflitos entre gostos.</p></article>
+          <article class="feature"><div class="icon" aria-hidden="true">◎</div><h3>Geral e por perfil</h3><p>A lista de perfis mostra Geral e cada pessoa da casa. Escolha o modo individual ou combine os gostos para encontrar afinidades sem apagar preferências.</p></article>
         <article class="feature"><div class="icon" aria-hidden="true">◒</div><h3>Estatísticas de gostos</h3><p>Veja afinidade de 0 a 100%, gêneros mais fortes, títulos registrados, assistidos e notas de cada perfil para entender como o gosto está evoluindo.</p></article>
         <article class="feature"><div class="icon" aria-hidden="true">⌕</div><h3>Busca por texto e voz</h3><p>Pesquise em português, filtre Tudo, Filme ou Série, explore o catálogo IMDb com a lupa vazia e abra detalhes relacionados sem perder a posição.</p></article>
         <article class="feature"><div class="icon" aria-hidden="true">▣</div><h3>Capas e catálogo em PT-BR</h3><p>O catálogo prioriza títulos, sinopses, disponibilidade e capas brasileiras. A Home prepara versões horizontal e vertical sem deformar a imagem.</p></article>
         <article class="feature"><div class="icon" aria-hidden="true">▶</div><h3>Trailers dentro do modal</h3><p>Assista ao trailer em tela cheia com D-pad, prioridade para PT-BR e carregamento progressivo, sem precisar abandonar o launcher.</p></article>
         <article class="feature"><div class="icon" aria-hidden="true">◌</div><h3>Feito para controle remoto</h3><p>Foco visível, grades contínuas, seis colunas na busca, retorno ao card anterior e avanço controlado ao voltar de outro aplicativo.</p></article>
         <article class="feature"><div class="icon" aria-hidden="true">↗</div><h3>Histórico e listas</h3><p>Assistidos, avaliações, Gostos, Favoritos e Assistir mais tarde ficam acessíveis pela barra da Home, separados do menu de perfis.</p></article>
-        <article class="feature"><div class="icon" aria-hidden="true">☁</div><h3>Perfil que viaja</h3><p>Vincule cada perfil a uma conta Google e sincronize histórico, avaliações, gostos e listas em uma pasta própria do Drive.</p></article>
+          <article class="feature"><div class="icon" aria-hidden="true">☁</div><h3>Perfil que viaja</h3><p>Vincule cada perfil a uma conta Google pelo QR code e sincronize histórico, avaliações, gostos e listas em uma pasta própria do Drive.</p></article>
       </div>
     </div></section>
 
@@ -86,7 +86,7 @@
       const preview = document.getElementById('feature-preview');
       const image = preview.querySelector('img');
       const caption = preview.querySelector('span');
-      const screenshots = ['screen-home.png','screen-tastes.png','screen-tastes.png','screen-search.png','screen-detail.png','screen-trailer.png','screen-home.png','screen-home.png','screen-sync.png'];
+        const screenshots = ['screen-tastes.png','screen-profiles.png','screen-tastes.png','screen-search.png','screen-detail.png','screen-trailer.png','screen-home.png','screen-tastes.png','screen-sync.png'];
       let active = null;
       function place(x, y) {
         const margin = 18, width = preview.offsetWidth, height = preview.offsetHeight;

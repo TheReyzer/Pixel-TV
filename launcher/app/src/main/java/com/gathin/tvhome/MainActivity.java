@@ -155,6 +155,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private View updateWelcomeOverlay;
     private ProgressBar updateDownloadProgress;
     private TextView updateDownloadStatus;
+    private TextView updatePermissionAction;
+    private java.io.File pendingUpdateApk;
     private int updateNoticeVersion=-1;
     private ProfileController profiles;
     private WatchFeedbackController watchFeedback;
@@ -696,7 +698,13 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     @Override
     protected void onResume() {
         super.onResume(); activityResumed=true;
-        if (homeInitialized) { resumeHome(); UpdateManager.checkIfDue(this,this::onUpdateChecked); }
+        if (homeInitialized) {
+            resumeHome();
+            if (pendingUpdateApk!=null && (android.os.Build.VERSION.SDK_INT<26 || getPackageManager().canRequestPackageInstalls())) {
+                java.io.File apk=pendingUpdateApk; pendingUpdateApk=null; installUpdate(apk);
+            }
+            UpdateManager.checkIfDue(this,this::onUpdateChecked);
+        }
     }
     private void resumeHome() {
         long resumeBegan=android.os.SystemClock.elapsedRealtime();
@@ -812,8 +820,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         for (String change:availableUpdate.changes) { TextView row=new TextView(this); row.setText("•  "+change); row.setTextColor(0xffc9c9d2); row.setTextSize(12); row.setPadding(0,dp(3),0,dp(3)); changes.addView(row); }
         ScrollView scroll=new ScrollView(this); scroll.addView(changes); panel.addView(scroll,new LinearLayout.LayoutParams(-1,dp(130)));
         updateDownloadProgress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal); updateDownloadProgress.setMax(100); updateDownloadProgress.setIndeterminate(true); panel.addView(updateDownloadProgress,new LinearLayout.LayoutParams(-1,dp(6)));
-        updateDownloadStatus=new TextView(this); updateDownloadStatus.setText("Baixando a atualização…"); updateDownloadStatus.setTextColor(0xffbcbcc7); updateDownloadStatus.setTextSize(12); updateDownloadStatus.setPadding(0,dp(10),0,0); panel.addView(updateDownloadStatus);
-        FrameLayout.LayoutParams pp=new FrameLayout.LayoutParams(dp(670),dp(410),Gravity.CENTER); overlay.addView(panel,pp); root.addView(overlay,new FrameLayout.LayoutParams(-1,-1)); updateWelcomeOverlay=overlay; overlay.requestFocus();
+        updateDownloadStatus=new TextView(this); updateDownloadStatus.setText("Baixando a atualização oficial do GitHub…"); updateDownloadStatus.setTextColor(0xffbcbcc7); updateDownloadStatus.setTextSize(12); updateDownloadStatus.setPadding(0,dp(10),0,dp(6)); panel.addView(updateDownloadStatus);
+        updatePermissionAction=updateAction("ABRIR CONFIGURAÇÃO"); updatePermissionAction.setVisibility(View.GONE); panel.addView(updatePermissionAction,new LinearLayout.LayoutParams(-2,dp(42)));
+        FrameLayout.LayoutParams pp=new FrameLayout.LayoutParams(dp(720),dp(430),Gravity.CENTER); overlay.addView(panel,pp); root.addView(overlay,new FrameLayout.LayoutParams(-1,-1)); updateWelcomeOverlay=overlay; overlay.requestFocus();
         UpdateManager.download(this,availableUpdate,new UpdateManager.DownloadCallback() {
             @Override public void progress(int percent) { if (updateDownloadProgress==null) return; if (percent<0) updateDownloadProgress.setIndeterminate(true); else { updateDownloadProgress.setIndeterminate(false); updateDownloadProgress.setProgress(percent); updateDownloadStatus.setText("Baixando a atualização… "+percent+"%"); } }
             @Override public void success(java.io.File apk) { updateDownloadStatus.setText("Download concluído. Abrindo instalação…"); installUpdate(apk); }
@@ -821,10 +830,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         });
     }
     private void installUpdate(java.io.File apk) {
+        pendingUpdateApk=apk;
         try {
             if (android.os.Build.VERSION.SDK_INT>=26 && !getPackageManager().canRequestPackageInstalls()) {
-                updateDownloadStatus.setText("Permita instalações do PIXEL TV e volte para concluir."); startActivity(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,Uri.parse("package:"+getPackageName()))); return;
+                updateDownloadStatus.setText("Para concluir automaticamente, permita instalações do PIXEL TV e volte para esta tela.");
+                if (updatePermissionAction!=null) { updatePermissionAction.setVisibility(View.VISIBLE); updatePermissionAction.setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,Uri.parse("package:"+getPackageName())))); updatePermissionAction.requestFocus(); }
+                return;
             }
+            pendingUpdateApk=null;
             Uri uri=FileProvider.getUriForFile(this,getPackageName()+".fileprovider",apk);
             Intent intent=new Intent(Intent.ACTION_VIEW).setDataAndType(uri,"application/vnd.android.package-archive"); intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_ACTIVITY_NEW_TASK); startActivity(intent);
         } catch (Exception e) { if (updateDownloadStatus!=null) updateDownloadStatus.setText("Não foi possível abrir o instalador nesta TV."); }

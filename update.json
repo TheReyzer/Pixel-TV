@@ -1,12 +1,12 @@
 {
-  "versionCode": 4,
-  "versionName": "3.0.1",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.1/pixel-tv-3.0.1.apk",
-  "summary": "Ajustes de estabilidade no retorno à Home e no aviso de atualização.",
+  "versionCode": 5,
+  "versionName": "3.0.2",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.2/pixel-tv-3.0.2.apk",
+  "summary": "Conexão Google para perfis e atualização guiada com menos passos.",
   "changelog": [
-    "A tela de boas-vindas aparece somente ao ligar a TV.",
-    "Avaliações atualizam as recomendações sem interromper a navegação.",
-    "O PIXEL TV verifica atualizações pela manhã e à noite e avisa quando há uma nova versão.",
-    "O aviso de atualização pode ser adiado e fica disponível no ícone verde da Home."
+    "Perfis podem conectar sua conta Google e levar histórico, gostos e listas para outra TV.",
+    "O QR code de conexão mostra o código alternativo para concluir o login pelo celular.",
+    "O modal de atualização orienta a permissão necessária e retoma a instalação automaticamente.",
+    "A Home volta direto para as recomendações, sem repetir a saudação ao sair de um app."
   ]
 }

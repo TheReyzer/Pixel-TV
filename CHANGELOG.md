@@ -1,5 +1,12 @@
 # Changelog do PIXEL TV
 
+## 3.0.2
+
+- Perfis podem conectar sua conta Google e levar histórico, gostos e listas para outra TV.
+- O QR code de conexão mostra o código alternativo para concluir o login pelo celular.
+- O modal de atualização orienta a permissão necessária e retoma a instalação automaticamente.
+- A Home volta direto para as recomendações, sem repetir a saudação ao sair de um app.
+
 ## 3.0.1
 
 - Ajustes de estabilidade no retorno à Home e no aviso de atualização.
