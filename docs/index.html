@@ -118,48 +118,61 @@
     }
 
     /* =========================================
-       TOPBAR FIEL AO ARTFOLIO
+       TOPBAR FLUTUANTE E REFINADA
        ========================================= */
+    .navbar-wrap {
+      position: sticky;
+      top: 18px;
+      z-index: 120;
+      padding-inline: clamp(24px, 6.5vw, 96px);
+      max-width: 1400px;
+      margin-inline: auto;
+    }
+
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1400px;
-      margin-inline: auto;
-      padding: 26px clamp(24px, 6.5vw, 96px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px 20px 12px 22px;
+      border-radius: 999px;
+      background: rgba(11, 13, 18, 0.78);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
     }
 
     .brand-logo {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
       font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
 
     .brand-logo img {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
       object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
     .brand-logo .serif-part {
       font-family: 'Instrument Serif', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.35rem;
+      font-size: 1.38rem;
       color: #fff;
     }
 
     .nav-center {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.02);
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
       padding: 4px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.06);
@@ -180,76 +193,79 @@
 
     .nav-item.active {
       color: var(--ink);
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       font-size: 0.82rem;
     }
 
-    .nav-link-plain {
-      color: var(--muted);
-      font-weight: 500;
-      padding: 6px 10px;
-      transition: color 0.2s;
+    .nav-version-badge {
+      color: #b4b9c7;
+      font-weight: 600;
+      font-size: 0.75rem;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: color 0.2s, border-color 0.2s;
     }
 
-    .nav-link-plain:hover {
+    .nav-version-badge:hover {
       color: #fff;
+      border-color: rgba(255, 255, 255, 0.22);
     }
 
     .btn-outline-pill {
-      padding: 8px 18px;
+      padding: 8px 20px;
       border-radius: 999px;
-      border: 1px solid var(--border-strong);
-      background: rgba(255, 255, 255, 0.03);
-      color: #fff;
-      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #ffffff;
+      color: #050507;
+      font-weight: 700;
       font-size: 0.8rem;
       transition: all 0.25s ease;
     }
 
     .btn-outline-pill:hover {
-      background: #fff;
-      color: #050507;
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      transform: translateY(-1px);
     }
 
     /* =========================================
-       HERO SECTION (MISTO FRAME·S & ARTFOLIO)
+       HERO SECTION — VITRINE CINEMATOGRÁFICA CENTRALIZADA
        ========================================= */
     .hero {
-      padding-top: 80px;
-      padding-bottom: 92px;
+      padding-top: 64px;
+      padding-bottom: 96px;
       position: relative;
     }
 
-    /* Estrelas / Sparkles decorativas do Artfolio */
     .sparkle {
       position: absolute;
-      color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.14);
       font-size: 1.1rem;
       pointer-events: none;
       user-select: none;
     }
-    .sp-1 { top: 80px; left: 12%; }
-    .sp-2 { top: 140px; right: 14%; }
-    .sp-3 { bottom: 90px; left: 18%; }
-    .sp-4 { top: 60px; right: 28%; font-size: 0.8rem; }
+    .sp-1 { top: 56px; left: 14%; }
+    .sp-2 { top: 110px; right: 14%; }
+    .sp-3 { top: 310px; left: 10%; }
+    .sp-4 { top: 44px; right: 26%; font-size: 0.8rem; }
 
-    .hero-top-grid {
+    .hero-center-header {
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-
-    .hero-left {
-      max-width: 720px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 56px;
+      gap: 24px;
     }
 
     /* Pill com as duas logos e o divisor no meio */
@@ -257,32 +273,17 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 28px;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid var(--border-hairline);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .index-num {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: 1.1rem;
-      color: var(--ink);
-      line-height: 1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     .index-sep {
       width: 1px;
       height: 12px;
-      background: rgba(255, 255, 255, 0.16);
-    }
-
-    .index-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
+      background: rgba(255, 255, 255, 0.22);
     }
 
     /* LOGOS DE PLATAFORMA BEM MENORES E DISCRETOS */
@@ -299,7 +300,7 @@
       max-width: 68px;
       object-fit: contain;
       filter: brightness(0) invert(1);
-      opacity: 0.82;
+      opacity: 0.86;
       transition: opacity 0.2s;
     }
 
@@ -312,102 +313,86 @@
     }
 
     .hero-headline {
-      font-size: clamp(3rem, 5.8vw, 5rem);
-      line-height: 1.06;
+      font-size: clamp(3rem, 5.8vw, 5.1rem);
+      line-height: 1.04;
       letter-spacing: -0.035em;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 26px;
     }
 
     .hero-sub {
-      font-size: 1.08rem;
+      font-size: clamp(1.02rem, 1.35vw, 1.16rem);
       color: var(--muted);
-      max-width: 560px;
+      max-width: 680px;
       line-height: 1.72;
     }
 
-    /* Selo Giratório Circular fiel ao FRAME·S */
-    .hero-right-seal {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 24px;
-    }
-
-    .rotating-seal {
-      position: relative;
-      width: 112px;
-      height: 112px;
+    .hero-actions {
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
-    .rotating-seal svg.seal-text {
-      width: 100%;
-      height: 100%;
-      animation: spinSlow 18s linear infinite;
-    }
-
-    .rotating-seal .seal-center {
-      position: absolute;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      color: #fff;
-      transition: transform 0.25s ease, background 0.25s ease;
-    }
-
-    .rotating-seal:hover .seal-center {
-      transform: scale(1.12);
-      background: #fff;
-      color: #050507;
-    }
-
-    @keyframes spinSlow {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Botão Branco Retangular Fiel ao FRAME·S ("Get started ↗") */
     .btn-white-rect {
       display: inline-flex;
       align-items: center;
       gap: 12px;
       background: #ffffff;
       color: #050507;
-      padding: 14px 26px;
-      border-radius: 4px;
-      font-size: 0.85rem;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 0.01em;
+      letter-spacing: -0.01em;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 34px rgba(255, 255, 255, 0.14);
     }
 
     .btn-white-rect:hover {
       background: var(--accent-cyan);
       transform: translateY(-2px);
-      box-shadow: 0 14px 36px rgba(112, 225, 255, 0.28);
+      box-shadow: 0 16px 40px rgba(112, 225, 255, 0.3);
+    }
+
+    .btn-ghost-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .btn-ghost-pill:hover {
+      border-color: rgba(255, 255, 255, 0.38);
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+    }
+
+    @keyframes spinSlow {
+      to { transform: rotate(360deg); }
     }
 
     /* =========================================
-       BANNER CINEMATOGRÁFICO WIDE (ESTILO FRAME·S)
+       BANNER CINEMATOGRÁFICO WIDE (MOLDURA DE TV COM AMBIENT GLOW)
        ========================================= */
     .hero-cinema-stage {
       position: relative;
-      border-radius: var(--radius-card);
+      border-radius: 26px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       background: #040507;
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9);
+      box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.92),
+        0 0 80px -20px rgba(88, 184, 120, 0.18);
     }
 
     .hero-cinema-stage img.main-screen {
@@ -415,7 +400,7 @@
       width: 100%;
       height: auto;
       aspect-ratio: 16/9;
-      max-height: 580px;
+      max-height: 620px;
       object-fit: cover;
       object-position: center top;
       filter: contrast(1.03);
@@ -423,16 +408,15 @@
     }
 
     .hero-cinema-stage:hover img.main-screen {
-      transform: scale(1.015);
+      transform: scale(1.012);
     }
 
-    /* Barra inferior sobre a imagem com Louros (Laurels) e Links igual ao FRAME·S */
     .cinema-overlay-bar {
       position: absolute;
       inset-inline: 0;
       bottom: 0;
-      padding: 36px 40px 28px;
-      background: linear-gradient(to top, rgba(5, 5, 7, 0.96) 0%, rgba(5, 5, 7, 0.7) 55%, transparent 100%);
+      padding: 48px 40px 30px;
+      background: linear-gradient(to top, rgba(5, 5, 7, 0.96) 0%, rgba(5, 5, 7, 0.72) 55%, transparent 100%);
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -447,11 +431,19 @@
       flex-wrap: wrap;
     }
 
+    .laurel-badges.nowrap-row {
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: clamp(16px, 2.6vw, 36px);
+      width: 100%;
+    }
+
     .laurel-item {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.88);
+      flex-shrink: 0;
     }
 
     .laurel-wreath {
@@ -468,12 +460,13 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .laurel-text strong {
-      font-size: 0.74rem;
+      font-size: 0.76rem;
       color: #fff;
+      white-space: nowrap;
     }
 
     .cinema-quick-links {
@@ -532,7 +525,7 @@
     }
 
     /* =========================================
-       SEÇÃO ARTFOLIO: CABEÇALHO CENTRAL + 3 CARDS SPOTLIGHT
+       SEÇÃO ARTFOLIO: CABEÇALHO CENTRAL + 3 CARDS SPOTLIGHT (IMAGEM FULL-WIDTH)
        ========================================= */
     .artfolio-section {
       padding-top: 112px;
@@ -579,7 +572,7 @@
       line-height: 1.72;
     }
 
-    /* 3 CARDS COM CARD DO MEIO EM DESTAQUE ESMERALDA (FIEL AO ARTFOLIO) */
+    /* 3 CARDS COM IMAGEM LARGURA TOTAL E SEM CURSOR POINTER */
     .spotlight-trio {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -593,84 +586,53 @@
       border-radius: var(--radius-card);
       border: 1px solid var(--border-hairline);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-      padding: 36px 32px 32px;
+      padding: 20px 22px 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       justify-content: space-between;
-      gap: 26px;
-      cursor: pointer;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 22px;
+      cursor: default;
+      transition: border-color 0.3s ease;
       overflow: hidden;
     }
 
     /* Card central com o brilho verde/esmeralda característico do Artfolio */
     .spot-card.featured {
       background: 
-        radial-gradient(circle at 50% 60%, rgba(88, 184, 120, 0.24) 0%, rgba(42, 92, 65, 0.12) 45%, rgba(15, 18, 24, 0.95) 85%),
+        radial-gradient(circle at 50% 65%, rgba(88, 184, 120, 0.22) 0%, rgba(42, 92, 65, 0.12) 45%, rgba(15, 18, 24, 0.95) 85%),
         #0d1211;
       border-color: rgba(88, 184, 120, 0.38);
       box-shadow: 0 24px 70px -15px rgba(88, 184, 120, 0.18);
-      transform: translateY(-4px);
     }
 
-    .spot-card:hover {
-      border-color: rgba(255, 255, 255, 0.26);
-      transform: translateY(-6px);
-    }
-
-    .spot-card.featured:hover {
-      border-color: rgba(88, 184, 120, 0.65);
-    }
-
-    .spot-top-icons {
+    .spot-banner {
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 8px;
+      aspect-ratio: 16 / 10;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #060709;
     }
 
-    .mini-circle-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.03);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #d1d5db;
+    .spot-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .spot-avatar-wrap {
+    .spot-head {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-    }
-
-    .spot-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      padding: 3px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
-    }
-
-    .spot-avatar img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
+      gap: 6px;
+      margin-top: 2px;
     }
 
     .spot-name {
-      font-size: 1.22rem;
+      font-size: 1.26rem;
       font-weight: 700;
       color: #fff;
       line-height: 1.25;
@@ -679,14 +641,13 @@
     .spot-handle {
       font-size: 0.8rem;
       color: var(--muted);
-      margin-top: -6px;
     }
 
     .spot-bio {
-      font-size: 0.92rem;
+      font-size: 0.93rem;
       color: #b4b9c7;
       line-height: 1.68;
-      max-width: 300px;
+      max-width: 320px;
     }
 
     .spot-pills {
@@ -847,7 +808,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      cursor: pointer;
+      cursor: default;
     }
 
     .prod-thumb {
@@ -864,11 +825,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .prod-card:hover .prod-thumb img {
-      transform: scale(1.05);
+      display: block;
     }
 
     .prod-card h3 {
@@ -972,7 +929,6 @@
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
     }
 
-    /* Degradê escuro profundo na metade inferior para leitura perfeita sobre qualquer screenshot */
     .work-showcase::after {
       content: "";
       position: absolute;
@@ -1057,203 +1013,293 @@
     }
 
     /* =========================================
-       SEÇÃO ARTFOLIO: "JOIN THE COMMUNITY" + SELO + 2 CARDS RODAPÉ
+       SEÇÃO DE INSTALAÇÃO DO SISTEMA + RODAPÉ COMPLETO
        ========================================= */
     .community-footer-section {
-      padding-top: clamp(92px, 9vw, 136px);
+      padding-top: clamp(96px, 9.5vw, 140px);
       padding-bottom: clamp(56px, 6vw, 84px);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .community-split {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-      margin-bottom: 72px;
-      flex-wrap: wrap;
-    }
-
-    .comm-left {
-      display: flex;
-      flex-direction: column;
-      gap: 26px;
-    }
-
-    .comm-tag {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .comm-tag span {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-style: italic;
-      color: #fff;
-      margin-right: 4px;
-    }
-
-    .comm-emblem {
       position: relative;
-      width: 118px;
-      height: 118px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .comm-emblem svg {
-      width: 104px;
-      height: 104px;
-      animation: spinSlow 24s linear infinite;
-      opacity: 0.55;
+    .install-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
     }
 
-    .comm-emblem-center {
-      position: absolute;
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-style: italic;
-      font-size: 1.7rem;
-      color: #fff;
-    }
-
-    .comm-right {
-      text-align: right;
+    .install-step-card {
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-hairline);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+      padding: 30px 28px;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 18px;
+      gap: 14px;
     }
 
-    .comm-eyebrow {
-      font-size: 1.15rem;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .comm-giant-title {
-      font-size: clamp(2.8rem, 5.5vw, 4.6rem);
-      line-height: 1.02;
-      letter-spacing: -0.035em;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .comm-cta-link {
-      margin-top: 10px;
+    .install-step-num {
       display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: #fff;
-      padding-bottom: 4px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-      transition: border-color 0.2s;
-    }
-
-    .comm-cta-link .circle-arrow {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #fff;
-      color: #050507;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      transition: transform 0.2s ease;
-    }
-
-    .comm-cta-link:hover .circle-arrow {
-      transform: translateX(3px);
-      background: var(--accent-cyan);
-    }
-
-    .footer-meta-bar {
-      display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 0.74rem;
-      color: var(--faint);
-      padding-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
     }
 
-    /* DOIS CARDS ASSIMÉTRICOS DE RODAPÉ (IDÊNTICO AO ARTFOLIO) */
-    .footer-bento {
+    .install-step-num span.step-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(112, 225, 255, 0.1);
+      border: 1px solid rgba(112, 225, 255, 0.25);
+      color: #fff;
+      font-size: 0.7rem;
+    }
+
+    .install-step-card h3 {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .install-step-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .install-bento {
       display: grid;
-      grid-template-columns: 1.45fr 0.95fr;
+      grid-template-columns: 1.15fr 1fr;
       gap: 28px;
+      margin-bottom: 48px;
     }
 
-    .footer-card {
+    .install-panel {
       position: relative;
       border-radius: var(--radius-card);
       border: 1px solid var(--border-hairline);
       background: #0c0d12;
-      padding: 40px 38px;
-      overflow: hidden;
+      padding: 38px 36px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 290px;
-      gap: 28px;
+      gap: 24px;
+      overflow: hidden;
     }
 
-    /* Marca d'água gigante no fundo do card esquerdo como "af" no Artfolio */
-    .footer-watermark {
-      position: absolute;
-      right: 18px;
-      bottom: -36px;
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-style: italic;
-      font-size: 13rem;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.025);
-      pointer-events: none;
-      user-select: none;
+    .install-panel.ai-featured {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(88, 184, 120, 0.2) 0%, rgba(42, 92, 65, 0.08) 45%, rgba(12, 13, 18, 0.98) 85%),
+        #0c100f;
+      border-color: rgba(88, 184, 120, 0.36);
+      box-shadow: 0 24px 70px -18px rgba(88, 184, 120, 0.16);
     }
 
-    .footer-card-top p {
-      margin-top: 18px;
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 340px;
-      line-height: 1.65;
+    .panel-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-green);
     }
 
-    .footer-card-bottom {
+    .install-panel h3 {
+      font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+    }
+
+    .install-panel p.panel-desc {
+      font-size: 0.94rem;
+      color: #b4b9c7;
+      line-height: 1.68;
+    }
+
+    .ai-prompt-box {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(5, 6, 9, 0.78);
+      padding: 18px 20px;
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ai-prompt-text {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.84rem;
+      line-height: 1.65;
+      color: #e2e8f0;
+      user-select: all;
+    }
+
+    .ai-prompt-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ai-agents-tags {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .ai-agents-tags span {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d1d5db;
+    }
+
+    .btn-copy-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: #ffffff;
+      color: #050507;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-action:hover {
+      background: var(--accent-cyan);
+      transform: translateY(-1px);
+    }
+
+    .cli-commands-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cli-cmd-item {
+      border-radius: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(5, 6, 9, 0.72);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .cli-cmd-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .cli-cmd-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cli-cmd-code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.8rem;
+      color: #70e1ff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cli-copy-mini {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+      color: #e2e8f0;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .cli-copy-mini:hover {
+      background: #fff;
+      color: #050507;
+    }
+
+    .install-specs-row {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      margin-top: 32px;
-      position: relative;
-      z-index: 2;
+      padding-top: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .install-specs-row a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-bottom-bar {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
     .copyright-text {
-      font-size: 0.75rem;
-      color: var(--faint);
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
     .footer-pill-clusters {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      justify-content: flex-end;
-      max-width: 280px;
+      gap: 8px;
     }
 
     .f-pill {
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: rgba(255, 255, 255, 0.02);
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: #cbd5e1;
       transition: all 0.2s;
     }
@@ -1261,71 +1307,6 @@
     .f-pill:hover {
       background: #fff;
       color: #050507;
-    }
-
-    /* Card Direito: Prompt / Input Box com seta circular igual à Newsletter do Artfolio */
-    .prompt-input-label {
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: #d1d5db;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .prompt-input-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 6px 8px 6px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(0, 0, 0, 0.45);
-    }
-
-    .prompt-input-bar input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #e2e8f0;
-      font-size: 0.78rem;
-      width: 100%;
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    }
-
-    .prompt-send-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: none;
-      background: #ffffff;
-      color: #050507;
-      font-weight: 700;
-      cursor: pointer;
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .prompt-send-btn:hover {
-      background: var(--accent-cyan);
-      transform: scale(1.08);
-    }
-
-    .prompt-helper-note {
-      font-size: 0.72rem;
-      color: var(--faint);
-      margin-top: 12px;
-      line-height: 1.5;
-    }
-
-    .prompt-helper-note a {
-      color: #cbd5e1;
-      text-decoration: underline;
     }
 
     /* =======================================================
@@ -1395,97 +1376,87 @@
     /* RESPONSIVIDADE */
     @media (max-width: 960px) {
       .nav-center { display: none; }
-      .hero-top-grid { flex-direction: column; align-items: flex-start; }
-      .hero-right-seal { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
-      .spotlight-trio, .works-grid-2x2, .footer-bento {
+      .spotlight-trio, .works-grid-2x2, .install-steps-grid, .install-bento {
         grid-template-columns: 1fr;
+      }
+      .laurel-badges.nowrap-row {
+        flex-wrap: wrap;
       }
       .prod-card {
         flex: 0 0 100%;
         min-width: 100%;
       }
-      .comm-right { text-align: left; align-items: flex-start; }
       #jelly-preview { display: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- MOLDURA CENTRAL ESTILO ARTFOLIO -->
+  <!-- MOLDURA CENTRAL -->
   <div class="stage-frame">
 
-    <!-- NAVBAR FIEL AO ARTFOLIO -->
-    <header class="navbar">
-      <a href="./" class="brand-logo">
-        <img src="favicon.png" alt="Logo PIXEL TV">
-        <span><span class="serif-part">pixel</span>tv</span>
-      </a>
+    <!-- NAVBAR FLUTUANTE -->
+    <div class="navbar-wrap">
+      <header class="navbar">
+        <a href="./" class="brand-logo">
+          <img src="favicon.png" alt="Logo PIXEL TV">
+          <span><span class="serif-part">pixel</span>tv</span>
+        </a>
 
-      <nav class="nav-center" aria-label="Navegação principal">
-        <a href="#inicio" class="nav-item">Início</a>
-        <a href="#perfis" class="nav-item active">Perfis & IA</a>
-        <a href="#galeria" class="nav-item">Telas</a>
-        <a href="#integracoes" class="nav-item">Integrações</a>
-        <a href="#producoes" class="nav-item">Arquitetura</a>
-      </nav>
+        <nav class="nav-center" aria-label="Navegação principal">
+          <a href="#inicio" class="nav-item active">Início</a>
+          <a href="#perfis" class="nav-item">Perfis &amp; IA</a>
+          <a href="#galeria" class="nav-item">Telas</a>
+          <a href="#integracoes" class="nav-item">Integrações</a>
+          <a href="#producoes" class="nav-item">Arquitetura</a>
+          <a href="#instalacao" class="nav-item">Instalação</a>
+        </nav>
 
-      <div class="nav-right">
-        <a href="https://github.com/TheReyzer/Pixel-TV/releases" target="_blank" rel="noopener" class="nav-link-plain">v3.0.3</a>
-        <a href="https://github.com/TheReyzer/Pixel-TV#instalar-com-uma-ia" target="_blank" rel="noopener" class="btn-outline-pill">Instalar</a>
-      </div>
-    </header>
+        <div class="nav-right">
+          <a href="https://github.com/TheReyzer/Pixel-TV/releases" target="_blank" rel="noopener" class="nav-version-badge">v3.0.3</a>
+          <a href="#instalacao" class="btn-outline-pill">Instalar</a>
+        </div>
+      </header>
+    </div>
 
-    <!-- HERO SECTION (MISTO FRAME·S & ARTFOLIO) -->
+    <!-- HERO SECTION CENTRALIZADA E MONUMENTAL -->
     <section id="inicio" class="hero container">
       <span class="sparkle sp-1">✦</span>
       <span class="sparkle sp-2">✦</span>
       <span class="sparkle sp-3">✦</span>
       <span class="sparkle sp-4">✧</span>
 
-      <div class="hero-top-grid">
-        <div class="hero-left">
-          <!-- APENAS AS DUAS LOGOS COM O DIVISOR NO MEIO -->
-          <div class="hero-index-row" aria-label="Compatível com Android TV e Google TV">
-            <div class="hero-platform-logos">
-              <img src="android-tv-logo.svg" alt="Android TV">
-              <span class="index-sep"></span>
-              <img src="google-tv-logo.svg" alt="Google TV" class="gtv">
-            </div>
+      <div class="hero-center-header">
+        <div class="hero-index-row" aria-label="Compatível com Android TV e Google TV">
+          <div class="hero-platform-logos">
+            <img src="android-tv-logo.svg" alt="Android TV">
+            <span class="index-sep"></span>
+            <img src="google-tv-logo.svg" alt="Google TV" class="gtv">
           </div>
-
-          <h1 class="hero-headline">
-            Transformamos sua TV em <br>
-            <span class="serif-italic bright">cinema & descoberta.</span>
-          </h1>
-
-          <p class="hero-sub">
-            O PIXEL TV nasceu de uma ideia simples: cada pessoa da casa merece um palco inteligente. 
-            Catálogo oficial do IMDb com alerta de disponibilidade nos apps instalados na sua TV, trailers nativos e automação direta para seus streamings.
-          </p>
         </div>
 
-        <!-- SELO GIRATÓRIO + BOTÃO RETANGULAR BRANCO (FIEL AO FRAME·S) -->
-        <div class="hero-right-seal">
-          <a href="#producoes" class="rotating-seal" aria-label="Explorar interface">
-            <svg class="seal-text" viewBox="0 0 100 100">
-              <defs>
-                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
-              </defs>
-              <text fill="rgba(255,255,255,0.75)" font-size="7.3" font-weight="700" letter-spacing="2.1">
-                <textPath href="#circlePath">• PIXEL TV HOME • ANDROID &amp; GOOGLE TV</textPath>
-              </text>
-            </svg>
-            <span class="seal-center">▶</span>
-          </a>
+        <h1 class="hero-headline">
+          Transformamos sua TV em <br>
+          <span class="serif-italic bright">cinema &amp; descoberta.</span>
+        </h1>
 
-          <a href="https://github.com/TheReyzer/Pixel-TV#instalar-com-uma-ia" target="_blank" rel="noopener" class="btn-white-rect">
-            <span>Começar agora</span>
+        <p class="hero-sub">
+          Catálogo oficial do IMDb com aviso de disponibilidade nos apps instalados na sua TV, recomendações por afinidade individual, trailers embutidos e automação direta para seus streamings.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#instalacao" class="btn-white-rect">
+            <span>Instalar na minha TV</span>
+            <span>↓</span>
+          </a>
+          <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener" class="btn-ghost-pill">
+            <span>Ver repositório no GitHub</span>
             <span>↗</span>
           </a>
         </div>
       </div>
 
-      <!-- IMAGEM CINEMATOGRÁFICA WIDE COM LOUROS (LAURELS) E LINKS (SEM HOVER FLUTUANTE) -->
+      <!-- IMAGEM CINEMATOGRÁFICA WIDE COM LOUROS (SEM HOVER FLUTUANTE) -->
       <div class="hero-cinema-stage">
         <img src="screen-home.webp" alt="Tela Inicial do PIXEL TV" class="main-screen" fetchpriority="high">
         
@@ -1515,8 +1486,8 @@
               <span class="laurel-wreath">❦</span>
               <div class="laurel-text">
                 <span>AUTOMAÇÃO DIRETA</span>
-                <strong>MULTI-STREAMING</strong>
-                <span>NETFLIX · PRIME · STREMIO · UNITV</span>
+                <strong>UNITV · STREMIO &amp; OUTROS</strong>
+                <span>PRIME · NETFLIX · APPLE TV</span>
               </div>
               <span class="laurel-wreath">❧</span>
             </div>
@@ -1526,7 +1497,7 @@
             <a href="#perfis">perfis</a>
             <a href="#galeria">telas</a>
             <a href="#integracoes">integrações</a>
-            <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener">github</a>
+            <a href="#instalacao">instalar</a>
           </div>
         </div>
       </div>
@@ -1538,19 +1509,19 @@
         <div class="ribbon-phrase">
           <span>CATÁLOGO IMDB OFICIAL</span><span class="ribbon-line"></span>
           <span>DETECÇÃO DE APPS INSTALADOS</span><span class="ribbon-line"></span>
-          <span>AUTOMAÇÃO MULTI-STREAMING</span><span class="ribbon-line"></span>
+          <span>UNITV · STREMIO &amp; OUTROS</span><span class="ribbon-line"></span>
           <span>GOOGLE DRIVE SYNC</span><span class="ribbon-line"></span>
         </div>
         <div class="ribbon-phrase">
           <span>CATÁLOGO IMDB OFICIAL</span><span class="ribbon-line"></span>
           <span>DETECÇÃO DE APPS INSTALADOS</span><span class="ribbon-line"></span>
-          <span>AUTOMAÇÃO MULTI-STREAMING</span><span class="ribbon-line"></span>
+          <span>UNITV · STREMIO &amp; OUTROS</span><span class="ribbon-line"></span>
           <span>GOOGLE DRIVE SYNC</span><span class="ribbon-line"></span>
         </div>
       </div>
     </div>
 
-    <!-- SEÇÃO ARTFOLIO: CABEÇALHO + 3 CARDS SPOTLIGHT (CARD CENTRAL VERDE) -->
+    <!-- SEÇÃO ARTFOLIO: CABEÇALHO + 3 CARDS COM IMAGEM LARGURA TOTAL (SEM HOVER E SEM ÍCONES NO TOPO) -->
     <section id="perfis" class="artfolio-section container">
       <div class="center-header">
         <span class="pill-tag">Motores de Experiência</span>
@@ -1565,13 +1536,11 @@
 
       <div class="spotlight-trio">
         <!-- CARD ESQUERDO -->
-        <article class="spot-card" data-preview="screen-tastes.webp" data-caption="Motor de Afinidade · Pesos de 0 a 100%">
-          <div class="spot-top-icons">
-            <span class="mini-circle-icon">✦</span>
-            <span class="mini-circle-icon">◒</span>
+        <article class="spot-card">
+          <div class="spot-banner">
+            <img src="screen-tastes.webp" alt="Afinidade Pessoal" loading="lazy">
           </div>
-          <div class="spot-avatar-wrap">
-            <div class="spot-avatar"><img src="screen-tastes.webp" alt="Afinidade"></div>
+          <div class="spot-head">
             <h3 class="spot-name">Afinidade Pessoal</h3>
             <span class="spot-handle">@motor.recomendacao</span>
           </div>
@@ -1584,15 +1553,12 @@
           </div>
         </article>
 
-        <!-- CARD CENTRAL EM DESTAQUE ESMERALDA (FIEL AO ARTFOLIO) -->
-        <article class="spot-card featured" data-preview="screen-sync.webp" data-caption="Google Drive Sync · OAuth QR Code na TV">
-          <div class="spot-top-icons">
-            <span class="mini-circle-icon">☁</span>
-            <span class="mini-circle-icon">QR</span>
-            <span class="mini-circle-icon">🔒</span>
+        <!-- CARD CENTRAL EM DESTAQUE ESMERALDA -->
+        <article class="spot-card featured">
+          <div class="spot-banner">
+            <img src="screen-sync.webp" alt="Perfil que Viaja" loading="lazy">
           </div>
-          <div class="spot-avatar-wrap">
-            <div class="spot-avatar"><img src="screen-sync.webp" alt="Google Sync"></div>
+          <div class="spot-head">
             <h3 class="spot-name">Perfil que Viaja</h3>
             <span class="spot-handle">@google.drive.sync</span>
           </div>
@@ -1607,14 +1573,11 @@
         </article>
 
         <!-- CARD DIREITO -->
-        <article class="spot-card" data-preview="screen-profiles.webp" data-caption="Multi-Perfis & Modo Geral Combinado">
-          <div class="spot-top-icons">
-            <span class="mini-circle-icon">◎</span>
-            <span class="mini-circle-icon">⚡</span>
-            <span class="mini-circle-icon">✓</span>
+        <article class="spot-card">
+          <div class="spot-banner">
+            <img src="screen-profiles.webp" alt="Modo Casa e Individual" loading="lazy">
           </div>
-          <div class="spot-avatar-wrap">
-            <div class="spot-avatar"><img src="screen-profiles.webp" alt="Multi-Perfis"></div>
+          <div class="spot-head">
             <h3 class="spot-name">Modo Casa &amp; Individual</h3>
             <span class="spot-handle">@perfis.isolados</span>
           </div>
@@ -1658,7 +1621,7 @@
           <div class="wall-tile" data-preview="screen-sync.webp" data-caption="Backup Automático no Google Drive"><img src="screen-sync.webp" alt="Sync"><span class="wall-tile-tag">Portabilidade</span></div>
           <div class="wall-tile" data-preview="screen-home.webp" data-caption="Retorno Instantâneo · Estado Preservado"><img src="screen-home.webp" alt="Home"><span class="wall-tile-tag">Memória Ativa</span></div>
           <div class="wall-tile" data-preview="screen-tastes.webp" data-caption="Histórico · Títulos Assistidos e Avaliados"><img src="screen-tastes.webp" alt="Gostos"><span class="wall-tile-tag">Biblioteca</span></div>
-          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Automação · Prime Video, Apple TV, Netflix, Stremio e UniTV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Multi-Apps</span></div>
+          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Automação · UniTV, Stremio, Prime Video, Netflix e mais"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Multi-Apps</span></div>
           <div class="wall-tile" data-preview="screen-profiles.webp" data-caption="Cores & Avatares Personalizados"><img src="screen-profiles.webp" alt="Perfis"><span class="wall-tile-tag">Identidade</span></div>
           <!-- Duplicata -->
           <div class="wall-tile" data-preview="screen-search.webp" data-caption="Filtros · Tudo, Filmes ou Séries"><img src="screen-search.webp" alt="Busca"><span class="wall-tile-tag">Filtros IMDb</span></div>
@@ -1666,7 +1629,7 @@
           <div class="wall-tile" data-preview="screen-sync.webp" data-caption="Backup Automático no Google Drive"><img src="screen-sync.webp" alt="Sync"><span class="wall-tile-tag">Portabilidade</span></div>
           <div class="wall-tile" data-preview="screen-home.webp" data-caption="Retorno Instantâneo · Estado Preservado"><img src="screen-home.webp" alt="Home"><span class="wall-tile-tag">Memória Ativa</span></div>
           <div class="wall-tile" data-preview="screen-tastes.webp" data-caption="Histórico · Títulos Assistidos e Avaliados"><img src="screen-tastes.webp" alt="Gostos"><span class="wall-tile-tag">Biblioteca</span></div>
-          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Automação · Prime Video, Apple TV, Netflix, Stremio e UniTV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Multi-Apps</span></div>
+          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Automação · UniTV, Stremio, Prime Video, Netflix e mais"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Multi-Apps</span></div>
           <div class="wall-tile" data-preview="screen-profiles.webp" data-caption="Cores & Avatares Personalizados"><img src="screen-profiles.webp" alt="Perfis"><span class="wall-tile-tag">Identidade</span></div>
         </div>
 
@@ -1691,9 +1654,9 @@
       </div>
     </section>
 
-    <!-- SEÇÃO FRAME·S: CABEÇALHO + CARROSSEL DE FUNCIONALIDADES PIXEL.TV -->
+    <!-- SEÇÃO FRAME·S: CABEÇALHO + 4 LOUROS LADO A LADO + CARROSSEL SEM HOVER PREVIEW -->
     <section id="integracoes" class="production-section container">
-      <div class="center-header">
+      <div class="center-header" style="max-width: 980px;">
         <span class="serif-italic bright" style="font-size: 1.4rem;">Pixel.tv</span>
         <h2 class="center-title">
           Do título <span class="serif-italic">à reprodução</span> sem caçar aplicativo.
@@ -1702,54 +1665,54 @@
           Catálogo oficial do IMDb cruzado com os aplicativos instalados na sua TV e automação inteligente para abrir seus streamings sem esforço.
         </p>
 
-        <div class="laurel-badges" style="justify-content: center; margin-top: 8px;">
+        <div class="laurel-badges nowrap-row" style="margin-top: 12px;">
           <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>CATÁLOGO</span><strong>IMDB OFICIAL</strong></div><span class="laurel-wreath">❧</span></div>
           <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>DISPONIBILIDADE</span><strong>APPS DA SUA TV</strong></div><span class="laurel-wreath">❧</span></div>
-          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>AUTOMAÇÃO</span><strong>PRIME · NETFLIX · APPLE TV</strong></div><span class="laurel-wreath">❧</span></div>
-          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>INTEGRAÇÃO</span><strong>STREMIO · UNITV &amp; MAIS</strong></div><span class="laurel-wreath">❧</span></div>
+          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>AUTOMAÇÃO</span><strong>UNITV · STREMIO &amp; OUTROS</strong></div><span class="laurel-wreath">❧</span></div>
+          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>TRAILERS</span><strong>PT-BR · EN · ORIGINAL</strong></div><span class="laurel-wreath">❧</span></div>
         </div>
       </div>
 
-      <!-- CARROSSEL DE FUNCIONALIDADES -->
+      <!-- CARROSSEL DE FUNCIONALIDADES (SEM IMAGEM DE HOVER FLUTUANTE) -->
       <div class="prod-carousel-wrapper" id="prod-carousel">
         <div class="prod-carousel-track" id="prod-track">
           <!-- Slide 1 -->
-          <article class="prod-card" data-preview="screen-detail.webp" data-caption="Catálogo IMDb · Aviso de disponibilidade nos apps da TV">
+          <article class="prod-card">
             <div class="prod-thumb"><img src="screen-detail.webp" alt="Catálogo IMDb e Disponibilidade na TV" loading="lazy"></div>
             <h3>Catálogo IMDb &amp; Aviso de Disponibilidade</h3>
             <p>Baseado no catálogo do IMDb, o sistema cruza onde cada obra está disponível com as plataformas instaladas na sua TV, avisando na hora onde assistir.</p>
           </article>
 
           <!-- Slide 2 -->
-          <article class="prod-card" data-preview="screen-search.webp" data-caption="Automação · Prime Video, Apple TV, Netflix, Stremio, UniTV e mais">
+          <article class="prod-card">
             <div class="prod-thumb"><img src="screen-search.webp" alt="Automação Multi-Plataforma" loading="lazy"></div>
-            <h3>Automação Multi-Plataforma</h3>
-            <p>Funciona em Prime Video, Apple TV, Netflix, Stremio, UniTV e outros: aciona deep links ou conduz a busca automaticamente e sugere avaliar ao retornar.</p>
+            <h3>UniTV, Stremio &amp; Outros</h3>
+            <p>Funciona em UniTV, Stremio, Prime Video, Apple TV, Netflix e outros: aciona o título diretamente ou conduz a busca automática e sugere avaliar ao retornar.</p>
           </article>
 
           <!-- Slide 3 -->
-          <article class="prod-card" data-preview="screen-trailer.webp" data-caption="Trailers · Busca automática em PT-BR, Inglês ou Original">
+          <article class="prod-card">
             <div class="prod-thumb"><img src="screen-trailer.webp" alt="Busca Inteligente de Trailers" loading="lazy"></div>
             <h3>Trailers Multilíngues Embutidos</h3>
             <p>Localiza automaticamente o trailer em PT-BR, inglês ou idioma original e reproduz em um player moderno otimizado, sem sair da tela do título.</p>
           </article>
 
           <!-- Slide 4 -->
-          <article class="prod-card" data-preview="screen-tastes.webp" data-caption="Mapa de Gostos · Evolução de afinidade 0 a 100%">
+          <article class="prod-card">
             <div class="prod-thumb"><img src="screen-tastes.webp" alt="Mapa de Gostos e Listas" loading="lazy"></div>
             <h3>Listas, Gostos &amp; Estatísticas</h3>
             <p>Acompanhe sua evolução de afinidade de 0 a 100%, gerencie Favoritos, Assistir Mais Tarde e consulte seu histórico completo de notas.</p>
           </article>
 
           <!-- Slide 5 -->
-          <article class="prod-card" data-preview="screen-sync.webp" data-caption="Google Drive Sync · QR Code no Celular">
+          <article class="prod-card">
             <div class="prod-thumb"><img src="screen-sync.webp" alt="Sincronização Google Drive" loading="lazy"></div>
             <h3>Sincronização via QR Code</h3>
             <p>Vincule a conta Google de cada perfil escaneando o QR Code na tela. Suas preferências e listas ficam salvas no seu Drive pessoal.</p>
           </article>
 
           <!-- Slide 6 -->
-          <article class="prod-card" data-preview="screen-home.webp" data-caption="Home · Foco previsível no Controle Remoto">
+          <article class="prod-card">
             <div class="prod-thumb"><img src="screen-home.webp" alt="Navegação por Controle Remoto" loading="lazy"></div>
             <h3>Feito para Controle Remoto</h3>
             <p>Navegação contínua por D-pad, busca global por voz ou texto em seis colunas e retorno imediato para o último card selecionado.</p>
@@ -1803,7 +1766,7 @@
           <div class="work-caption">
             <span class="work-eyebrow">PIXEL TV · DURANTE O SEU FILME OU SÉRIE</span>
             <h4>0% de CPU e Proteção do Player em Reprodução</h4>
-            <p class="work-desc">Enquanto você assiste no Prime Video, Apple TV, Netflix, Stremio ou UniTV, o monitoramento fica em repouso (0% de CPU) e blinda o player ativo contra fechamentos em segundo plano.</p>
+            <p class="work-desc">Enquanto você assiste no UniTV, Stremio, Prime Video, Apple TV ou Netflix, o monitoramento fica em repouso (0% de CPU) e blinda o player ativo contra fechamentos em segundo plano.</p>
           </div>
         </article>
 
@@ -1819,94 +1782,154 @@
       </div>
     </section>
 
-    <!-- RODAPÉ FIEL AO ARTFOLIO ("JOIN THE COMMUNITY" + SELO + 2 CARDS) -->
-    <footer class="community-footer-section container">
-      <div class="community-split">
-        <div class="comm-left">
-          <div class="comm-tag"><span>(ptv)</span> Instalação Assistida</div>
-          <div class="comm-emblem" aria-hidden="true">
-            <svg viewBox="0 0 100 100">
-              <defs>
-                <path id="emblemPath" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
-              </defs>
-              <text fill="rgba(255,255,255,0.6)" font-size="6.8" letter-spacing="2.2">
-                <textPath href="#emblemPath">• CÓDIGO ABERTO • SEM TELEMETRIA •</textPath>
-              </text>
-            </svg>
-            <span class="comm-emblem-center">ptv</span>
-          </div>
-        </div>
-
-        <div class="comm-right">
-          <span class="comm-eyebrow">Vamos começar</span>
-          <h2 class="comm-giant-title">
-            Instale com <br>
-            <span class="serif-italic">sua IA favorita</span>
-          </h2>
-          <a href="https://github.com/TheReyzer/Pixel-TV#instalar-com-uma-ia" target="_blank" rel="noopener" class="comm-cta-link">
-            <span>Abrir guia no GitHub</span>
-            <span class="circle-arrow">›</span>
-          </a>
-        </div>
+    <!-- SEÇÃO DE INSTALAÇÃO DO SISTEMA COMPLETA + RODAPÉ -->
+    <footer id="instalacao" class="community-footer-section container">
+      <div class="center-header">
+        <span class="pill-tag">Instalação Segura &amp; Reversível</span>
+        <h2 class="center-title">
+          Instale na sua TV <span class="serif-italic">em minutos,</span> <br>
+          com IA ou <span class="serif-italic">via terminal</span>
+        </h2>
+        <p class="center-desc">
+          O instalador preserva seus aplicativos, perfis e o launcher original da TV, criando um ponto de restauração automático antes de aplicar qualquer configuração.
+        </p>
       </div>
 
-      <div class="footer-meta-bar">
-        <span>• Curadoria de Impacto</span>
-        <span>• Suporte Android 8+ (API 26+)</span>
+      <!-- 3 PASSOS DE PREPARAÇÃO E INSTALAÇÃO -->
+      <div class="install-steps-grid">
+        <article class="install-step-card">
+          <div class="install-step-num">
+            <span>PASSO 01 · NA SUA TV</span>
+            <span class="step-badge">Depuração ADB</span>
+          </div>
+          <h3>Ative a Depuração na TV</h3>
+          <p>
+            Em Configurações → Sistema → Sobre, clique 7 vezes em <strong>Número da versão</strong>. Depois, em Opções do desenvolvedor, ative a <strong>Depuração USB / Rede (ADB)</strong> e anote o IP da TV.
+          </p>
+        </article>
+
+        <article class="install-step-card">
+          <div class="install-step-num">
+            <span>PASSO 02 · NO COMPUTADOR</span>
+            <span class="step-badge">IA ou Python</span>
+          </div>
+          <h3>Dispare o Instalador</h3>
+          <p>
+            Envie o prompt abaixo para seu assistente de código (Claude Code, Antigravity ou Cursor) ou execute <code>python tools/install.py</code>. O roteiro verifica o ambiente, compila o APK e conecta na TV.
+          </p>
+        </article>
+
+        <article class="install-step-card">
+          <div class="install-step-num">
+            <span>PASSO 03 · CONFIRMAÇÃO</span>
+            <span class="step-badge">100% Seguro</span>
+          </div>
+          <h3>Autorize na Tela e Use</h3>
+          <p>
+            Aceite o pareamento ADB quando surgir na TV. Você pode instalar apenas como prévia ou definir como Home padrão (<code>--set-home</code>) sem desinstalar nem bloquear o launcher original.
+          </p>
+        </article>
       </div>
 
-      <div class="footer-bento">
-        <!-- CARD ESQUERDO COM MARCA D'ÁGUA -->
-        <div class="footer-card">
-          <span class="footer-watermark">ptv</span>
-          <div class="footer-card-top">
-            <a href="./" class="brand-logo">
-              <img src="favicon.png" alt="Logo PIXEL TV">
-              <span><span class="serif-part">pixel</span>tv</span>
-            </a>
-            <p>
-              Transformamos a tela inicial da sua TV em um espaço de descoberta pessoal, sem desativar o launcher original e sem coletar seus dados.
-            </p>
-          </div>
-
-          <div class="footer-card-bottom">
-            <span class="copyright-text">PIXEL TV © 2026. Código Aberto.</span>
-            <div class="footer-pill-clusters">
-              <a href="#inicio" class="f-pill">Início</a>
-              <a href="#perfis" class="f-pill">Perfis</a>
-              <a href="#integracoes" class="f-pill">Integrações</a>
-              <a href="privacy.html" class="f-pill">Privacidade</a>
-              <a href="terms.html" class="f-pill">Termos</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD DIREITO: COPIAR PROMPT PARA IA (LAYOUT DO CARD DIREITO DO ARTFOLIO) -->
-        <div class="footer-card">
+      <!-- DOIS PAINÉIS PRINCIPAIS: INSTALAÇÃO COM IA (ESQUERDA) + COMANDOS MANUAIS (DIREITA) -->
+      <div class="install-bento">
+        <!-- Painel 1: Instalação Assistida por IA -->
+        <div class="install-panel ai-featured">
           <div>
-            <h3 style="font-size: 1.12rem; font-weight: 600; margin-bottom: 18px; line-height: 1.4;">
-              Explore o <span class="serif-italic bright" style="font-size: 1.25rem;">repositório</span> <br>oficial do PIXEL TV
+            <span class="panel-eyebrow">✦ Recomendado · Instalação Assistida por IA</span>
+            <h3 style="margin-top: 10px;">
+              Cole um único comando na <span class="serif-italic bright">sua IA favorita</span>
             </h3>
-            <div style="display: flex; gap: 8px;">
-              <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener" class="mini-circle-icon" title="GitHub">GH</a>
-              <a href="https://github.com/TheReyzer/Pixel-TV/releases" target="_blank" rel="noopener" class="mini-circle-icon" title="Releases">v3</a>
-              <a href="privacy.html" class="mini-circle-icon" title="Privacidade">🔒</a>
+            <p class="panel-desc" style="margin-top: 10px;">
+              A IA lê o roteiro <code>PROMPT.md</code> do repositório, diagnostica sua TV via ADB, compila e instala o PIXEL TV preservando seus apps e criando backup automático em <code>backup/install-DATA</code>.
+            </p>
+          </div>
+
+          <div class="ai-prompt-box">
+            <div class="ai-prompt-text" id="ai-prompt-full">Clone https://github.com/TheReyzer/Pixel-TV e instale na minha Android TV/Google TV. Leia PROMPT.md, identifique a TV e siga o instalador e a verificação deste repositório. Preserve meus aplicativos, perfis e o launcher original.</div>
+            <div class="ai-prompt-actions">
+              <div class="ai-agents-tags">
+                <span>Claude Code</span>
+                <span>Antigravity</span>
+                <span>Cursor</span>
+                <span>Windsurf</span>
+              </div>
+              <button type="button" class="btn-copy-action" id="copy-prompt-btn">
+                <span id="copy-prompt-label">Copiar prompt para IA</span>
+                <span>⎘</span>
+              </button>
             </div>
           </div>
 
-          <div style="margin-top: 28px;">
-            <div class="prompt-input-label">
-              <span>⌘</span>
-              <span>Prompt rápido para instalar com IA</span>
-            </div>
-            <div class="prompt-input-bar">
-              <input type="text" id="ai-prompt-input" readonly value="Clone https://github.com/TheReyzer/Pixel-TV e instale na minha TV seguindo o PROMPT.md" aria-label="Prompt para IA">
-              <button type="button" class="prompt-send-btn" id="copy-prompt-btn" title="Copiar prompt">→</button>
-            </div>
-            <p class="prompt-helper-note" id="copy-feedback">
-              Clique na seta para copiar e cole no Claude Code, Antigravity ou Cursor. Consulte a <a href="privacy.html">Política de Privacidade</a>.
+          <div class="install-specs-row">
+            <span>• Roteiro completo em <a href="https://github.com/TheReyzer/Pixel-TV/blob/main/PROMPT.md" target="_blank" rel="noopener">PROMPT.md</a></span>
+            <span>• Android 8.0+ (API 26+)</span>
+          </div>
+        </div>
+
+        <!-- Painel 2: Instalação Manual via Terminal (CLI) -->
+        <div class="install-panel">
+          <div>
+            <span class="panel-eyebrow" style="color: var(--accent-cyan);">⌘ Instalação Direta · Terminal (CLI)</span>
+            <h3 style="margin-top: 10px;">
+              Prefere rodar no <span class="serif-italic bright">terminal?</span>
+            </h3>
+            <p class="panel-desc" style="margin-top: 10px;">
+              Com Python 3.10+, JDK 17 e Android SDK configurados, utilize o instalador nativo para diagnosticar, instalar em modo prévia ou definir como Home padrão:
             </p>
           </div>
+
+          <div class="cli-commands-list">
+            <div class="cli-cmd-item">
+              <div class="cli-cmd-info">
+                <span class="cli-cmd-label">1. Diagnosticar conexão e capacidades da TV</span>
+                <code class="cli-cmd-code">python tools/install.py --device IP_DA_TV:5555 --probe-only</code>
+              </div>
+              <button type="button" class="cli-copy-mini" data-copy="python tools/install.py --device IP_DA_TV:5555 --probe-only">Copiar</button>
+            </div>
+
+            <div class="cli-cmd-item">
+              <div class="cli-cmd-info">
+                <span class="cli-cmd-label">2. Instalar e definir como Home + Automação</span>
+                <code class="cli-cmd-code">python tools/install.py --device IP_DA_TV:5555 --set-home --enable-assist</code>
+              </div>
+              <button type="button" class="cli-copy-mini" data-copy="python tools/install.py --device IP_DA_TV:5555 --set-home --enable-assist">Copiar</button>
+            </div>
+
+            <div class="cli-cmd-item">
+              <div class="cli-cmd-info">
+                <span class="cli-cmd-label">3. Restaurar backup anterior (se desejar)</span>
+                <code class="cli-cmd-code">python tools/install.py --device IP_DA_TV:5555 --restore backup/install-DATA</code>
+              </div>
+              <button type="button" class="cli-copy-mini" data-copy="python tools/install.py --device IP_DA_TV:5555 --restore backup/install-DATA">Copiar</button>
+            </div>
+          </div>
+
+          <div class="install-specs-row">
+            <span>• Documentação em <a href="https://github.com/TheReyzer/Pixel-TV#ambiente-e-comandos" target="_blank" rel="noopener">README.md</a></span>
+            <span>• <a href="https://github.com/TheReyzer/Pixel-TV/releases" target="_blank" rel="noopener">Baixar APK (Releases)</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA FINAL DO RODAPÉ -->
+      <div class="footer-bottom-bar">
+        <div class="footer-brand-row">
+          <a href="./" class="brand-logo">
+            <img src="favicon.png" alt="Logo PIXEL TV">
+            <span><span class="serif-part">pixel</span>tv</span>
+          </a>
+          <span class="copyright-text">PIXEL TV © 2026 · Código Aberto · Zero Telemetria</span>
+        </div>
+
+        <div class="footer-pill-clusters">
+          <a href="#inicio" class="f-pill">Início</a>
+          <a href="#perfis" class="f-pill">Perfis &amp; IA</a>
+          <a href="#integracoes" class="f-pill">Integrações</a>
+          <a href="#producoes" class="f-pill">Arquitetura</a>
+          <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener" class="f-pill">GitHub</a>
+          <a href="privacy.html" class="f-pill">Privacidade</a>
+          <a href="terms.html" class="f-pill">Termos</a>
         </div>
       </div>
     </footer>
@@ -1914,7 +1937,7 @@
   </div>
 
   <!-- ========================================================
-       FLOATING JELLY PREVIEW (LEVE, ELÁSTICO E MAIS LENTO NO CURSOR)
+       FLOATING JELLY PREVIEW (APENAS NA PAREDE DE TELAS #galeria)
        ======================================================== -->
   <aside id="jelly-preview" aria-hidden="true">
     <div class="jelly-inner">
@@ -1928,21 +1951,34 @@
 
   <script>
     (() => {
-      // Botão de copiar prompt no rodapé
+      // Botão de copiar prompt da IA
       const copyBtn = document.getElementById('copy-prompt-btn');
-      const promptInput = document.getElementById('ai-prompt-input');
-      const feedback = document.getElementById('copy-feedback');
+      const copyLabel = document.getElementById('copy-prompt-label');
+      const promptFull = document.getElementById('ai-prompt-full');
 
-      if (copyBtn && promptInput) {
+      if (copyBtn && promptFull) {
         copyBtn.addEventListener('click', () => {
-          navigator.clipboard.writeText(promptInput.value);
-          copyBtn.textContent = '✓';
-          if (feedback) feedback.textContent = 'Prompt copiado para a área de transferência!';
+          navigator.clipboard.writeText(promptFull.textContent.trim());
+          if (copyLabel) copyLabel.textContent = 'Prompt copiado!';
           setTimeout(() => {
-            copyBtn.textContent = '→';
+            if (copyLabel) copyLabel.textContent = 'Copiar prompt para IA';
           }, 2200);
         });
       }
+
+      // Botões de copiar comandos CLI
+      document.querySelectorAll('[data-copy]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cmd = btn.getAttribute('data-copy');
+          if (!cmd) return;
+          navigator.clipboard.writeText(cmd);
+          const original = btn.textContent;
+          btn.textContent = 'Copiado ✓';
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 2000);
+        });
+      });
 
       // Carrossel da seção Pixel.tv
       const track = document.getElementById('prod-track');
