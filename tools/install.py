@@ -108,6 +108,12 @@ class Tv:
         return {key: self.shell('getprop', prop) for key, prop in (
             ('model', 'ro.product.model'), ('manufacturer', 'ro.product.manufacturer'), ('sdk', 'ro.build.version.sdk'))}
 
+    def allow_update_installs(self):
+        self.shell('appops', 'set', '--user', self.user, APP, 'REQUEST_INSTALL_PACKAGES', 'allow')
+        state = self.shell('appops', 'get', '--user', self.user, APP, 'REQUEST_INSTALL_PACKAGES')
+        if 'allow' not in state:
+            raise RuntimeError('TV did not allow PIXEL TV to install its own updates')
+
     def home(self):
         response = self.shell('cmd', 'package', 'resolve-activity', '--user', self.user, '--brief', '-a',
                               'android.intent.action.MAIN', '-c', 'android.intent.category.HOME')
@@ -227,6 +233,11 @@ def restore(tv, folder):
             tv.shell('run-as', APP, 'rm', '-f', 'files/device-config.json')
         else:
             tv.command('shell', '-T', 'run-as', APP, 'tee', 'files/device-config.json', data=journal['previous_config'].encode('utf-8'))
+    if journal.get('install_updates_changed'):
+        previous = journal.get('install_updates_previous', '')
+        mode = next((candidate for candidate in ('allow', 'deny', 'ignore', 'foreground', 'default')
+                     if re.search(r'REQUEST_INSTALL_PACKAGES:\s*' + candidate, previous)), 'default')
+        tv.shell('appops', 'set', '--user', tv.user, APP, 'REQUEST_INSTALL_PACKAGES', mode, check=False)
     if journal.get('listener_added'):
         tv.shell('cmd', 'notification', 'disallow_listener', LISTENER, tv.user, check=False)
     for key, value in journal.get('settings', {}).items():
@@ -287,6 +298,12 @@ def main(argv=None):
     result = tv.command('install', '--no-streaming', '-r', str(apk), timeout=180)
     if 'Success' not in result:
         raise RuntimeError('Install failed; original Home remains enabled. Never uninstall to bypass a signing-key mismatch.')
+    previous_install_op = tv.shell('appops', 'get', '--user', tv.user, APP, 'REQUEST_INSTALL_PACKAGES', check=False)
+    if 'allow' not in previous_install_op:
+        tv.allow_update_installs()
+        journal['install_updates_changed'] = True
+        journal['install_updates_previous'] = previous_install_op
+        save_journal(folder, journal)
     if config is not None:
         journal['config_changed'] = True
         journal['applied_config'] = json.dumps(config)
