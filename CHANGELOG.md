@@ -1,5 +1,10 @@
 # Changelog do PIXEL TV
 
+## 3.0.1
+
+- Ajustes de estabilidade no retorno à Home e no aviso de atualização.
+- O aviso adiado fica disponível no ícone verde da Home.
+
 ## 3.0.0
 
 - A tela de boas-vindas aparece apenas uma vez por inicialização da TV.
