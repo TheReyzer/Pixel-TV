@@ -95,7 +95,9 @@
     }
 
     .container {
-      width: min(1440px, calc(100% - 64px));
+      width: 100%;
+      max-width: 1400px;
+      padding-inline: clamp(24px, 6.5vw, 96px);
       margin-inline: auto;
       position: relative;
       z-index: 2;
@@ -122,7 +124,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 22px 32px;
+      max-width: 1400px;
+      margin-inline: auto;
+      padding: 26px clamp(24px, 6.5vw, 96px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -218,7 +222,8 @@
        HERO SECTION (MISTO FRAME·S & ARTFOLIO)
        ========================================= */
     .hero {
-      padding: 64px 0 72px;
+      padding-top: 80px;
+      padding-bottom: 92px;
       position: relative;
     }
 
@@ -239,21 +244,21 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 42px;
+      gap: 48px;
+      margin-bottom: 56px;
     }
 
     .hero-left {
-      max-width: 680px;
+      max-width: 720px;
     }
 
-    /* Numeração 01 + Logos de Android TV e Google TV bem menores */
+    /* Pill com as duas logos e o divisor no meio */
     .hero-index-row {
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 22px;
-      padding: 6px 14px;
+      margin-bottom: 28px;
+      padding: 8px 16px;
       border-radius: 999px;
       border: 1px solid var(--border-hairline);
       background: rgba(255, 255, 255, 0.02);
@@ -269,7 +274,7 @@
     .index-sep {
       width: 1px;
       height: 12px;
-      background: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.16);
     }
 
     .index-label {
@@ -284,8 +289,7 @@
     .hero-platform-logos {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      margin-left: 4px;
+      gap: 12px;
     }
 
     .hero-platform-logos img {
@@ -295,7 +299,7 @@
       max-width: 68px;
       object-fit: contain;
       filter: brightness(0) invert(1);
-      opacity: 0.78;
+      opacity: 0.82;
       transition: opacity 0.2s;
     }
 
@@ -308,19 +312,19 @@
     }
 
     .hero-headline {
-      font-size: clamp(3rem, 6vw, 5.1rem);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
+      font-size: clamp(3rem, 5.8vw, 5rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 18px;
+      margin-bottom: 26px;
     }
 
     .hero-sub {
-      font-size: 1.02rem;
+      font-size: 1.08rem;
       color: var(--muted);
-      max-width: 510px;
-      line-height: 1.65;
+      max-width: 560px;
+      line-height: 1.72;
     }
 
     /* Selo Giratório Circular fiel ao FRAME·S */
@@ -328,7 +332,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 20px;
+      gap: 24px;
     }
 
     .rotating-seal {
@@ -379,9 +383,9 @@
       gap: 12px;
       background: #ffffff;
       color: #050507;
-      padding: 13px 24px;
+      padding: 14px 26px;
       border-radius: 4px;
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 0.01em;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -411,7 +415,7 @@
       width: 100%;
       height: auto;
       aspect-ratio: 16/9;
-      max-height: 540px;
+      max-height: 580px;
       object-fit: cover;
       object-position: center top;
       filter: contrast(1.03);
@@ -427,27 +431,27 @@
       position: absolute;
       inset-inline: 0;
       bottom: 0;
-      padding: 28px 32px 22px;
-      background: linear-gradient(to top, rgba(5, 5, 7, 0.95) 0%, rgba(5, 5, 7, 0.65) 55%, transparent 100%);
+      padding: 36px 40px 28px;
+      background: linear-gradient(to top, rgba(5, 5, 7, 0.96) 0%, rgba(5, 5, 7, 0.7) 55%, transparent 100%);
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 20px;
+      gap: 24px;
       flex-wrap: wrap;
     }
 
     .laurel-badges {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
       flex-wrap: wrap;
     }
 
     .laurel-item {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      color: rgba(255, 255, 255, 0.82);
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .laurel-wreath {
@@ -464,7 +468,7 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .laurel-text strong {
@@ -475,10 +479,10 @@
     .cinema-quick-links {
       display: flex;
       align-items: center;
-      gap: 24px;
-      font-size: 0.78rem;
+      gap: 28px;
+      font-size: 0.8rem;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(255, 255, 255, 0.75);
     }
 
     .cinema-quick-links a:hover {
@@ -487,12 +491,11 @@
 
     /* =========================================
        FAIXA DIVISÓRIA EDITORIAL (ESTILO FRAME·S)
-       "RECOMENDAÇÃO INDIVIDUAL — GOOGLE DRIVE SYNC — TRAILERS NATIVOS"
        ========================================= */
     .editorial-ribbon {
       border-top: 1px solid rgba(255, 255, 255, 0.07);
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      padding: 22px 0;
+      padding: 26px 0;
       overflow: hidden;
       white-space: nowrap;
       background: #07080b;
@@ -501,14 +504,14 @@
     .ribbon-track {
       display: inline-flex;
       align-items: center;
-      gap: 36px;
+      gap: 42px;
       animation: marqueeSlide 38s linear infinite;
     }
 
     .ribbon-phrase {
       display: inline-flex;
       align-items: center;
-      gap: 36px;
+      gap: 42px;
       font-size: clamp(1.1rem, 2vw, 1.45rem);
       font-weight: 400;
       letter-spacing: 0.12em;
@@ -532,54 +535,55 @@
        SEÇÃO ARTFOLIO: CABEÇALHO CENTRAL + 3 CARDS SPOTLIGHT
        ========================================= */
     .artfolio-section {
-      padding: 88px 0 64px;
+      padding-top: 112px;
+      padding-bottom: 84px;
       position: relative;
     }
 
     .center-header {
       text-align: center;
-      max-width: 680px;
-      margin: 0 auto 56px;
+      max-width: 760px;
+      margin: 0 auto 68px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 22px;
     }
 
     .pill-tag {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
+      padding: 7px 18px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: rgba(255, 255, 255, 0.03);
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 600;
       color: #d5d9e6;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
     .center-title {
-      font-size: clamp(2.3rem, 4.5vw, 3.7rem);
-      line-height: 1.06;
-      letter-spacing: -0.035em;
+      font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
       font-weight: 600;
       color: #fff;
     }
 
     .center-desc {
-      font-size: 0.96rem;
+      font-size: 1.04rem;
       color: var(--muted);
-      max-width: 460px;
-      line-height: 1.6;
+      max-width: 580px;
+      line-height: 1.72;
     }
 
     /* 3 CARDS COM CARD DO MEIO EM DESTAQUE ESMERALDA (FIEL AO ARTFOLIO) */
     .spotlight-trio {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 28px;
       align-items: stretch;
       position: relative;
     }
@@ -589,13 +593,13 @@
       border-radius: var(--radius-card);
       border: 1px solid var(--border-hairline);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-      padding: 26px 24px 24px;
+      padding: 36px 32px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       justify-content: space-between;
-      gap: 22px;
+      gap: 26px;
       cursor: pointer;
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
@@ -646,12 +650,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .spot-avatar {
-      width: 68px;
-      height: 68px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       padding: 3px;
       background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
@@ -666,23 +670,23 @@
     }
 
     .spot-name {
-      font-size: 1.15rem;
+      font-size: 1.22rem;
       font-weight: 700;
       color: #fff;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
     .spot-handle {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--muted);
       margin-top: -6px;
     }
 
     .spot-bio {
-      font-size: 0.86rem;
+      font-size: 0.92rem;
       color: #b4b9c7;
-      line-height: 1.55;
-      max-width: 280px;
+      line-height: 1.68;
+      max-width: 300px;
     }
 
     .spot-pills {
@@ -695,11 +699,11 @@
     }
 
     .stat-pill {
-      padding: 5px 11px;
+      padding: 6px 13px;
       border-radius: 999px;
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       color: var(--muted);
     }
 
@@ -712,7 +716,7 @@
        PAREDE DE TILES ESCALONADA (3 LINHAS DO ARTFOLIO)
        ========================================= */
     .wall-section {
-      padding: 28px 0 84px;
+      padding: 36px 0 104px;
       overflow: hidden;
       position: relative;
     }
@@ -724,7 +728,7 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 110px;
+      width: 120px;
       z-index: 4;
       pointer-events: none;
     }
@@ -740,12 +744,12 @@
     .wall-rows {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
     .wall-row {
       display: flex;
-      gap: 16px;
+      gap: 18px;
       width: max-content;
     }
 
@@ -767,8 +771,8 @@
     }
 
     .wall-tile {
-      width: 240px;
-      height: 156px;
+      width: 248px;
+      height: 160px;
       border-radius: var(--radius-tile);
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -801,9 +805,9 @@
 
     .wall-tile-tag {
       position: absolute;
-      bottom: 8px;
-      left: 10px;
-      padding: 3px 9px;
+      bottom: 10px;
+      left: 12px;
+      padding: 4px 10px;
       border-radius: 999px;
       background: rgba(5, 6, 8, 0.78);
       backdrop-filter: blur(8px);
@@ -817,31 +821,32 @@
        SEÇÃO FRAME·S: CARROSSEL DE FUNCIONALIDADES PIXEL.TV
        ========================================= */
     .production-section {
-      padding: 84px 0;
+      padding-top: 108px;
+      padding-bottom: 108px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       position: relative;
     }
 
     .prod-carousel-wrapper {
       position: relative;
-      margin-top: 44px;
+      margin-top: 56px;
       overflow: hidden;
-      padding: 8px 0 20px;
+      padding: 12px 0 24px;
     }
 
     .prod-carousel-track {
       display: flex;
-      gap: 26px;
+      gap: 32px;
       transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
     }
 
     .prod-card {
-      flex: 0 0 calc((100% - 52px) / 3);
-      min-width: calc((100% - 52px) / 3);
+      flex: 0 0 calc((100% - 64px) / 3);
+      min-width: calc((100% - 64px) / 3);
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
       cursor: pointer;
     }
 
@@ -852,6 +857,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: #060709;
       position: relative;
+      margin-bottom: 6px;
     }
 
     .prod-thumb img {
@@ -866,30 +872,31 @@
     }
 
     .prod-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.02em;
+      line-height: 1.3;
     }
 
     .prod-card p {
-      font-size: 0.9rem;
+      font-size: 0.94rem;
       color: var(--muted);
-      line-height: 1.6;
-      margin-top: -8px;
+      line-height: 1.7;
+      margin-top: 0;
     }
 
     .prod-carousel-controls {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      margin-top: 32px;
+      gap: 16px;
+      margin-top: 42px;
     }
 
     .carousel-arrow {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.16);
       background: rgba(255, 255, 255, 0.04);
@@ -897,7 +904,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 1.05rem;
       cursor: pointer;
       transition: all 0.25s ease;
     }
@@ -935,20 +942,21 @@
        SEÇÃO FRAME·S: FEATURED PRODUCTIONS (GRADE 2x2 COM LEITURA NÍTIDA)
        ========================================= */
     .works-section {
-      padding: 84px 0 96px;
+      padding-top: 108px;
+      padding-bottom: 116px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .works-grid-2x2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 42px;
+      gap: 32px;
+      margin-top: 56px;
     }
 
     .work-showcase {
       position: relative;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       aspect-ratio: 16/9;
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -972,8 +980,8 @@
       background: linear-gradient(
         to top,
         rgba(4, 5, 8, 0.98) 0%,
-        rgba(4, 5, 8, 0.9) 28%,
-        rgba(4, 5, 8, 0.55) 55%,
+        rgba(4, 5, 8, 0.92) 32%,
+        rgba(4, 5, 8, 0.58) 58%,
         rgba(4, 5, 8, 0.1) 100%
       );
       pointer-events: none;
@@ -987,7 +995,7 @@
 
     .work-play-circle {
       position: absolute;
-      top: 38%;
+      top: 34%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 52px;
@@ -1017,42 +1025,43 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 24px 28px 22px;
+      padding: 32px 36px 28px;
       pointer-events: none;
       z-index: 2;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 10px;
     }
 
     .work-caption span.work-eyebrow {
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent-cyan);
     }
 
     .work-caption h4 {
-      font-size: 1.38rem;
+      font-size: 1.42rem;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.2;
+      line-height: 1.25;
       letter-spacing: -0.02em;
     }
 
     .work-caption p.work-desc {
-      font-size: 0.86rem;
+      font-size: 0.9rem;
       color: #cbd5e1;
-      line-height: 1.5;
-      max-width: 94%;
+      line-height: 1.6;
+      max-width: 96%;
     }
 
     /* =========================================
        SEÇÃO ARTFOLIO: "JOIN THE COMMUNITY" + SELO + 2 CARDS RODAPÉ
        ========================================= */
     .community-footer-section {
-      padding: 72px 0 40px;
+      padding-top: clamp(92px, 9vw, 136px);
+      padding-bottom: clamp(56px, 6vw, 84px);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
@@ -1060,15 +1069,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 56px;
+      gap: 48px;
+      margin-bottom: 72px;
       flex-wrap: wrap;
     }
 
     .comm-left {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 26px;
     }
 
     .comm-tag {
@@ -1115,7 +1124,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
+      gap: 18px;
     }
 
     .comm-eyebrow {
@@ -1126,14 +1135,14 @@
 
     .comm-giant-title {
       font-size: clamp(2.8rem, 5.5vw, 4.6rem);
-      line-height: 0.96;
+      line-height: 1.02;
       letter-spacing: -0.035em;
       font-weight: 600;
       color: #fff;
     }
 
     .comm-cta-link {
-      margin-top: 14px;
+      margin-top: 10px;
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -1169,14 +1178,14 @@
       justify-content: space-between;
       font-size: 0.74rem;
       color: var(--faint);
-      padding-bottom: 14px;
+      padding-bottom: 20px;
     }
 
     /* DOIS CARDS ASSIMÉTRICOS DE RODAPÉ (IDÊNTICO AO ARTFOLIO) */
     .footer-bento {
       display: grid;
       grid-template-columns: 1.45fr 0.95fr;
-      gap: 18px;
+      gap: 28px;
     }
 
     .footer-card {
@@ -1184,12 +1193,13 @@
       border-radius: var(--radius-card);
       border: 1px solid var(--border-hairline);
       background: #0c0d12;
-      padding: 34px 32px;
+      padding: 40px 38px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 270px;
+      min-height: 290px;
+      gap: 28px;
     }
 
     /* Marca d'água gigante no fundo do card esquerdo como "af" no Artfolio */
@@ -1207,11 +1217,11 @@
     }
 
     .footer-card-top p {
-      margin-top: 12px;
-      font-size: 0.86rem;
+      margin-top: 18px;
+      font-size: 0.9rem;
       color: var(--muted);
-      max-width: 300px;
-      line-height: 1.55;
+      max-width: 340px;
+      line-height: 1.65;
     }
 
     .footer-card-bottom {
@@ -1258,7 +1268,7 @@
       font-size: 0.76rem;
       font-weight: 600;
       color: #d1d5db;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -1307,9 +1317,10 @@
     }
 
     .prompt-helper-note {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--faint);
-      margin-top: 8px;
+      margin-top: 12px;
+      line-height: 1.5;
     }
 
     .prompt-helper-note a {
@@ -1449,7 +1460,7 @@
 
           <p class="hero-sub">
             O PIXEL TV nasceu de uma ideia simples: cada pessoa da casa merece um palco inteligente. 
-            Recomendações que aprendem de verdade, trailers nativos e disparo direto para seus apps.
+            Catálogo oficial do IMDb com alerta de disponibilidade nos apps instalados na sua TV, trailers nativos e automação direta para seus streamings.
           </p>
         </div>
 
@@ -1493,9 +1504,9 @@
             <div class="laurel-item">
               <span class="laurel-wreath">❦</span>
               <div class="laurel-text">
-                <span>SINCRONIZAÇÃO</span>
-                <strong>GOOGLE DRIVE</strong>
-                <span>OAUTH QR CODE</span>
+                <span>CATÁLOGO OFICIAL</span>
+                <strong>IMDB + APPS</strong>
+                <span>AVISO NA SUA TV</span>
               </div>
               <span class="laurel-wreath">❧</span>
             </div>
@@ -1503,9 +1514,9 @@
             <div class="laurel-item">
               <span class="laurel-wreath">❦</span>
               <div class="laurel-text">
-                <span>INTEGRAÇÃO</span>
-                <strong>STREMIO &amp; UNITV</strong>
-                <span>DEEP LINK IMDB</span>
+                <span>AUTOMAÇÃO DIRETA</span>
+                <strong>MULTI-STREAMING</strong>
+                <span>NETFLIX · PRIME · STREMIO · UNITV</span>
               </div>
               <span class="laurel-wreath">❧</span>
             </div>
@@ -1514,7 +1525,7 @@
           <div class="cinema-quick-links">
             <a href="#perfis">perfis</a>
             <a href="#galeria">telas</a>
-            <a href="#integracoes">stremio</a>
+            <a href="#integracoes">integrações</a>
             <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener">github</a>
           </div>
         </div>
@@ -1525,15 +1536,15 @@
     <div class="editorial-ribbon" aria-hidden="true">
       <div class="ribbon-track">
         <div class="ribbon-phrase">
-          <span>DIREÇÃO DE CURADORIA</span><span class="ribbon-line"></span>
-          <span>RECOMENDAÇÃO MATEMÁTICA</span><span class="ribbon-line"></span>
-          <span>TRAILERS NATIVOS MEDIA3</span><span class="ribbon-line"></span>
+          <span>CATÁLOGO IMDB OFICIAL</span><span class="ribbon-line"></span>
+          <span>DETECÇÃO DE APPS INSTALADOS</span><span class="ribbon-line"></span>
+          <span>AUTOMAÇÃO MULTI-STREAMING</span><span class="ribbon-line"></span>
           <span>GOOGLE DRIVE SYNC</span><span class="ribbon-line"></span>
         </div>
         <div class="ribbon-phrase">
-          <span>DIREÇÃO DE CURADORIA</span><span class="ribbon-line"></span>
-          <span>RECOMENDAÇÃO MATEMÁTICA</span><span class="ribbon-line"></span>
-          <span>TRAILERS NATIVOS MEDIA3</span><span class="ribbon-line"></span>
+          <span>CATÁLOGO IMDB OFICIAL</span><span class="ribbon-line"></span>
+          <span>DETECÇÃO DE APPS INSTALADOS</span><span class="ribbon-line"></span>
+          <span>AUTOMAÇÃO MULTI-STREAMING</span><span class="ribbon-line"></span>
           <span>GOOGLE DRIVE SYNC</span><span class="ribbon-line"></span>
         </div>
       </div>
@@ -1624,7 +1635,7 @@
         <!-- Fileira 1 -->
         <div class="wall-row r1">
           <div class="wall-tile" data-preview="screen-home.webp" data-caption="Home · Carrosséis Inteligentes"><img src="screen-home.webp" alt="Home"><span class="wall-tile-tag">Home</span></div>
-          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Detalhes · Sinopse PT-BR & Ofertas"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Ficha Técnica</span></div>
+          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Catálogo IMDb · Disponibilidade conforme Apps da TV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Catálogo IMDb</span></div>
           <div class="wall-tile" data-preview="screen-trailer.webp" data-caption="Trailer · Player Media3 Embutido"><img src="screen-trailer.webp" alt="Trailer"><span class="wall-tile-tag">Trailer Nativo</span></div>
           <div class="wall-tile" data-preview="screen-search.webp" data-caption="Busca · Voz e Texto em 6 Colunas"><img src="screen-search.webp" alt="Busca"><span class="wall-tile-tag">Busca Global</span></div>
           <div class="wall-tile" data-preview="screen-tastes.webp" data-caption="Estatísticas · Evolução do Gosto"><img src="screen-tastes.webp" alt="Gostos"><span class="wall-tile-tag">Mapa de Gostos</span></div>
@@ -1632,7 +1643,7 @@
           <div class="wall-tile" data-preview="screen-sync.webp" data-caption="Nuvem · Conexão Google pelo Celular"><img src="screen-sync.webp" alt="Sync"><span class="wall-tile-tag">QR Code Sync</span></div>
           <!-- Duplicata para scroll infinito -->
           <div class="wall-tile" data-preview="screen-home.webp" data-caption="Home · Carrosséis Inteligentes"><img src="screen-home.webp" alt="Home"><span class="wall-tile-tag">Home</span></div>
-          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Detalhes · Sinopse PT-BR & Ofertas"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Ficha Técnica</span></div>
+          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Catálogo IMDb · Disponibilidade conforme Apps da TV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Catálogo IMDb</span></div>
           <div class="wall-tile" data-preview="screen-trailer.webp" data-caption="Trailer · Player Media3 Embutido"><img src="screen-trailer.webp" alt="Trailer"><span class="wall-tile-tag">Trailer Nativo</span></div>
           <div class="wall-tile" data-preview="screen-search.webp" data-caption="Busca · Voz e Texto em 6 Colunas"><img src="screen-search.webp" alt="Busca"><span class="wall-tile-tag">Busca Global</span></div>
           <div class="wall-tile" data-preview="screen-tastes.webp" data-caption="Estatísticas · Evolução do Gosto"><img src="screen-tastes.webp" alt="Gostos"><span class="wall-tile-tag">Mapa de Gostos</span></div>
@@ -1647,7 +1658,7 @@
           <div class="wall-tile" data-preview="screen-sync.webp" data-caption="Backup Automático no Google Drive"><img src="screen-sync.webp" alt="Sync"><span class="wall-tile-tag">Portabilidade</span></div>
           <div class="wall-tile" data-preview="screen-home.webp" data-caption="Retorno Instantâneo · Estado Preservado"><img src="screen-home.webp" alt="Home"><span class="wall-tile-tag">Memória Ativa</span></div>
           <div class="wall-tile" data-preview="screen-tastes.webp" data-caption="Histórico · Títulos Assistidos e Avaliados"><img src="screen-tastes.webp" alt="Gostos"><span class="wall-tile-tag">Biblioteca</span></div>
-          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Abertura Direta · Stremio e UniTV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Deep Links</span></div>
+          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Automação · Prime Video, Apple TV, Netflix, Stremio e UniTV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Multi-Apps</span></div>
           <div class="wall-tile" data-preview="screen-profiles.webp" data-caption="Cores & Avatares Personalizados"><img src="screen-profiles.webp" alt="Perfis"><span class="wall-tile-tag">Identidade</span></div>
           <!-- Duplicata -->
           <div class="wall-tile" data-preview="screen-search.webp" data-caption="Filtros · Tudo, Filmes ou Séries"><img src="screen-search.webp" alt="Busca"><span class="wall-tile-tag">Filtros IMDb</span></div>
@@ -1655,7 +1666,7 @@
           <div class="wall-tile" data-preview="screen-sync.webp" data-caption="Backup Automático no Google Drive"><img src="screen-sync.webp" alt="Sync"><span class="wall-tile-tag">Portabilidade</span></div>
           <div class="wall-tile" data-preview="screen-home.webp" data-caption="Retorno Instantâneo · Estado Preservado"><img src="screen-home.webp" alt="Home"><span class="wall-tile-tag">Memória Ativa</span></div>
           <div class="wall-tile" data-preview="screen-tastes.webp" data-caption="Histórico · Títulos Assistidos e Avaliados"><img src="screen-tastes.webp" alt="Gostos"><span class="wall-tile-tag">Biblioteca</span></div>
-          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Abertura Direta · Stremio e UniTV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Deep Links</span></div>
+          <div class="wall-tile" data-preview="screen-detail.webp" data-caption="Automação · Prime Video, Apple TV, Netflix, Stremio e UniTV"><img src="screen-detail.webp" alt="Detalhes"><span class="wall-tile-tag">Multi-Apps</span></div>
           <div class="wall-tile" data-preview="screen-profiles.webp" data-caption="Cores & Avatares Personalizados"><img src="screen-profiles.webp" alt="Perfis"><span class="wall-tile-tag">Identidade</span></div>
         </div>
 
@@ -1682,20 +1693,20 @@
 
     <!-- SEÇÃO FRAME·S: CABEÇALHO + CARROSSEL DE FUNCIONALIDADES PIXEL.TV -->
     <section id="integracoes" class="production-section container">
-      <div class="center-header" style="margin-bottom: 36px;">
-        <span class="serif-italic bright" style="font-size: 1.35rem;">Pixel.tv</span>
-        <h2 class="center-title" style="font-size: clamp(1.9rem, 3.6vw, 2.8rem);">
+      <div class="center-header">
+        <span class="serif-italic bright" style="font-size: 1.4rem;">Pixel.tv</span>
+        <h2 class="center-title">
           Do título <span class="serif-italic">à reprodução</span> sem caçar aplicativo.
         </h2>
-        <p class="center-desc" style="font-size: 1.05rem;">
-          Às vezes você descobre obras-primas em segundos.
+        <p class="center-desc">
+          Catálogo oficial do IMDb cruzado com os aplicativos instalados na sua TV e automação inteligente para abrir seus streamings sem esforço.
         </p>
 
-        <div class="laurel-badges" style="justify-content: center; margin-top: 10px;">
-          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>IDENTIDADE</span><strong>IMDB ID</strong></div><span class="laurel-wreath">❧</span></div>
-          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>DEEP LINK</span><strong>STREMIO</strong></div><span class="laurel-wreath">❧</span></div>
-          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>AUTOMAÇÃO</span><strong>UNITV</strong></div><span class="laurel-wreath">❧</span></div>
-          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>CATÁLOGO</span><strong>STREAMINGS BR</strong></div><span class="laurel-wreath">❧</span></div>
+        <div class="laurel-badges" style="justify-content: center; margin-top: 8px;">
+          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>CATÁLOGO</span><strong>IMDB OFICIAL</strong></div><span class="laurel-wreath">❧</span></div>
+          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>DISPONIBILIDADE</span><strong>APPS DA SUA TV</strong></div><span class="laurel-wreath">❧</span></div>
+          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>AUTOMAÇÃO</span><strong>PRIME · NETFLIX · APPLE TV</strong></div><span class="laurel-wreath">❧</span></div>
+          <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>INTEGRAÇÃO</span><strong>STREMIO · UNITV &amp; MAIS</strong></div><span class="laurel-wreath">❧</span></div>
         </div>
       </div>
 
@@ -1703,28 +1714,28 @@
       <div class="prod-carousel-wrapper" id="prod-carousel">
         <div class="prod-carousel-track" id="prod-track">
           <!-- Slide 1 -->
-          <article class="prod-card" data-preview="screen-detail.webp" data-caption="Stremio · Abertura direta via IMDb ID">
-            <div class="prod-thumb"><img src="screen-detail.webp" alt="Disparo Direto Stremio" loading="lazy"></div>
-            <h3>Disparo Direto Stremio</h3>
-            <p>Quando instalado na TV, o botão aciona o título diretamente pelo identificador IMDb no Stremio, sem precisar digitar com o controle remoto.</p>
+          <article class="prod-card" data-preview="screen-detail.webp" data-caption="Catálogo IMDb · Aviso de disponibilidade nos apps da TV">
+            <div class="prod-thumb"><img src="screen-detail.webp" alt="Catálogo IMDb e Disponibilidade na TV" loading="lazy"></div>
+            <h3>Catálogo IMDb &amp; Aviso de Disponibilidade</h3>
+            <p>Baseado no catálogo do IMDb, o sistema cruza onde cada obra está disponível com as plataformas instaladas na sua TV, avisando na hora onde assistir.</p>
           </article>
 
           <!-- Slide 2 -->
-          <article class="prod-card" data-preview="screen-search.webp" data-caption="UniTV · Busca automatizada e retorno de nota">
-            <div class="prod-thumb"><img src="screen-search.webp" alt="Automação UniTV" loading="lazy"></div>
-            <h3>Automação UniTV</h3>
-            <p>Abre o UniTV, injeta o título pesquisado e seleciona o resultado correspondente. Ao terminar de assistir, sugere registrar sua avaliação.</p>
+          <article class="prod-card" data-preview="screen-search.webp" data-caption="Automação · Prime Video, Apple TV, Netflix, Stremio, UniTV e mais">
+            <div class="prod-thumb"><img src="screen-search.webp" alt="Automação Multi-Plataforma" loading="lazy"></div>
+            <h3>Automação Multi-Plataforma</h3>
+            <p>Funciona em Prime Video, Apple TV, Netflix, Stremio, UniTV e outros: aciona deep links ou conduz a busca automaticamente e sugere avaliar ao retornar.</p>
           </article>
 
           <!-- Slide 3 -->
           <article class="prod-card" data-preview="screen-trailer.webp" data-caption="Trailers · Busca automática em PT-BR, Inglês ou Original">
             <div class="prod-thumb"><img src="screen-trailer.webp" alt="Busca Inteligente de Trailers" loading="lazy"></div>
-            <h3>Trailers Multilíngues &amp; Ofertas</h3>
-            <p>Localiza automaticamente o trailer em PT-BR, inglês ou idioma original em um player moderno embutido, e exibe onde assistir no Brasil.</p>
+            <h3>Trailers Multilíngues Embutidos</h3>
+            <p>Localiza automaticamente o trailer em PT-BR, inglês ou idioma original e reproduz em um player moderno otimizado, sem sair da tela do título.</p>
           </article>
 
           <!-- Slide 4 -->
-          <article class="prod-card" data-preview="screen-tastes.webp" data-caption="Busca por Voz e Texto em 6 Colunas">
+          <article class="prod-card" data-preview="screen-tastes.webp" data-caption="Mapa de Gostos · Evolução de afinidade 0 a 100%">
             <div class="prod-thumb"><img src="screen-tastes.webp" alt="Mapa de Gostos e Listas" loading="lazy"></div>
             <h3>Listas, Gostos &amp; Estatísticas</h3>
             <p>Acompanhe sua evolução de afinidade de 0 a 100%, gerencie Favoritos, Assistir Mais Tarde e consulte seu histórico completo de notas.</p>
@@ -1755,11 +1766,14 @@
 
     <!-- SEÇÃO FRAME·S: FEATURED PRODUCTIONS (GRADE 2x2 COM LEITURA NÍTIDA E SEM HOVER FLUTUANTE) -->
     <section id="producoes" class="works-section container">
-      <div class="center-header" style="margin-bottom: 20px;">
-        <span class="serif-italic bright" style="font-size: 1.3rem;">arquitetura.</span>
-        <h2 class="center-title" style="font-size: clamp(2rem, 3.8vw, 3rem);">
+      <div class="center-header">
+        <span class="serif-italic bright" style="font-size: 1.4rem;">arquitetura.</span>
+        <h2 class="center-title">
           Engenharia <span class="serif-italic">em destaque</span>
         </h2>
+        <p class="center-desc">
+          Projetado para rodar liso até em televisores e TV Boxes de entrada, protegendo a reprodução do início ao fim do filme.
+        </p>
       </div>
 
       <div class="works-grid-2x2">
@@ -1789,7 +1803,7 @@
           <div class="work-caption">
             <span class="work-eyebrow">PIXEL TV · DURANTE O SEU FILME OU SÉRIE</span>
             <h4>0% de CPU e Proteção do Player em Reprodução</h4>
-            <p class="work-desc">Enquanto você assiste no Stremio, UniTV ou Netflix, o monitoramento entra em repouso profundo (0% de CPU) e blinda o player ativo contra fechamentos em segundo plano.</p>
+            <p class="work-desc">Enquanto você assiste no Prime Video, Apple TV, Netflix, Stremio ou UniTV, o monitoramento fica em repouso (0% de CPU) e blinda o player ativo contra fechamentos em segundo plano.</p>
           </div>
         </article>
 
@@ -1870,8 +1884,8 @@
         <!-- CARD DIREITO: COPIAR PROMPT PARA IA (LAYOUT DO CARD DIREITO DO ARTFOLIO) -->
         <div class="footer-card">
           <div>
-            <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 14px; line-height: 1.35;">
-              Explore o <span class="serif-italic bright" style="font-size: 1.2rem;">repositório</span> <br>oficial do PIXEL TV
+            <h3 style="font-size: 1.12rem; font-weight: 600; margin-bottom: 18px; line-height: 1.4;">
+              Explore o <span class="serif-italic bright" style="font-size: 1.25rem;">repositório</span> <br>oficial do PIXEL TV
             </h3>
             <div style="display: flex; gap: 8px;">
               <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener" class="mini-circle-icon" title="GitHub">GH</a>
@@ -1973,7 +1987,7 @@
           currentIndex = index;
 
           const cardWidth = slides[0].getBoundingClientRect().width;
-          const gap = 26;
+          const gap = 32;
           track.style.transform = `translate3d(-${currentIndex * (cardWidth + gap)}px, 0, 0)`;
 
           [...dotsWrap.children].forEach((d, idx) => {
