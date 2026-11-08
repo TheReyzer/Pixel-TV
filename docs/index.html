@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PIXEL TV: uma Home inteligente para Android TV e Google TV, com perfis, recomendações e sincronização Google.">
+  <title>PIXEL TV — sua TV, do seu jeito</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090a0f;--panel:#151720;--ink:#f7f8fb;--muted:#a8adbd;--line:#ffffff1c;--cyan:#70e1ff;--pink:#ff5c9a;--yellow:#ffd166;--max:1160px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 78% -10%,#283b53 0,#090a0f 35%),var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;letter-spacing:.12em}.brand img{width:42px;height:42px;object-fit:cover;border-radius:12px}.nav{display:flex;gap:20px;color:var(--muted);font-size:.92rem}.nav a{text-decoration:none}.nav a:hover{color:var(--cyan)}
+    .hero{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;padding:70px 0 96px}.eyebrow{color:var(--cyan);font:700 .8rem/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.17em;text-transform:uppercase}.hero h1{max-width:700px;margin:18px 0;font-size:clamp(3.2rem,7vw,6.7rem);line-height:.93;letter-spacing:-.065em}.hero h1 span{color:var(--pink)}.hero p{max-width:600px;color:var(--muted);font-size:1.15rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:#ffffff0d;text-decoration:none;font-weight:700}.button.primary{background:var(--cyan);border-color:var(--cyan);color:#071018}.button:hover{transform:translateY(-1px);filter:brightness(1.08)}.hero-art{position:relative}.hero-art img{display:block;width:min(100%,480px);margin:auto;border:1px solid var(--line);border-radius:32px;box-shadow:25px 28px 0 #ff5c9a20,0 30px 100px #000b;transform:rotate(2deg)}.hero-art:after{content:"";position:absolute;z-index:-1;inset:12% 0 0 16%;border:1px solid #70e1ff33;border-radius:32px;transform:rotate(-5deg)}
+    .section{padding:82px 0;border-top:1px solid var(--line)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px}.section h2{max-width:700px;margin:0;font-size:clamp(2rem,4vw,3.5rem);line-height:1.02;letter-spacing:-.04em}.section-head p{max-width:430px;margin:0;color:var(--muted)}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:25px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#ffffff0c,#ffffff03)}.feature .icon{font-size:1.7rem}.feature h3{margin:15px 0 7px;font-size:1.1rem}.feature p{margin:0;color:var(--muted)}
+    .screens{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}.shot{overflow:hidden;margin:0;border:1px solid var(--line);border-radius:24px;background:var(--panel)}.shot img{display:block;width:100%;height:100%;min-height:250px;object-fit:cover;object-position:center}.shot figcaption{padding:15px 18px;color:var(--muted);font-size:.93rem}.shot.large{grid-row:span 2}.shot.large img{min-height:510px}.shot img:hover{filter:saturate(1.15)}
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;overflow:hidden;border:1px solid var(--line);border-radius:24px;background:var(--line)}.compare>div{padding:28px;background:var(--panel)}.compare h3{margin:0 0 20px}.compare .old h3{color:#a8adbd}.compare .new h3{color:var(--cyan)}.compare p{margin:14px 0;padding-top:14px;border-top:1px solid var(--line);color:var(--muted)}.compare strong{color:var(--ink)}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:step}.step{padding:25px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}.step:before{counter-increment:step;content:"0" counter(step);display:block;margin-bottom:22px;color:var(--yellow);font:700 1rem ui-monospace,SFMono-Regular,Consolas,monospace}.step h3{margin:0 0 8px}.step p{margin:0;color:var(--muted)}
+    .cta{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:34px;border:1px solid #70e1ff55;border-radius:26px;background:linear-gradient(110deg,#70e1ff18,#ff5c9a12)}.cta h2{font-size:clamp(1.7rem,3vw,2.7rem)}.cta p{max-width:590px;margin-bottom:0;color:var(--muted)}footer{padding:32px 0 50px;color:var(--muted);font-size:.9rem}footer .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}footer a{text-decoration:none}footer a:hover{color:var(--cyan)}
+    @media (max-width:800px){.nav{display:none}.hero{grid-template-columns:1fr;padding:48px 0 72px;gap:32px}.hero h1{font-size:clamp(3rem,15vw,5rem)}.feature-grid,.steps{grid-template-columns:1fr}.screens{grid-template-columns:1fr}.shot.large{grid-row:auto}.shot.large img{min-height:0}.compare{grid-template-columns:1fr}.cta{display:block}.cta .button{margin-top:18px}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}.hero-art img{transform:none}}
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="./"><img src="pixel-tv-logo.jpg" alt="Logo PIXEL TV">PIXEL TV</a>
+    <nav class="nav" aria-label="Navegação principal"><a href="#recursos">Recursos</a><a href="#melhorias">Evolução</a><a href="#telas">Telas reais</a><a href="https://github.com/TheReyzer/Pixel-TV">GitHub</a></nav>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Android TV · Google TV · código aberto</div>
+        <h1>Sua TV.<br><span>Seu jeito.</span></h1>
+        <p>O PIXEL TV transforma a tela inicial em uma experiência de descoberta: recomendações que aprendem com cada perfil, atalhos para seus apps e uma biblioteca que não esquece o que você gosta.</p>
+        <div class="actions"><a class="button primary" href="https://github.com/TheReyzer/Pixel-TV#instalar-com-uma-ia">Como instalar</a><a class="button" href="#recursos">Conheça os recursos</a></div>
+      </div>
+      <div class="hero-art"><img src="pixel-tv-logo.jpg" alt="Televisão retrô em pixel art com barras coloridas"></div>
+    </section>
+
+    <section id="recursos" class="section"><div class="wrap">
+      <div class="section-head"><h2>Uma Home que entende a casa inteira.</h2><p>Cada pessoa tem seu perfil. A tela continua simples para quem só quer sentar e assistir.</p></div>
+      <div class="feature-grid">
+        <article class="feature"><div class="icon" aria-hidden="true">✦</div><h3>Recomendações por perfil</h3><p>Notas, gostos, assistidos e listas alimentam um ranking individual. O perfil Geral combina os gostos da casa.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">◉</div><h3>Sincronização Google</h3><p>Vincule cada perfil a uma conta Google e leve histórico, avaliações, gostos e listas para outra TV.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">⌕</div><h3>Busca rápida e por voz</h3><p>Pesquise filmes e séries, abra detalhes, trailers e opções de onde assistir sem sair da experiência.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">▣</div><h3>Conteúdo sem deformar</h3><p>Capas horizontais e verticais são preenchidas com prioridade para imagens regionais e melhor qualidade.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">◌</div><h3>Feito para o controle remoto</h3><p>Foco visível, navegação por D-pad, grades contínuas e retorno ao ponto anterior em detalhes e buscas.</p></article>
+        <article class="feature"><div class="icon" aria-hidden="true">↗</div><h3>Seus apps, no mesmo lugar</h3><p>Atalhos para os aplicativos instalados, favoritos, TV ao vivo, Assistidos e Assistir mais tarde.</p></article>
+      </div>
+    </div></section>
+
+    <section id="melhorias" class="section"><div class="wrap">
+      <div class="section-head"><h2>O que muda em relação à Home original?</h2><p>O launcher original continua preservado. O PIXEL TV adiciona uma camada de organização e descoberta por cima da TV.</p></div>
+      <div class="compare">
+        <div class="old"><h3>Home tradicional</h3><p><strong>Apps separados</strong><br>Você troca de aplicativo para lembrar onde está cada conteúdo.</p><p><strong>Recomendações genéricas</strong><br>O que aparece não considera a diferença entre as pessoas da casa.</p><p><strong>Memória local</strong><br>Trocar de TV pode significar recomeçar histórico, notas e listas.</p></div>
+        <div class="new"><h3>Com PIXEL TV</h3><p><strong>Conteúdo reunido</strong><br>Filmes, séries, serviços e TV ao vivo ficam acessíveis pela mesma Home.</p><p><strong>Descoberta personalizada</strong><br>O ranking aprende com avaliações, gostos, assistidos e tempo.</p><p><strong>Perfil que viaja</strong><br>Contas Google permitem sincronizar cada perfil em uma nova instalação.</p></div>
+      </div>
+    </div></section>
+
+    <section id="telas" class="section"><div class="wrap">
+      <div class="section-head"><h2>Veja o sistema funcionando na TV.</h2><p>Capturas reais da versão validada em uma Android TV, não mockups.</p></div>
+      <div class="screens">
+        <figure class="shot large"><img src="screen-home.png" alt="Home do PIXEL TV com recomendações e atalhos de aplicativos"><figcaption>Home com recomendações, categorias, busca, favoritos, gostos e atalhos para apps.</figcaption></figure>
+        <figure class="shot"><img src="screen-profiles.png" alt="Tela de seleção de perfis do PIXEL TV"><figcaption>Perfis individuais com avatar, contagem de títulos e perfil Geral.</figcaption></figure>
+        <figure class="shot"><img src="screen-sync.png" alt="Menu de contas Google e sincronização do PIXEL TV"><figcaption>Uma conta Google por perfil e sincronização de todos os perfis vinculados.</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <div class="section-head"><h2>Comece em três passos.</h2><p>Sem desativar o launcher original e sem prender seus dados a um servidor próprio.</p></div>
+      <div class="steps"><article class="step"><h3>Instale</h3><p>Use o instalador do projeto em uma Android TV ou Google TV com Android 8/API 26 ou superior.</p></article><article class="step"><h3>Crie os perfis</h3><p>Escolha nome, avatar e cor. Cada pessoa mantém sua própria avaliação, lista e histórico.</p></article><article class="step"><h3>Vincule e assista</h3><p>Opcionalmente, conecte as contas Google pelo QR code exibido na TV para restaurar dados em outra tela.</p></article></div>
+    </div></section>
+
+    <section class="wrap cta"><div><h2>Uma TV melhor começa pela Home.</h2><p>Consulte o código, a compatibilidade, a instalação e as decisões de privacidade no repositório público.</p></div><a class="button primary" href="https://github.com/TheReyzer/Pixel-TV">Abrir no GitHub</a></section>
+  </main>
+
+  <footer class="wrap"><div>PIXEL TV · projeto para Android TV e Google TV</div><div class="footer-links"><a href="privacy.html">Política de Privacidade</a><a href="terms.html">Termos de Uso</a><a href="https://github.com/TheReyzer/Pixel-TV">Código-fonte</a></div></footer>
+</body>
+</html>
