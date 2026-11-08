@@ -67,6 +67,7 @@ final class UpdateManager {
         worker.execute(() -> {
             Update found=null;
             try {
+                android.util.Log.d("TVHomeUpdate","checking "+MANIFEST_URL);
                 HttpURLConnection c=(HttpURLConnection)new URL(MANIFEST_URL).openConnection(); c.setConnectTimeout(8000); c.setReadTimeout(8000); c.setUseCaches(false);
                 InputStream in=c.getInputStream(); StringBuilder b=new StringBuilder(); byte[] buf=new byte[4096]; int n;
                 while ((n=in.read(buf))!=-1) b.append(new String(buf,0,n,java.nio.charset.StandardCharsets.UTF_8));
@@ -75,7 +76,8 @@ final class UpdateManager {
                 if (candidate.versionCode>BuildConfig.VERSION_CODE && !candidate.apkUrl.isEmpty()) {
                     context.getSharedPreferences(PREFS,Context.MODE_PRIVATE).edit().putString(JSON,b.toString()).apply(); found=candidate;
                 } else context.getSharedPreferences(PREFS,Context.MODE_PRIVATE).edit().remove(JSON).apply();
-            } catch (Exception ignored) { found=available(context); }
+                android.util.Log.d("TVHomeUpdate","remote="+candidate.versionCode+" local="+BuildConfig.VERSION_CODE+" available="+(found!=null));
+            } catch (Exception error) { android.util.Log.e("TVHomeUpdate","check failed",error); found=available(context); }
             Update result=found; if (callback!=null) main.post(() -> callback.done(result));
         });
     }
