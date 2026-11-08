@@ -56,7 +56,9 @@
     body {
       background: var(--bg-void);
       min-height: 100vh;
-      padding: 20px 16px 40px;
+      padding: 0;
+      margin: 0;
+      width: 100%;
       overflow-x: hidden;
       position: relative;
     }
@@ -78,22 +80,22 @@
       text-decoration: none;
     }
 
-    /* MOLDURA PRINCIPAL ESTILO ARTFOLIO */
+    /* MOLDURA PRINCIPAL 100% FULL WIDTH */
     .stage-frame {
-      max-width: 1280px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
       background: 
         radial-gradient(ellipse 65% 42% at 50% 0%, rgba(88, 184, 120, 0.08) 0%, rgba(112, 225, 255, 0.05) 35%, transparent 70%),
         var(--bg-frame);
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-frame);
+      border: none;
+      border-radius: 0;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.95);
     }
 
     .container {
-      width: min(1140px, calc(100% - 48px));
+      width: min(1440px, calc(100% - 64px));
       margin-inline: auto;
       position: relative;
       z-index: 2;
@@ -1336,14 +1338,11 @@
 
       <div class="hero-top-grid">
         <div class="hero-left">
-          <!-- 01 + LOGOS ANDROID TV E GOOGLE TV REDUZIDOS -->
-          <div class="hero-index-row">
-            <span class="index-num">01</span>
-            <span class="index-sep"></span>
-            <span class="index-label">HOME LAUNCHER</span>
-            <span class="index-sep"></span>
-            <div class="hero-platform-logos" aria-label="Android TV e Google TV">
+          <!-- APENAS AS DUAS LOGOS COM O DIVISOR NO MEIO -->
+          <div class="hero-index-row" aria-label="Compatível com Android TV e Google TV">
+            <div class="hero-platform-logos">
               <img src="android-tv-logo.svg" alt="Android TV">
+              <span class="index-sep"></span>
               <img src="google-tv-logo.svg" alt="Google TV" class="gtv">
             </div>
           </div>
@@ -1380,8 +1379,8 @@
         </div>
       </div>
 
-      <!-- IMAGEM CINEMATOGRÁFICA WIDE COM LOUROS (LAURELS) E LINKS -->
-      <div class="hero-cinema-stage" data-preview="screen-home.webp" data-caption="Tela Inicial Completa · PIXEL TV">
+      <!-- IMAGEM CINEMATOGRÁFICA WIDE COM LOUROS (LAURELS) E LINKS (SEM HOVER FLUTUANTE) -->
+      <div class="hero-cinema-stage">
         <img src="screen-home.webp" alt="Tela Inicial do PIXEL TV" class="main-screen" fetchpriority="high">
         
         <div class="cinema-overlay-bar">
@@ -1591,9 +1590,11 @@
       <div class="center-header" style="margin-bottom: 36px;">
         <span class="serif-italic bright" style="font-size: 1.35rem;">Pixel.tv</span>
         <h2 class="center-title" style="font-size: clamp(1.9rem, 3.6vw, 2.8rem);">
-          Do título à reprodução sem caçar aplicativo. <br>
-          Às vezes você descobre obras-primas em segundos.
+          Do título à reprodução sem caçar aplicativo.
         </h2>
+        <p class="center-desc" style="font-size: 1.05rem;">
+          Às vezes você descobre obras-primas em segundos.
+        </p>
 
         <div class="laurel-badges" style="justify-content: center; margin-top: 10px;">
           <div class="laurel-item"><span class="laurel-wreath">❦</span><div class="laurel-text"><span>IDENTIDADE</span><strong>IMDB ID</strong></div><span class="laurel-wreath">❧</span></div>
@@ -1624,7 +1625,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO FRAME·S: FEATURED PRODUCTIONS (GRADE 2x2 COM BOTÃO PLAY) -->
+    <!-- SEÇÃO FRAME·S: FEATURED PRODUCTIONS (GRADE 2x2 SEM HOVER FLUTUANTE) -->
     <section id="producoes" class="works-section container">
       <div class="center-header" style="margin-bottom: 20px;">
         <span class="serif-italic bright" style="font-size: 1.3rem;">arquitetura.</span>
@@ -1632,7 +1633,7 @@
       </div>
 
       <div class="works-grid-2x2">
-        <article class="work-showcase" data-preview="screen-home.webp" data-caption="Memória Blindada · Libera capas ao abrir apps pesados">
+        <article class="work-showcase">
           <img src="screen-home.webp" alt="Gerenciamento de Memória" loading="lazy">
           <span class="work-play-circle">▶</span>
           <div class="work-caption">
@@ -1641,7 +1642,7 @@
           </div>
         </article>
 
-        <article class="work-showcase" data-preview="screen-trailer.webp" data-caption="Trailers Progressivos · Media3 ExoPlayer">
+        <article class="work-showcase">
           <img src="screen-trailer.webp" alt="Trailers Nativos" loading="lazy">
           <span class="work-play-circle">▶</span>
           <div class="work-caption">
@@ -1650,7 +1651,7 @@
           </div>
         </article>
 
-        <article class="work-showcase" data-preview="screen-tastes.webp" data-caption="Zero Consumo em Vídeo · 0% CPU durante reprodução">
+        <article class="work-showcase">
           <img src="screen-tastes.webp" alt="Consumo Zero em Reprodução" loading="lazy">
           <span class="work-play-circle">▶</span>
           <div class="work-caption">
@@ -1659,7 +1660,7 @@
           </div>
         </article>
 
-        <article class="work-showcase" data-preview="screen-sync.webp" data-caption="OTA Transparente · Atualização pela própria Home">
+        <article class="work-showcase">
           <img src="screen-sync.webp" alt="Atualização Embutida" loading="lazy">
           <span class="work-play-circle">▶</span>
           <div class="work-caption">
