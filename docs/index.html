@@ -90,7 +90,7 @@
         var(--bg-frame);
       border: none;
       border-radius: 0;
-      overflow: hidden;
+      overflow-x: clip;
       position: relative;
     }
 
@@ -1424,8 +1424,10 @@
     }
 
     .faq-intro-col {
+      position: -webkit-sticky;
       position: sticky;
-      top: 48px;
+      top: 44px;
+      align-self: start;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
