@@ -1625,51 +1625,202 @@
       border-radius: 6px;
     }
 
-    .site-footer {
-      padding-bottom: clamp(44px, 5vw, 68px);
+    /* =========================================
+       RODAPÉ ESTRUTURADO (COLUNAS + CRÉDITOS DO CRIADOR)
+       ========================================= */
+    .footer-structured {
+      margin-top: clamp(56px, 6vw, 88px);
+      padding-top: clamp(48px, 5vw, 72px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
     }
 
-    .footer-bottom-bar {
-      padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 0.8fr 0.85fr 1fr;
+      gap: clamp(28px, 4vw, 56px);
+      align-items: start;
+    }
+
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 360px;
+    }
+
+    .footer-badges-mini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .footer-badge-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .footer-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px rgba(88, 184, 120, 0.7);
+    }
+
+    .footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-col-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links-list a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links-list a:hover {
+      color: #ffffff;
+    }
+
+    .footer-author-card {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(112, 225, 255, 0.07) 0%, transparent 65%),
+        rgba(255, 255, 255, 0.02);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-author-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+    }
+
+    .footer-author-name {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-author-bio {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .footer-author-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .footer-gh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .footer-gh-btn:hover {
+      background: #ffffff;
+      color: #050608;
+      border-color: #ffffff;
+    }
+
+    .footer-legal-bar {
+      padding-top: 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
-    .footer-brand-row {
+    .footer-legal-bar a {
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-legal-bar a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-legal-right {
       display: flex;
       align-items: center;
       gap: 18px;
       flex-wrap: wrap;
     }
 
-    .copyright-text {
-      font-size: 0.8rem;
+    .footer-legal-right a {
       color: var(--muted);
+      font-weight: 500;
+      text-decoration: none;
     }
 
-    .footer-pill-clusters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .f-pill {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.02);
-      font-size: 0.75rem;
-      color: #cbd5e1;
-      transition: all 0.2s;
-    }
-
-    .f-pill:hover {
-      background: #fff;
-      color: #050507;
+    .footer-legal-right a:hover {
+      color: #ffffff;
     }
 
     /* =======================================================
@@ -1739,7 +1890,7 @@
     /* RESPONSIVIDADE */
     @media (max-width: 960px) {
       .nav-center { display: none; }
-      .spotlight-trio, .works-grid-2x2, .install-steps-grid, .install-bento, .faq-split-layout {
+      .spotlight-trio, .works-grid-2x2, .install-steps-grid, .install-bento, .faq-split-layout, .footer-top-grid {
         grid-template-columns: 1fr;
       }
       .faq-intro-col {
@@ -2418,26 +2569,80 @@
         </div>
       </section>
 
-      <!-- BARRA FINAL DO RODAPÉ -->
-      <div class="footer-bottom-bar">
-        <div class="footer-brand-row">
-          <a href="./" class="brand-logo">
-            <img src="favicon.png" alt="Logo PIXEL TV">
-            <span><span class="serif-part">pixel</span>tv</span>
-          </a>
-          <span class="copyright-text">PIXEL TV © 2026 · Código Aberto · Zero Telemetria</span>
+      <!-- RODAPÉ ESTRUTURADO EM COLUNAS + CRÉDITO DO CRIADOR -->
+      <div class="footer-structured">
+        <div class="footer-top-grid">
+          <!-- Coluna 1: Identidade PIXEL TV -->
+          <div class="footer-brand-col">
+            <a href="./" class="brand-logo">
+              <img src="favicon.png" alt="Logo PIXEL TV">
+              <span><span class="serif-part">pixel</span>tv</span>
+            </a>
+            <p class="footer-brand-desc">
+              Uma Home com alma de cinema para Android TV e Google TV. Catálogo oficial do IMDb, recomendações por perfil, trailers nativos e automação direta sem&nbsp;telemetria.
+            </p>
+            <div class="footer-badges-mini">
+              <span class="footer-badge-chip"><span class="footer-badge-dot"></span> Código Aberto</span>
+              <span class="footer-badge-chip">Zero Telemetria</span>
+              <span class="footer-badge-chip">Android 8.0+</span>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Navegação da Página -->
+          <div class="footer-nav-col">
+            <span class="footer-col-title">Explorar</span>
+            <ul class="footer-links-list">
+              <li><a href="#inicio">Início</a></li>
+              <li><a href="#perfis">Perfis &amp; IA</a></li>
+              <li><a href="#galeria">Galeria de Telas</a></li>
+              <li><a href="#integracoes">Integrações</a></li>
+              <li><a href="#producoes">Arquitetura</a></li>
+              <li><a href="#instalacao">Instalação</a></li>
+              <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+          </div>
+
+          <!-- Coluna 3: Repositório & Documentação -->
+          <div class="footer-nav-col">
+            <span class="footer-col-title">Projeto &amp; Código</span>
+            <ul class="footer-links-list">
+              <li><a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener">Repositório no GitHub ↗</a></li>
+              <li><a href="https://github.com/TheReyzer/Pixel-TV/releases" target="_blank" rel="noopener">Releases &amp; APK (v3.0.3) ↗</a></li>
+              <li><a href="https://github.com/TheReyzer/Pixel-TV/blob/main/PROMPT.md" target="_blank" rel="noopener">Roteiro para IA (PROMPT.md) ↗</a></li>
+              <li><a href="https://github.com/TheReyzer/Pixel-TV/issues" target="_blank" rel="noopener">Reportar Bug / Sugestão ↗</a></li>
+              <li><a href="privacy.html">Política de Privacidade</a></li>
+              <li><a href="terms.html">Termos de Uso</a></li>
+            </ul>
+          </div>
+
+          <!-- Coluna 4: Criador do Projeto -->
+          <div class="footer-author-card">
+            <span class="footer-author-label">✦ Idealização &amp; Engenharia</span>
+            <div class="footer-author-name">Criado por Rodrigo C.</div>
+            <p class="footer-author-bio">
+              Desenvolvido de ponta a ponta para transformar qualquer TV Box ou Smart TV em uma sala de cinema fluida e&nbsp;privada.
+            </p>
+            <div class="footer-author-links">
+              <a href="https://github.com/TheReyzer" target="_blank" rel="noopener" class="footer-gh-btn">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.02 11.02 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+                <span>@TheReyzer</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div class="footer-pill-clusters">
-          <a href="#inicio" class="f-pill">Início</a>
-          <a href="#perfis" class="f-pill">Perfis &amp; IA</a>
-          <a href="#integracoes" class="f-pill">Integrações</a>
-          <a href="#producoes" class="f-pill">Arquitetura</a>
-          <a href="#instalacao" class="f-pill">Instalação</a>
-          <a href="#faq" class="f-pill">FAQ</a>
-          <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener" class="f-pill">GitHub</a>
-          <a href="privacy.html" class="f-pill">Privacidade</a>
-          <a href="terms.html" class="f-pill">Termos</a>
+        <!-- Barra Inferior de Direitos e Links Rápidos -->
+        <div class="footer-legal-bar">
+          <span>
+            PIXEL TV © 2026 · Projeto criado por <a href="https://github.com/TheReyzer" target="_blank" rel="noopener">Rodrigo C. (@TheReyzer)</a>
+          </span>
+          <div class="footer-legal-right">
+            <a href="privacy.html">Privacidade</a>
+            <a href="terms.html">Termos</a>
+            <a href="https://github.com/TheReyzer/Pixel-TV" target="_blank" rel="noopener">GitHub</a>
+            <a href="#inicio">Voltar ao topo ↑</a>
+          </div>
         </div>
       </div>
     </footer>
