@@ -1100,51 +1100,114 @@
     .install-steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 32px;
+      gap: 28px;
+      margin-bottom: 36px;
+      position: relative;
     }
 
     .install-step-card {
+      position: relative;
       border-radius: var(--radius-card);
-      border: 1px solid var(--border-hairline);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-      padding: 30px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(112, 225, 255, 0.07) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.012) 100%);
+      padding: 32px 28px 30px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 18px;
+      overflow: hidden;
     }
 
-    .install-step-num {
+    /* Seta conectora entre os passos 1 -> 2 -> 3 no desktop */
+    .install-step-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: rgba(112, 225, 255, 0.45);
+      pointer-events: none;
+      z-index: 3;
+      display: none;
+    }
+
+    /* Marca d'água numérica grande no canto superior direito */
+    .step-watermark {
+      position: absolute;
+      top: 10px;
+      right: 22px;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 4.6rem;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.045);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .install-step-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-number-circle {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffffff 0%, #d8e6f3 100%);
+      color: #050608;
+      font-size: 1.35rem;
+      font-weight: 800;
       display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+
+    .step-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .step-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent-cyan);
     }
 
-    .install-step-num span.step-badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(112, 225, 255, 0.1);
-      border: 1px solid rgba(112, 225, 255, 0.25);
-      color: #fff;
-      font-size: 0.7rem;
+    .step-context {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #b4b9c7;
     }
 
     .install-step-card h3 {
-      font-size: 1.22rem;
+      font-size: 1.28rem;
       font-weight: 700;
       color: #fff;
-      line-height: 1.3;
+      line-height: 1.28;
+      position: relative;
+      z-index: 1;
     }
 
     .install-step-card p {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--muted);
       line-height: 1.68;
+      position: relative;
+      z-index: 1;
     }
 
     .install-bento {
@@ -1868,35 +1931,47 @@
       <!-- 3 PASSOS DE PREPARAÇÃO E INSTALAÇÃO -->
       <div class="install-steps-grid">
         <article class="install-step-card">
-          <div class="install-step-num">
-            <span>PASSO 01 · NA SUA TV</span>
-            <span class="step-badge">Depuração ADB</span>
+          <span class="step-watermark" aria-hidden="true">01</span>
+          <div class="install-step-header">
+            <span class="step-number-circle">1</span>
+            <div class="step-meta">
+              <span class="step-kicker">PASSO 1 DE 3</span>
+              <span class="step-context">Na sua TV · Depuração ADB</span>
+            </div>
           </div>
-          <h3>Ative a Depuração na TV</h3>
+          <h3>Ative a Depuração na&nbsp;TV</h3>
           <p>
-            Em Configurações → Sistema → Sobre, clique 7 vezes em <strong>Número da versão</strong>. Depois, em Opções do desenvolvedor, ative a <strong>Depuração USB / Rede (ADB)</strong> e anote o IP da TV.
+            Em Configurações → Sistema → Sobre, clique 7 vezes em <strong>Número da versão</strong>. Depois, em Opções do desenvolvedor, ative a <strong>Depuração USB / Rede (ADB)</strong> e anote o IP da&nbsp;TV.
           </p>
         </article>
 
         <article class="install-step-card">
-          <div class="install-step-num">
-            <span>PASSO 02 · NO COMPUTADOR</span>
-            <span class="step-badge">IA ou Python</span>
+          <span class="step-watermark" aria-hidden="true">02</span>
+          <div class="install-step-header">
+            <span class="step-number-circle">2</span>
+            <div class="step-meta">
+              <span class="step-kicker">PASSO 2 DE 3</span>
+              <span class="step-context">No computador · IA ou Python</span>
+            </div>
           </div>
-          <h3>Dispare o Instalador</h3>
+          <h3>Dispare o&nbsp;Instalador</h3>
           <p>
-            Envie o prompt abaixo para seu assistente de código (Claude Code, Antigravity ou Cursor) ou execute <code>python tools/install.py</code>. O roteiro verifica o ambiente, compila o APK e conecta na TV.
+            Envie o prompt abaixo para seu assistente de código (Claude Code, Antigravity ou Cursor) ou execute <code>python tools/install.py</code>. O roteiro verifica o ambiente, compila o APK e conecta na&nbsp;TV.
           </p>
         </article>
 
         <article class="install-step-card">
-          <div class="install-step-num">
-            <span>PASSO 03 · CONFIRMAÇÃO</span>
-            <span class="step-badge">100% Seguro</span>
+          <span class="step-watermark" aria-hidden="true">03</span>
+          <div class="install-step-header">
+            <span class="step-number-circle">3</span>
+            <div class="step-meta">
+              <span class="step-kicker">PASSO 3 DE 3</span>
+              <span class="step-context">Confirmação · 100% Seguro</span>
+            </div>
           </div>
-          <h3>Autorize na Tela e Use</h3>
+          <h3>Autorize na Tela e&nbsp;Use</h3>
           <p>
-            Aceite o pareamento ADB quando surgir na TV. Você pode instalar apenas como prévia ou definir como Home padrão (<code>--set-home</code>) sem desinstalar nem bloquear o launcher original.
+            Aceite o pareamento ADB quando surgir na TV. Você pode instalar apenas como prévia ou definir como Home padrão (<code>--set-home</code>) sem desinstalar nem bloquear o launcher&nbsp;original.
           </p>
         </article>
       </div>
