@@ -1,12 +1,59 @@
-# Pixel TV
+<div align="center">
 
-Launcher para **Android TV e Google TV**, com interface em português brasileiro, recomendações por perfil, busca por voz, trailers no modal, listas e atalhos para streaming.
+  <img src="docs/favicon.png" alt="Logo PIXEL TV" width="76" height="76" />
+
+  # PIXEL TV
+  ### Uma Home com alma de cinema para Android TV e Google TV
+
+  Catálogo oficial do **IMDb** com aviso de disponibilidade nos apps instalados na sua TV, recomendações por afinidade individual, busca por voz, trailers embutidos e automação direta para seus streamings — **100% código aberto e zero telemetria**.
+
+  <p>
+    <a href="https://thereyzer.github.io/Pixel-TV/">
+      <img src="https://img.shields.io/badge/%F0%9F%8C%90_ACESSAR_SITE_OFICIAL-thereyzer.github.io%2FPixel--TV-70e1ff?style=for-the-badge&labelColor=0b0d13" alt="Acessar Site Oficial" />
+    </a>
+    <a href="https://github.com/TheReyzer/Pixel-TV/releases">
+      <img src="https://img.shields.io/badge/Vers%C3%A3o-v3.0.3-58b878?style=for-the-badge&labelColor=0b0d13" alt="Releases v3.0.3" />
+    </a>
+    <a href="https://thereyzer.github.io/Pixel-TV/#instalacao">
+      <img src="https://img.shields.io/badge/Instala%C3%A7%C3%A3o-Assistida_por_IA_ou_CLI-ffffff?style=for-the-badge&labelColor=0b0d13" alt="Guia de Instalação" />
+    </a>
+  </p>
+
+  <p>
+    <a href="https://thereyzer.github.io/Pixel-TV/"><strong>🌐 Site Oficial & Demonstração Interativa</strong></a> ·
+    <a href="https://thereyzer.github.io/Pixel-TV/#galeria">Galeria de Telas</a> ·
+    <a href="https://thereyzer.github.io/Pixel-TV/#instalacao">Como Instalar</a> ·
+    <a href="https://thereyzer.github.io/Pixel-TV/#faq">Perguntas Frequentes (FAQ)</a> ·
+    <a href="https://github.com/TheReyzer/Pixel-TV/releases">Baixar APK</a>
+  </p>
+
+  <br />
+
+  <a href="https://thereyzer.github.io/Pixel-TV/">
+    <img src="docs/screen-home.webp" alt="Prévia da interface do PIXEL TV — Clique para abrir o site oficial" width="100%" />
+  </a>
+
+  <sub>👆 Clique na imagem acima ou acesse <a href="https://thereyzer.github.io/Pixel-TV/"><strong>thereyzer.github.io/Pixel-TV</strong></a> para explorar todas as telas, arquitetura, FAQ e o guia interativo de instalação.</sub>
+
+</div>
+
+---
+
+## 🌐 Conheça pelo Site Oficial
+
+A apresentação completa do sistema — com prévia interativa de todas as telas, detalhes do motor de afinidade por perfil, sincronização via QR Code no Google Drive (`pasta PIXEL TV`), otimizações para TVs de **2 GB de RAM** e passo a passo de instalação — está disponível em:
+
+👉 **[https://thereyzer.github.io/Pixel-TV/](https://thereyzer.github.io/Pixel-TV/)**
+
+---
 
 ## Instalar com uma IA
 
-Abra este repositório no assistente de programação e envie:
+Abra este repositório no seu assistente de programação (Claude Code, Antigravity, Cursor ou Windsurf) e envie:
 
-> Instale este projeto na minha Android TV/Google TV. Leia PROMPT.md, identifique a TV e siga o instalador e a verificação deste repositório. Preserve meus aplicativos, perfis e o launcher original.
+```text
+Clone https://github.com/TheReyzer/Pixel-TV e instale na minha Android TV/Google TV. Leia PROMPT.md, identifique a TV e siga o instalador e a verificação deste repositório. Preserve meus aplicativos, perfis e o launcher original.
+```
 
 A IA prepara o ambiente, compila, instala e verifica. Você precisa habilitar a depuração e autorizar o computador na TV; alguns modelos exigem pareamento ADB com código. Essas autorizações pertencem ao Android e não podem ser puladas.
 
