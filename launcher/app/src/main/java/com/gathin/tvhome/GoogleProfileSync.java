@@ -42,7 +42,8 @@ final class GoogleProfileSync {
     private static final String USERINFO_ENDPOINT="https://openidconnect.googleapis.com/v1/userinfo";
     private static final String DRIVE_ENDPOINT="https://www.googleapis.com/drive/v3/files";
     private static final String UPLOAD_ENDPOINT="https://www.googleapis.com/upload/drive/v3/files";
-    private static final String FOLDER_NAME="TV VibeCheck";
+    private static final String FOLDER_NAME="PIXEL TV";
+    private static final String LEGACY_FOLDER_NAME="TV VibeCheck";
     private static final String FILE_NAME="perfil.json";
     private static final String FOLDER_MIME="application/vnd.google-apps.folder";
     private static final int MAX_BODY=1_000_000;
@@ -176,6 +177,13 @@ final class GoogleProfileSync {
     private String findOrCreateFolder(String token) throws Exception {
         String query="name='"+quote(FOLDER_NAME)+"' and mimeType='"+FOLDER_MIME+"' and trashed=false";
         JSONObject listed=list(token,query,"files(id,name)"); if (listed.getJSONArray("files").length()>0) return listed.getJSONArray("files").getJSONObject(0).getString("id");
+        String legacyQuery="name='"+quote(LEGACY_FOLDER_NAME)+"' and mimeType='"+FOLDER_MIME+"' and trashed=false";
+        JSONObject legacyListed=list(token,legacyQuery,"files(id,name)");
+        if (legacyListed.getJSONArray("files").length()>0) {
+            String legacyId=legacyListed.getJSONArray("files").getJSONObject(0).getString("id");
+            try { requestText(DRIVE_ENDPOINT+"/"+enc(legacyId),"PATCH",token,new JSONObject().put("name",FOLDER_NAME).toString(),"application/json"); } catch (Exception ignored) { }
+            return legacyId;
+        }
         JSONObject meta=new JSONObject().put("name",FOLDER_NAME).put("mimeType",FOLDER_MIME);
         return postJson(DRIVE_ENDPOINT,meta.toString(),token).getString("id");
     }

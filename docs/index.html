@@ -1407,7 +1407,7 @@
     }
 
     /* =========================================
-       SEÇÃO DE PERGUNTAS FREQUENTES (FAQ)
+       SEÇÃO DE PERGUNTAS FREQUENTES (FAQ BENTO)
        ========================================= */
     .faq-section {
       padding-top: clamp(88px, 8.5vw, 124px);
@@ -1416,118 +1416,181 @@
       position: relative;
     }
 
-    .faq-list {
-      max-width: 960px;
-      margin: 0 auto;
+    .faq-trust-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .faq-trust-pill {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .faq-trust-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 12px rgba(88, 184, 120, 0.65);
+      flex-shrink: 0;
+    }
+
+    .faq-trust-dot.cyan {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(112, 225, 255, 0.65);
+    }
+
+    .faq-trust-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .faq-trust-text span {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .faq-trust-text strong {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .faq-bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .faq-card {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(112, 225, 255, 0.05) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(20, 22, 30, 0.72) 0%, rgba(11, 12, 17, 0.92) 100%);
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .faq-card.emerald-glow {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(88, 184, 120, 0.08) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(16, 24, 20, 0.78) 0%, rgba(11, 13, 15, 0.94) 100%);
+      border-color: rgba(88, 184, 120, 0.22);
+    }
+
+    .faq-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(112, 225, 255, 0.32);
+      box-shadow: 0 22px 50px -18px rgba(0, 0, 0, 0.75);
+    }
+
+    .faq-card.emerald-glow:hover {
+      border-color: rgba(88, 184, 120, 0.42);
+    }
+
+    .faq-card-top {
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
 
-    .faq-item {
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-      overflow: hidden;
-      transition: border-color 0.25s ease, background 0.25s ease;
-    }
-
-    .faq-item:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .faq-item[open] {
-      border-color: rgba(112, 225, 255, 0.35);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(112, 225, 255, 0.06) 0%, transparent 55%),
-        rgba(12, 14, 20, 0.95);
-    }
-
-    .faq-question {
-      list-style: none;
-      cursor: pointer;
-      padding: 22px 26px;
+    .faq-card-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      user-select: none;
+      gap: 12px;
     }
 
-    .faq-question::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq-q-left {
-      display: flex;
+    .faq-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      min-width: 0;
-    }
-
-    .faq-tag {
-      padding: 4px 10px;
+      gap: 7px;
+      padding: 5px 12px;
       border-radius: 999px;
       font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.11em;
       text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--accent-cyan);
-      flex-shrink: 0;
-    }
-
-    .faq-q-title {
-      font-size: 1.06rem;
-      font-weight: 600;
-      color: #ffffff;
-      line-height: 1.38;
-      letter-spacing: -0.01em;
-    }
-
-    .faq-toggle-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(255, 255, 255, 0.03);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: #cbd5e1;
-      flex-shrink: 0;
-      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-    }
-
-    .faq-item[open] .faq-toggle-icon {
-      transform: rotate(45deg);
-      background: #ffffff;
-      color: #050608;
-      border-color: #ffffff;
-    }
-
-    .faq-answer {
-      padding: 0 26px 24px;
-      font-size: 0.95rem;
-      color: #b4b9c7;
-      line-height: 1.72;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 16px;
-    }
-
-    .faq-answer code {
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-      font-size: 0.84rem;
-      color: #70e1ff;
       background: rgba(112, 225, 255, 0.08);
+      border: 1px solid rgba(112, 225, 255, 0.22);
+      color: var(--accent-cyan);
+    }
+
+    .faq-badge.emerald {
+      background: rgba(88, 184, 120, 0.1);
+      border-color: rgba(88, 184, 120, 0.28);
+      color: var(--accent-green);
+    }
+
+    .faq-verdict-pill {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #94a3b8;
+    }
+
+    .faq-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.32;
+      letter-spacing: -0.015em;
+    }
+
+    .faq-card p {
+      font-size: 0.92rem;
+      color: #b4b9c7;
+      line-height: 1.68;
+    }
+
+    .faq-card p strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .faq-card p code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.82rem;
+      color: #70e1ff;
+      background: rgba(112, 225, 255, 0.09);
+      border: 1px solid rgba(112, 225, 255, 0.16);
       padding: 2px 7px;
       border-radius: 6px;
     }
 
-    .faq-answer strong {
-      color: #fff;
+    .faq-card-foot {
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.76rem;
+      color: #8e96aa;
+    }
+
+    .faq-card-foot span.highlight {
+      color: #e2e8f0;
+      font-weight: 600;
     }
 
     .site-footer {
@@ -1644,7 +1707,7 @@
     /* RESPONSIVIDADE */
     @media (max-width: 960px) {
       .nav-center { display: none; }
-      .spotlight-trio, .works-grid-2x2, .install-steps-grid, .install-bento {
+      .spotlight-trio, .works-grid-2x2, .install-steps-grid, .install-bento, .faq-bento-grid, .faq-trust-bar {
         grid-template-columns: 1fr;
       }
       .laurel-badges.nowrap-row {
@@ -2186,7 +2249,7 @@
         </div>
       </div>
 
-      <!-- SEÇÃO DE PERGUNTAS FREQUENTES (FAQ) ABAIXO DA INSTALAÇÃO -->
+      <!-- SEÇÃO DE PERGUNTAS FREQUENTES (FAQ BENTO) ABAIXO DA INSTALAÇÃO -->
       <section id="faq" class="faq-section" aria-label="Perguntas frequentes">
         <div class="center-header">
           <span class="pill-tag">Transparência &amp; Funcionamento</span>
@@ -2198,90 +2261,147 @@
           </p>
         </div>
 
-        <div class="faq-list">
-          <!-- FAQ 1: Telemetria e Captura de Dados -->
-          <details class="faq-item" open>
-            <summary class="faq-question">
-              <div class="faq-q-left">
-                <span class="faq-tag">Privacidade</span>
-                <span class="faq-q-title">O PIXEL TV possui telemetria ou coleta dados de uso da minha TV?</span>
-              </div>
-              <span class="faq-toggle-icon" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <strong>Não.</strong> O PIXEL TV é um projeto 100% código aberto, <strong>sem servidor próprio, sem SDKs de analytics, sem rastreadores e sem anúncios</strong>. Seus perfis, avaliações (de “Odiei” a “Amei”), histórico de títulos assistidos e listas ficam armazenados exclusivamente no espaço privado da própria TV. Os nomes dos seus perfis e suas notas pessoais nunca são enviados nas consultas públicas de&nbsp;catálogo.
+        <!-- FAIXA DE GARANTIAS TÉCNICAS -->
+        <div class="faq-trust-bar">
+          <div class="faq-trust-pill">
+            <span class="faq-trust-dot"></span>
+            <div class="faq-trust-text">
+              <span>TELEMETRIA</span>
+              <strong>0% · Sem Rastreadores</strong>
             </div>
-          </details>
+          </div>
+          <div class="faq-trust-pill">
+            <span class="faq-trust-dot cyan"></span>
+            <div class="faq-trust-text">
+              <span>GOOGLE DRIVE</span>
+              <strong>Pasta Isolada · PIXEL TV</strong>
+            </div>
+          </div>
+          <div class="faq-trust-pill">
+            <span class="faq-trust-dot"></span>
+            <div class="faq-trust-text">
+              <span>ATUALIZAÇÕES OTA</span>
+              <strong>2x ao Dia via GitHub</strong>
+            </div>
+          </div>
+          <div class="faq-trust-pill">
+            <span class="faq-trust-dot cyan"></span>
+            <div class="faq-trust-text">
+              <span>SISTEMA ORIGINAL</span>
+              <strong>100% Preservado</strong>
+            </div>
+          </div>
+        </div>
 
-          <!-- FAQ 2: Login com o Google e Google Drive -->
-          <details class="faq-item">
-            <summary class="faq-question">
-              <div class="faq-q-left">
-                <span class="faq-tag">Google Sync</span>
-                <span class="faq-q-title">Como funciona o login com o Google e o que o app acessa no meu Drive?</span>
+        <!-- GRADE BENTO 2x3 DE PERGUNTAS E RESPOSTAS -->
+        <div class="faq-bento-grid">
+          <!-- Card 1: Telemetria e Captura de Dados -->
+          <article class="faq-card emerald-glow">
+            <div class="faq-card-top">
+              <div class="faq-card-meta">
+                <span class="faq-badge emerald">✦ Privacidade &amp; Dados</span>
+                <span class="faq-verdict-pill">100% Local na TV</span>
               </div>
-              <span class="faq-toggle-icon" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              O login é opcional, individual por perfil e realizado escaneando um <strong>QR Code pelo celular</strong> (fluxo oficial OAuth 2.0 para dispositivos de TV, sem digitar senha no controle remoto). O PIXEL TV solicita apenas o escopo restrito <code>drive.file</code>: ele <strong>não enxerga nem acessa seus arquivos pessoais, fotos ou documentos</strong>, tendo permissão unicamente para salvar e sincronizar o arquivo <code>perfil.json</code> dentro da pasta <code>TV VibeCheck</code> no seu próprio Google Drive. Os tokens de acesso ficam protegidos por criptografia de hardware no <strong>Android&nbsp;Keystore</strong>.
+              <h3>O PIXEL TV possui telemetria ou coleta dados de uso da minha&nbsp;TV?</h3>
+              <p>
+                <strong>Não.</strong> O PIXEL TV é código aberto, <strong>sem servidor próprio, sem SDKs de analytics, sem rastreadores e sem anúncios</strong>. Seus perfis, avaliações (de “Odiei” a “Amei”), histórico de títulos assistidos e listas ficam guardados apenas no armazenamento privado da TV. Nomes de perfis e notas nunca saem nas consultas de&nbsp;catálogo.
+              </p>
             </div>
-          </details>
+            <div class="faq-card-foot">
+              <span>Armazenamento padrão</span>
+              <span class="highlight">Sandbox Privado do Android</span>
+            </div>
+          </article>
 
-          <!-- FAQ 3: Atualizações do Sistema (OTA) -->
-          <details class="faq-item">
-            <summary class="faq-question">
-              <div class="faq-q-left">
-                <span class="faq-tag">Atualizações</span>
-                <span class="faq-q-title">Como funcionam as atualizações do sistema? Vou perder meus perfis ao atualizar?</span>
+          <!-- Card 2: Login com o Google e Google Drive -->
+          <article class="faq-card">
+            <div class="faq-card-top">
+              <div class="faq-card-meta">
+                <span class="faq-badge">✦ Google Sync</span>
+                <span class="faq-verdict-pill">Escopo Restrito</span>
               </div>
-              <span class="faq-toggle-icon" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              O sistema conta com atualização embutida (<strong>OTA</strong>) que consulta novas versões oficiais diretamente nas Releases do GitHub duas vezes ao dia (pela manhã e à noite). Quando uma nova versão está disponível, a TV exibe um aviso com o resumo das novidades em linguagem simples e instala o pacote com barra de progresso na própria tela, <strong>preservando integralmente seus perfis, notas, listas e contas&nbsp;vinculadas</strong>.
+              <h3>Como funciona o login com o Google e o que o app acessa no meu&nbsp;Drive?</h3>
+              <p>
+                O login é opcional, individual por perfil e feito via <strong>QR Code no celular</strong> (fluxo OAuth 2.0 para TVs, sem digitar senha no controle). O app pede apenas o escopo restrito <code>drive.file</code>: ele <strong>não vê nem acessa suas fotos ou documentos pessoais</strong>, sincronizando apenas o arquivo <code>perfil.json</code> dentro da pasta <code>PIXEL TV</code> no seu Drive.
+              </p>
             </div>
-          </details>
+            <div class="faq-card-foot">
+              <span>Proteção de credenciais</span>
+              <span class="highlight">Criptografia Android Keystore</span>
+            </div>
+          </article>
 
-          <!-- FAQ 4: Serviço de Acessibilidade e Captura de Tela -->
-          <details class="faq-item">
-            <summary class="faq-question">
-              <div class="faq-q-left">
-                <span class="faq-tag">Automação</span>
-                <span class="faq-q-title">Por que o Serviço de Acessibilidade é usado na automação? Ele lê senhas ou conversas?</span>
+          <!-- Card 3: Atualizações do Sistema (OTA) -->
+          <article class="faq-card">
+            <div class="faq-card-top">
+              <div class="faq-card-meta">
+                <span class="faq-badge">✦ Ciclo OTA</span>
+                <span class="faq-verdict-pill">Manhã &amp; Noite</span>
               </div>
-              <span class="faq-toggle-icon" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              O Serviço de Acessibilidade (ativado opcionalmente com <code>--enable-assist</code>) serve exclusivamente para automatizar a abertura e a busca de filmes/séries em aplicativos como <strong>UniTV, Stremio, Prime Video, Netflix, Apple TV e outros</strong> quando o app de destino exige navegação na tela ou seleção de perfil. Ele atua apenas durante os segundos iniciais de abertura da obra, <strong>não captura senhas nem dados sensíveis</strong> e entra em repouso absoluto (<code>0% de CPU</code>) assim que a reprodução&nbsp;começa.
+              <h3>Como funcionam as atualizações do sistema? Vou perder meus perfis ao&nbsp;atualizar?</h3>
+              <p>
+                O sistema possui atualização embutida (<strong>OTA</strong>) que verifica novas versões oficiais nas Releases do GitHub duas vezes ao dia. Quando há novidade, a TV exibe um resumo claro na tela e instala com barra de progresso, <strong>preservando integralmente seus perfis, notas, listas e contas&nbsp;vinculadas</strong>.
+              </p>
             </div>
-          </details>
+            <div class="faq-card-foot">
+              <span>Origem dos pacotes</span>
+              <span class="highlight">GitHub Releases Oficial</span>
+            </div>
+          </article>
 
-          <!-- FAQ 5: Consultas Externas (IMDb, Trailers e Clima) -->
-          <details class="faq-item">
-            <summary class="faq-question">
-              <div class="faq-q-left">
-                <span class="faq-tag">Conexões</span>
-                <span class="faq-q-title">Quais conexões externas a TV faz durante o uso normal do launcher?</span>
+          <!-- Card 4: Serviço de Acessibilidade -->
+          <article class="faq-card emerald-glow">
+            <div class="faq-card-top">
+              <div class="faq-card-meta">
+                <span class="faq-badge emerald">✦ Automação</span>
+                <span class="faq-verdict-pill">0% CPU no Filme</span>
               </div>
-              <span class="faq-toggle-icon" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              A TV conecta-se diretamente aos serviços públicos de catálogo (como IMDb para notas, capas em PT-BR e sinopses), provedores de trailers e serviço opcional de clima local para o cabeçalho da Home. Essas requisições trafegam direto da sua TV para os respectivos serviços públicos, sem passar por nenhum intermediário do PIXEL&nbsp;TV.
+              <h3>Por que o Serviço de Acessibilidade é usado na automação? Ele lê senhas ou&nbsp;conversas?</h3>
+              <p>
+                Ativado opcionalmente com <code>--enable-assist</code>, ele serve unicamente para abrir e buscar a obra escolhida em apps como <strong>UniTV, Stremio, Prime Video, Netflix e Apple TV</strong>. Ele atua só nos segundos iniciais da abertura, <strong>jamais lê senhas ou dados sensíveis</strong> e fica em repouso absoluto (<code>0% de CPU</code>) durante o&nbsp;filme.
+              </p>
             </div>
-          </details>
+            <div class="faq-card-foot">
+              <span>Durante a reprodução</span>
+              <span class="highlight">Monitoramento em Repouso</span>
+            </div>
+          </article>
 
-          <!-- FAQ 6: Segurança do Launcher Original e Restauração -->
-          <details class="faq-item">
-            <summary class="faq-question">
-              <div class="faq-q-left">
-                <span class="faq-tag">Reversível</span>
-                <span class="faq-q-title">Definir o PIXEL TV como Home padrão apaga o launcher original da minha TV?</span>
+          <!-- Card 5: Consultas Externas -->
+          <article class="faq-card">
+            <div class="faq-card-top">
+              <div class="faq-card-meta">
+                <span class="faq-badge">✦ Conexões</span>
+                <span class="faq-verdict-pill">Sem Intermediários</span>
               </div>
-              <span class="faq-toggle-icon" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <strong>Jamais.</strong> O instalador nunca desinstala, desativa nem modifica pacotes de fábrica da sua Android TV ou Google TV. Antes de aplicar qualquer configuração, ele gera automaticamente um ponto de restauração em <code>backup/install-DATA</code>. Você pode voltar para a Home original a qualquer instante pelas configurações da TV ou executando o comando de restauração <code>--restore</code>.
+              <h3>Quais conexões externas a TV faz durante o uso normal do&nbsp;launcher?</h3>
+              <p>
+                A TV consulta diretamente os serviços públicos de catálogo (como <strong>IMDb</strong> para notas, capas em PT-BR e sinopses), provedores de trailers e clima local opcional para o topo da Home. Todas as conexões partem direto da sua TV para esses serviços, sem passar por nenhum servidor do PIXEL&nbsp;TV.
+              </p>
             </div>
-          </details>
+            <div class="faq-card-foot">
+              <span>Tráfego de rede</span>
+              <span class="highlight">Direto da TV para as APIs Públicas</span>
+            </div>
+          </article>
+
+          <!-- Card 6: Segurança do Launcher Original -->
+          <article class="faq-card">
+            <div class="faq-card-top">
+              <div class="faq-card-meta">
+                <span class="faq-badge">✦ Reversibilidade</span>
+                <span class="faq-verdict-pill">Backup Automático</span>
+              </div>
+              <h3>Definir o PIXEL TV como Home padrão apaga o launcher original da minha&nbsp;TV?</h3>
+              <p>
+                <strong>Jamais.</strong> O instalador nunca desinstala, desativa nem altera pacotes de fábrica da sua Android TV ou Google TV. Antes de qualquer ajuste, ele salva um ponto de restauração em <code>backup/install-DATA</code>. Você pode voltar à Home original a qualquer momento nas configurações ou com <code>--restore</code>.
+              </p>
+            </div>
+            <div class="faq-card-foot">
+              <span>Segurança de fábrica</span>
+              <span class="highlight">100% Reversível a Qualquer Hora</span>
+            </div>
+          </article>
         </div>
       </section>
 
