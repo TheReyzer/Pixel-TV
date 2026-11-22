@@ -49,6 +49,7 @@ final class RecommendationRail extends RecyclerView {
         int width=landscape?slotWidth:Math.min(slotWidth,Math.round(maxHeight*2f/3f));
         return new int[]{Math.max(1,width),Math.max(1,maxHeight)};
     }
+    static boolean[] artworkLoadOrder(boolean visibleLandscape) { return new boolean[]{visibleLandscape,!visibleLandscape}; }
     static int slotWidth(int available,int gap,int position,int first,int maxHeight) {
         int width=cardWidth(available,gap,position,first);
         return position==first?width:Math.min(width,Math.max(1,Math.round(maxHeight*2f/3f))+gap);
@@ -168,7 +169,7 @@ final class RecommendationRail extends RecyclerView {
         int at=holder.getAdapterPosition(); if (at<0||items.isEmpty()) return;
         int available=Math.max(getWidth(),layout.getWidth())-getPaddingLeft()-getPaddingRight(),height=Math.max(1,Math.max(getHeight(),layout.getHeight())-dp(20));
         MediaRepository.MediaItem item=holder.bound;
-        for (boolean landscape:new boolean[]{true,false}) {
+        for (boolean landscape:artworkLoadOrder(holder.landscape)) {
             ImageView image=landscape?holder.horizontal:holder.vertical;
             int width=slotWidth(available,dp(12),landscape?0:1,0,height)-dp(12);
             repo.loadHomeArtwork(item,image,width,height,landscape,() -> {

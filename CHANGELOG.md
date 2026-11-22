@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.0.7
+
+- A capa exibida em cada card recebe prioridade de carregamento.
+- As prévias continuam sendo preparadas em seguida para a navegação.
+- A melhoria não aumenta o número de downloads simultâneos.
+
 ## 3.0.6
 
 - A TV verifica a versão ao ligar e ao retornar para a Home.
