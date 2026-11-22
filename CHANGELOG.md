@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.0.5
+
+- A TV consulta a atualização no primeiro carregamento da Home.
+- O aviso aparece sem esperar os horários programados.
+- Perfis, histórico, favoritos e recomendações continuam preservados.
+
 ## 3.0.4
 
 - A atualização mantém perfis, histórico, favoritos e recomendações.

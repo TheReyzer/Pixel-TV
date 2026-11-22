@@ -1,11 +1,11 @@
 {
-  "versionCode": 7,
-  "versionName": "3.0.4",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.4/pixel-tv-3.0.4.apk",
-  "summary": "Atualização de manutenção para validar o canal de atualização sem perder seus dados.",
+  "versionCode": 8,
+  "versionName": "3.0.5",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.5/pixel-tv-3.0.5.apk",
+  "summary": "A verificação de atualização acontece assim que a Home termina de carregar.",
   "changelog": [
-    "A atualização mantém perfis, histórico, favoritos e recomendações.",
-    "O aplicativo retoma a Home sem exigir uma nova configuração.",
-    "O canal de atualização recebe uma nova versão para teste na TV."
+    "A TV consulta a atualização no primeiro carregamento da Home.",
+    "O aviso aparece sem esperar os horários programados.",
+    "Perfis, histórico, favoritos e recomendações continuam preservados."
   ]
 }
