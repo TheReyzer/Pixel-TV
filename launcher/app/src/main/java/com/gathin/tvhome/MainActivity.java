@@ -802,8 +802,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     private int dp(float value) { return Math.round(value*density); }
     private TextView updateAction(String label) {
-        TextView v=new TextView(this); v.setText(label); v.setTextColor(Color.WHITE); v.setTextSize(12); v.setGravity(Gravity.CENTER);
-        v.setTypeface(Typeface.create("sans",Typeface.BOLD)); v.setFocusable(true); v.setClickable(true); v.setPadding(dp(18),0,dp(18),0); v.setMinHeight(dp(42)); v.setBackgroundResource(R.drawable.home_top_segment);
+        TextView v=new TextView(this); v.setText(label); v.setTextColor(getResources().getColorStateList(R.color.update_action_text,getTheme())); v.setTextSize(12); v.setGravity(Gravity.CENTER);
+        v.setTypeface(Typeface.create("sans",Typeface.BOLD)); v.setFocusable(true); v.setFocusableInTouchMode(true); v.setClickable(true); v.setPadding(dp(18),0,dp(18),0); v.setMinHeight(dp(42)); v.setBackgroundResource(R.drawable.update_action_bg);
         return v;
     }
     private void onUpdateChecked(UpdateManager.Update update) {
@@ -835,14 +835,15 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (availableUpdate==null||updateWelcomeOverlay!=null) return;
         FrameLayout overlay=new FrameLayout(this); overlay.setBackgroundColor(0xe6000000); overlay.setFocusable(true); overlay.setFocusableInTouchMode(true);
         LinearLayout panel=new LinearLayout(this); panel.setOrientation(LinearLayout.VERTICAL); panel.setPadding(dp(34),dp(28),dp(34),dp(30)); panel.setBackgroundResource(R.drawable.glass_panel);
-        TextView eyebrow=new TextView(this); eyebrow.setText("PIXEL TV  ·  ATUALIZAÇÃO"); eyebrow.setTextColor(0xff87e5a0); eyebrow.setTextSize(11); eyebrow.setLetterSpacing(.12f); panel.addView(eyebrow);
+        LinearLayout brand=new LinearLayout(this); brand.setGravity(Gravity.CENTER_VERTICAL); ImageView logo=new ImageView(this); logo.setImageResource(R.mipmap.ic_launcher); logo.setScaleType(ImageView.ScaleType.CENTER_CROP); brand.addView(logo,new LinearLayout.LayoutParams(dp(48),dp(48)));
+        LinearLayout brandText=new LinearLayout(this); brandText.setOrientation(LinearLayout.VERTICAL); brandText.setPadding(dp(14),0,0,0); TextView brandName=new TextView(this); brandName.setText("PixelTV"); brandName.setTextColor(Color.WHITE); brandName.setTextSize(15); brandName.setTypeface(Typeface.DEFAULT,Typeface.BOLD); TextView brandHint=new TextView(this); brandHint.setText("ATUALIZAÇÃO OFICIAL"); brandHint.setTextColor(0xff87e5a0); brandHint.setTextSize(10); brandHint.setLetterSpacing(.12f); brandText.addView(brandName); brandText.addView(brandHint); brand.addView(brandText); panel.addView(brand,new LinearLayout.LayoutParams(-1,dp(52)));
         TextView title=new TextView(this); title.setText("Atualizando para v"+availableUpdate.versionName); title.setTextColor(Color.WHITE); title.setTextSize(25); title.setTypeface(Typeface.DEFAULT,Typeface.BOLD); title.setPadding(0,dp(8),0,dp(4)); panel.addView(title);
         TextView summary=new TextView(this); summary.setText(availableUpdate.summary.isEmpty()?"Uma atualização do sistema está pronta.":availableUpdate.summary); summary.setTextColor(0xffd2d2dc); summary.setTextSize(13); summary.setPadding(0,0,0,dp(16)); panel.addView(summary);
         TextView changesTitle=new TextView(this); changesTitle.setText("O que melhorou"); changesTitle.setTextColor(Color.WHITE); changesTitle.setTextSize(14); changesTitle.setTypeface(Typeface.DEFAULT,Typeface.BOLD); panel.addView(changesTitle);
         LinearLayout changes=new LinearLayout(this); changes.setOrientation(LinearLayout.VERTICAL); changes.setPadding(dp(8),dp(8),0,dp(14));
         for (String change:availableUpdate.changes) { TextView row=new TextView(this); row.setText("•  "+change); row.setTextColor(0xffc9c9d2); row.setTextSize(12); row.setPadding(0,dp(3),0,dp(3)); changes.addView(row); }
         ScrollView scroll=new ScrollView(this); scroll.addView(changes); panel.addView(scroll,new LinearLayout.LayoutParams(-1,dp(130)));
-        updateDownloadProgress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal); updateDownloadProgress.setMax(100); updateDownloadProgress.setIndeterminate(true); panel.addView(updateDownloadProgress,new LinearLayout.LayoutParams(-1,dp(6)));
+        updateDownloadProgress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal); updateDownloadProgress.setMax(100); updateDownloadProgress.setIndeterminate(true); updateDownloadProgress.setIndeterminateTintList(android.content.res.ColorStateList.valueOf(0xff87e5a0)); updateDownloadProgress.setProgressTintList(android.content.res.ColorStateList.valueOf(0xff87e5a0)); panel.addView(updateDownloadProgress,new LinearLayout.LayoutParams(-1,dp(6)));
         updateDownloadStatus=new TextView(this); updateDownloadStatus.setText("Baixando a atualização oficial do GitHub…"); updateDownloadStatus.setTextColor(0xffbcbcc7); updateDownloadStatus.setTextSize(12); updateDownloadStatus.setPadding(0,dp(10),0,dp(6)); panel.addView(updateDownloadStatus);
         updatePermissionAction=updateAction("ABRIR CONFIGURAÇÃO"); updatePermissionAction.setVisibility(View.GONE); panel.addView(updatePermissionAction,new LinearLayout.LayoutParams(-2,dp(42)));
         FrameLayout.LayoutParams pp=new FrameLayout.LayoutParams(dp(720),dp(430),Gravity.CENTER); overlay.addView(panel,pp); root.addView(overlay,new FrameLayout.LayoutParams(-1,-1)); updateWelcomeOverlay=overlay; overlay.requestFocus();

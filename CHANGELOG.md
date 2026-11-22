@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.2.0
+
+- Os botões do aviso de atualização permanecem legíveis quando focados.
+- A tela de instalação ganhou uma apresentação visual mais moderna.
+- O instalador passa a identificar o app como PixelTV com a logo do projeto.
+
 ## 3.1.0
 
 - A tela inicial começa com foco no primeiro card de recomendação.

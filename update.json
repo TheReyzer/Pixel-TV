@@ -1,11 +1,11 @@
 {
-  "versionCode": 13,
-  "versionName": "3.1.0",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.1.0/pixel-tv-3.1.0.apk",
-  "summary": "A Home começa no primeiro card e identifica filmes e séries.",
+  "versionCode": 14,
+  "versionName": "3.2.0",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.2.0/pixel-tv-3.2.0.apk",
+  "summary": "A instalação agora usa o nome e a identidade PixelTV.",
   "changelog": [
-    "A tela inicial começa com foco no primeiro card de recomendação.",
-    "Cards mistos exibem uma identificação sutil de Filme ou Série.",
-    "Filtros explícitos de filme ou série não repetem essa badge."
+    "Os botões do aviso de atualização permanecem legíveis quando focados.",
+    "A tela de instalação ganhou uma apresentação visual mais moderna.",
+    "O instalador passa a identificar o app como PixelTV com a logo do projeto."
   ]
 }

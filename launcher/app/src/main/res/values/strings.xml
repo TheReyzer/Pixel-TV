@@ -3,7 +3,7 @@
     <string name="home_welcome" translatable="false">Bem-vindo</string>
     <string name="home_preparing" translatable="false">Preparando sua tela inicial…</string>
     <string name="home_preparing_detail" translatable="false">Organizando seus aplicativos e recomendações</string>
-    <string name="app_name">Home</string>
+    <string name="app_name">PixelTV</string>
     <string name="inputs">Inputs</string>
     <string name="wifi">Wi-Fi</string>
     <string name="settings">Settings</string>
