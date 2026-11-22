@@ -14,8 +14,8 @@ android {
         applicationId 'com.gathin.tvhome'
         minSdk 26
         targetSdk 29
-        versionCode 10
-        versionName '3.0.7'
+        versionCode 11
+        versionName '3.0.8'
         buildConfigField 'String', 'GOOGLE_CLIENT_ID', buildConfigString(googleClientId)
         buildConfigField 'String', 'GOOGLE_CLIENT_SECRET', buildConfigString(googleClientSecret)
     }

@@ -36,7 +36,7 @@
     <string name="hdmi_switch">Switch to %1$s</string>
     <string name="profile_account">Switch or edit profile</string>
     <string name="rate_title">Rate</string>
-    <string name="no_profile_recommendations">No suggestions available for this profile in this category. Watched titles stay hidden for 21 days.</string>
+    <string name="no_profile_recommendations">No suggestions available for this profile in this category. Watched titles stay hidden for 30 days.</string>
     <string name="filter_all">All</string>
     <string name="discover">Discover</string>
     <string name="edit_discovery">Edit discovery choices</string>

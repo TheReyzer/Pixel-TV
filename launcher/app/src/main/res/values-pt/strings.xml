@@ -33,7 +33,7 @@
     <string name="hdmi_switch">Mudar para %1$s</string>
     <string name="profile_account">Trocar ou editar perfil</string>
     <string name="rate_title">Avaliar</string>
-    <string name="no_profile_recommendations">Sem sugestões disponíveis para este perfil nesta categoria. Títulos assistidos ficam ocultos por 21 dias.</string>
+    <string name="no_profile_recommendations">Sem sugestões disponíveis para este perfil nesta categoria. Títulos assistidos ficam ocultos por 30 dias.</string>
     <string name="filter_all">Todos</string>
     <string name="discover">Descobrir</string>
     <string name="edit_discovery">Editar escolhas de Descobrir</string>

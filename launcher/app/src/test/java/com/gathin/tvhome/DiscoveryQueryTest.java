@@ -81,7 +81,7 @@ public class DiscoveryQueryTest {
         List<MediaRepository.MediaItem> base=Arrays.asList(item(41,"movie","Terror","2026"),item(42,"movie","Drama","2026"));
         assertEquals(base.get(1),profiles.discover(base,query,2026).get(0));
     }
-    @Test public void excludeWatchedIsTemporaryReadOnlyAndIndependentOfTwentyOneDayCooldown() {
+    @Test public void excludeWatchedIsTemporaryReadOnlyAndIndependentOfThirtyDayCooldown() {
         ViewerProfiles profiles=ProfileFixtures.household(); MediaRepository.MediaItem movie=item(1,"movie","Drama","2026");
         profiles.rate("one",movie,4,1000); profiles.select("one"); String before=profiles.toJson();
         DiscoveryQuery query=new DiscoveryQuery("one"); List<MediaRepository.MediaItem> base=Arrays.asList(movie);

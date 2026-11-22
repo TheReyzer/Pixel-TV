@@ -107,7 +107,7 @@ public class ViewerProfilesTest {
         assertEquals(base.get(1),model.rank(base,false,2026).get(0));
         assertTrue(model.summary(ViewerProfiles.GENERAL,2026).contains("2 perfis com avaliações combinadas"));
     }
-    @Test public void watchedTitleIsHiddenForExactly21DaysThenReturnsWithLowerPriority() {
+    @Test public void watchedTitleIsHiddenForExactly30DaysThenReturnsWithLowerPriority() {
         ViewerProfiles model=ProfileFixtures.household(); MediaRepository.MediaItem seen=item(1,"movie","Drama",2026),fresh=item(2,"movie","Drama",2026);
         long watched=1_700_000_000_000L;
         model.rate("one",seen,4,watched); model.select("one");

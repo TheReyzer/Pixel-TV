@@ -1,11 +1,11 @@
 {
-  "versionCode": 10,
-  "versionName": "3.0.7",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.7/pixel-tv-3.0.7.apk",
-  "summary": "As capas visíveis das recomendações carregam antes das prévias fora de foco.",
+  "versionCode": 11,
+  "versionName": "3.0.8",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.8/pixel-tv-3.0.8.apk",
+  "summary": "Títulos avaliados ficam fora das recomendações por um mês.",
   "changelog": [
-    "A capa exibida em cada card recebe prioridade de carregamento.",
-    "As prévias continuam sendo preparadas em seguida para a navegação.",
-    "A melhoria não aumenta o número de downloads simultâneos."
+    "A blacklist de recomendações passa a durar 30 dias após uma avaliação.",
+    "O histórico, as notas e as listas continuam preservados.",
+    "Depois do cooldown, o título volta como opção de menor prioridade."
   ]
 }

@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.0.8
+
+- A blacklist de recomendações passa a durar 30 dias após uma avaliação.
+- O histórico, as notas e as listas continuam preservados.
+- Depois do cooldown, o título volta como opção de menor prioridade.
+
 ## 3.0.7
 
 - A capa exibida em cada card recebe prioridade de carregamento.

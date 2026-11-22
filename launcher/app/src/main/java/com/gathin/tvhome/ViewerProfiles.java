@@ -20,7 +20,7 @@ final class ViewerProfiles {
     }
     private static final long DAY_MS=86_400_000L;
     private static final java.util.regex.Pattern YEAR=java.util.regex.Pattern.compile("(?:19|20)\\d{2}");
-    static final long WATCHED_COOLDOWN_MS = 21L * 24 * 60 * 60 * 1000;
+    static final long WATCHED_COOLDOWN_MS = 30L * 24 * 60 * 60 * 1000;
     static final String[] AVATARS = {"cat", "dog", "fox", "panda", "koala", "tiger", "bear", "wolf", "monkey", "rabbit", "pig", "lion",
             "elephant", "raccoon", "otter", "owl", "frog", "penguin", "duck", "cow", "horse", "giraffe", "zebra", "capybara"};
     static final int[] COLORS = {0xff3457ad, 0xff7650a7, 0xff187d81, 0xffb44473, 0xffa86222, 0xff347751, 0xff465264, 0xffa83d45,
@@ -589,7 +589,7 @@ final class ViewerProfiles {
         List<Profile> people = contributors(profile);
         int count = 0, watched = 0;
         for (Profile p : profiles) if (profile.aggregate() || p == profile) for (Vote v : p.votes.values()) { watched++; if (v.rating >= 0) count++; }
-        if (count == 0) return watched + " registros de assistidos.\n\nAinda sem avaliações. Abra um filme ou série, escolha Avaliar e diga quem assistiu. Os gostos serão aprendidos a partir das notas. Títulos assistidos ficam fora das recomendações por 21 dias.";
+        if (count == 0) return watched + " registros de assistidos.\n\nAinda sem avaliações. Abra um filme ou série, escolha Avaliar e diga quem assistiu. Os gostos serão aprendidos a partir das notas. Títulos assistidos ficam fora das recomendações por 30 dias.";
         List<Taste> tastes = new ArrayList<>();
         Map<String, Double> features = new LinkedHashMap<>();
         for (Profile p : people) { Taste t = taste(p, now); tastes.add(t); for (String key : t.features.keySet()) features.put(key, 0.0); }
@@ -614,7 +614,7 @@ final class ViewerProfiles {
                 + "\n\nGÊNEROS PREFERIDOS\n" + names(positive, 6) + "\n\nGÊNEROS MENOS APRECIADOS\n" + names(negative, 6)
                 + "\n\nFILMES E SÉRIES\n" + format + "\n\nÉPOCAS COM MELHORES SINAIS\n" + namesPositive(eras, features)
                 + "\n\nDÉCADAS COM MELHORES SINAIS\n" + namesPositive(decades, features)
-                + "\n\nPriorizamos inéditos por 21 dias e buscamos outras opções no catálogo. Quando tudo se esgota, mostramos sugestões identificadas como Para rever. A prioridade menor dos assistidos diminui com o tempo."
+                + "\n\nPriorizamos inéditos por 30 dias e buscamos outras opções no catálogo. Quando tudo se esgota, mostramos sugestões identificadas como Para rever. A prioridade menor dos assistidos diminui com o tempo."
                 + (profile.aggregate() ? " O perfil Geral favorece afinidades em comum e reduz conflitos entre os gostos." : "");
     }
     private static String namesPositive(List<String> keys, Map<String, Double> scores) {
