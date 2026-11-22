@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.1.0
+
+- A tela inicial começa com foco no primeiro card de recomendação.
+- Cards mistos exibem uma identificação sutil de Filme ou Série.
+- Filtros explícitos de filme ou série não repetem essa badge.
+
 ## 3.0.9
 
 - Cada recomendação fica limitada a três exibições por dia.

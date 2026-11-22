@@ -27,6 +27,7 @@ final class RecommendationRail extends RecyclerView {
     private final java.util.function.Consumer<MediaRepository.MediaItem> focused;
     private final java.util.function.Consumer<List<MediaRepository.MediaItem>> exposed;
     private List<MediaRepository.MediaItem> items=Collections.emptyList();
+    private boolean showTypeBadge;
     private String context="";
     private int start=-1,current=-1,pending=-1,firstPosition,expandedPosition,initialPosition;
     private boolean movingWindow,viewportMotion;
@@ -58,6 +59,11 @@ final class RecommendationRail extends RecyclerView {
     static int slotLeft(int position,int first,int expanded,int wide,int small) {
         return (position-first)*small+(position>expanded?wide-small:0)-(first>expanded?wide-small:0);
     }
+    static String badgeText(MediaRepository.MediaItem item,boolean showType) {
+        String type=showType?(item.isSeries()?"Série":"Filme"):"";
+        String rating=item.hasRating()?item.ratingLabel(false):"";
+        return type.isEmpty()?rating:rating.isEmpty()?type:type+" · "+rating;
+    }
     private int windowOffset() { return firstPosition==initialPosition?0:dp(28); }
     private int slotWidth(int position) {
         int width=getWidth()>0?getWidth():getResources().getDisplayMetrics().widthPixels-dp(96);
@@ -81,8 +87,8 @@ final class RecommendationRail extends RecyclerView {
             card.setLayoutParams(new RecyclerView.LayoutParams(slotWidth(at),ViewGroup.LayoutParams.MATCH_PARENT));
             holder.title.setTextSize(19); holder.original.setTextSize(14);
             View caption=card.findViewById(R.id.discoveryCaption); caption.setPadding(dp(14),dp(10),dp(14),dp(14));
-            holder.badge.setText(item.ratingLabel(false)); holder.badge.setVisibility(item.hasRating()?View.VISIBLE:View.GONE);
-            repo.bindTitle(holder.title,holder.original,item); card.setContentDescription(item.displayTitles());
+            updateBadge(holder,item);
+            repo.bindTitle(holder.title,holder.original,item); card.setContentDescription(item.displayTitles()+" · "+(item.isSeries()?"Série":"Filme"));
             loadArtwork(holder);
             fitArtwork(holder); showBlend(holder,holder.blend,false); style(holder,card.hasFocus());
         }
@@ -118,6 +124,9 @@ final class RecommendationRail extends RecyclerView {
                 return false;
             });
         }
+    }
+    private void updateBadge(Holder holder,MediaRepository.MediaItem item) {
+        String text=badgeText(item,showTypeBadge); holder.badge.setText(text); holder.badge.setVisibility(text.isEmpty()?View.GONE:View.VISIBLE);
     }
     RecommendationRail(Activity activity,MediaRepository repo,java.util.function.BiConsumer<MediaRepository.MediaItem,Integer> open,Runnable up,Runnable down,java.util.function.Consumer<MediaRepository.MediaItem> focused,java.util.function.Consumer<List<MediaRepository.MediaItem>> exposed) {
         super(activity); this.activity=activity; this.repo=repo; this.open=open; this.up=up; this.down=down; this.focused=focused; this.exposed=exposed;
@@ -178,7 +187,7 @@ final class RecommendationRail extends RecyclerView {
                 boolean changed=horizontalReady!=holder.horizontalReady||verticalReady!=holder.verticalReady;
                 holder.horizontalReady=horizontalReady; holder.verticalReady=verticalReady;
                 holder.horizontal.setScaleType(ImageView.ScaleType.CENTER_CROP); holder.vertical.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                holder.badge.setText(item.ratingLabel(false)); holder.badge.setVisibility(item.hasRating()?View.VISIBLE:View.GONE);
+                updateBadge(holder,item);
                 if (movingWindow&&motionFrames!=null) {
                     for (MotionFrame frame:motionFrames) if (frame.holder==holder) frame.retarget(changed);
                 } else { fitArtwork(holder); showBlend(holder,holder.landscape?1:0,true); }
@@ -242,6 +251,11 @@ final class RecommendationRail extends RecyclerView {
         current=items.isEmpty()?-1:items.size()>3?(Integer.MAX_VALUE/2/items.size())*items.size()+start:Math.min(start,items.size()-1);
         firstPosition=Math.max(0,current); expandedPosition=firstPosition; initialPosition=firstPosition;
         cards.notifyDataSetChanged(); if (current>=0) { layout.scrollToPositionWithOffset(current,0); if (refocus) focusPosition(current); }
+    }
+    void showTypeBadge(boolean show) {
+        if (showTypeBadge==show) return;
+        showTypeBadge=show;
+        for (int i=0;i<getChildCount();i++) { Holder holder=(Holder)getChildViewHolder(getChildAt(i)); int at=holder.getAdapterPosition(); if (at>=0&&!items.isEmpty()) updateBadge(holder,item(at)); }
     }
     void focusCard(int requested) {
         if (items.isEmpty()) { down.run(); return; }

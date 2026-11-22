@@ -46,12 +46,18 @@ final class DiscoveryGrid extends LinearLayout {
     private Runnable left=() -> {};
     void onLeft(Runnable action) { left=action; }
     private java.util.function.Function<MediaRepository.MediaItem,String> annotation;
+    private boolean showTypeBadge;
     void onNearEnd(Runnable action) { nearingEnd=action; }
-    private void bindBadge(TextView badge,MediaRepository.MediaItem item) { badge.setText(item.ratingLabel(false)); badge.setVisibility(item.hasRating()?View.VISIBLE:View.GONE); }
+    private void bindBadge(TextView badge,MediaRepository.MediaItem item) { String text=RecommendationRail.badgeText(item,showTypeBadge); badge.setText(text); badge.setVisibility(text.isEmpty()?View.GONE:View.VISIBLE); }
+    void showTypeBadge(boolean show) {
+        if (showTypeBadge==show) return;
+        showTypeBadge=show;
+        for (int i=0;i<list.getChildCount();i++) { View card=list.getChildAt(i); int at=list.getChildAdapterPosition(card); if (at>=0&&at<items.size()) bindBadge(card.findViewById(R.id.discoveryBadge),items.get(at)); }
+    }
     private String caption(MediaRepository.MediaItem item) { String note=annotation==null?"":annotation.apply(item); return note.isEmpty()?item.year+" · "+item.genresPt:note; }
     void annotate(java.util.function.Function<MediaRepository.MediaItem,String> annotation) {
         this.annotation=annotation;
-        for (int i=0;i<list.getChildCount();i++) { View card=list.getChildAt(i); int at=list.getChildAdapterPosition(card); if (at>=0&&at<items.size()) { MediaRepository.MediaItem item=items.get(at); TextView badge=card.findViewById(R.id.discoveryBadge); if (badge!=null) bindBadge(badge,item); card.setContentDescription(item.displayTitles()+" · "+caption(item)); } }
+        for (int i=0;i<list.getChildCount();i++) { View card=list.getChildAt(i); int at=list.getChildAdapterPosition(card); if (at>=0&&at<items.size()) { MediaRepository.MediaItem item=items.get(at); TextView badge=card.findViewById(R.id.discoveryBadge); if (badge!=null) bindBadge(badge,item); card.setContentDescription(item.displayTitles()+" · "+(item.isSeries()?"Série":"Filme")+" · "+caption(item)); } }
     }
     private void nearing(int at) { if (nearingEnd!=null&&!items.isEmpty()&&at>=items.size()-8) list.post(nearingEnd); }
     private final RecyclerView.Adapter<RecyclerView.ViewHolder> adapter=new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -104,7 +110,7 @@ final class DiscoveryGrid extends LinearLayout {
             sizeCard(card);
             bindBadge(card.findViewById(R.id.discoveryBadge),item);
             repo.bindTitle(card.findViewById(R.id.discoveryTitle),card.findViewById(R.id.discoveryOriginal),item);
-            card.setContentDescription(item.displayTitles()+" · "+caption(item));
+            card.setContentDescription(item.displayTitles()+" · "+(item.isSeries()?"Série":"Filme")+" · "+caption(item));
             repo.loadGridArtwork(item,card.findViewById(R.id.discoveryArtwork),() -> bindBadge(card.findViewById(R.id.discoveryBadge),item)); styleCardFocus(card,card.hasFocus(),false);
         }
     };

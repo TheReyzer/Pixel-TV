@@ -1,11 +1,11 @@
 {
-  "versionCode": 12,
-  "versionName": "3.0.9",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.9/pixel-tv-3.0.9.apk",
-  "summary": "Cada recomendação aparece no máximo três vezes por dia.",
+  "versionCode": 13,
+  "versionName": "3.1.0",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.1.0/pixel-tv-3.1.0.apk",
+  "summary": "A Home começa no primeiro card e identifica filmes e séries.",
   "changelog": [
-    "Cada recomendação fica limitada a três exibições por dia.",
-    "A contagem é persistida por perfil e reinicia automaticamente no dia seguinte.",
-    "O histórico, as avaliações e as listas continuam preservados."
+    "A tela inicial começa com foco no primeiro card de recomendação.",
+    "Cards mistos exibem uma identificação sutil de Filme ou Série.",
+    "Filtros explícitos de filme ou série não repetem essa badge."
   ]
 }

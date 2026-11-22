@@ -459,7 +459,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 if (startupOverlay.getParent() instanceof android.view.ViewGroup) ((android.view.ViewGroup)startupOverlay.getParent()).removeView(startupOverlay);
                 if (!activityResumed||isDestroyed()) return;
                 profiles.ensureFirstProfile();
-                if ((profiles.dialog==null||!profiles.dialog.isShowing())&&hasWindowFocus()) getActiveFilterTabView().requestFocus();
+                if ((profiles.dialog==null||!profiles.dialog.isShowing())&&hasWindowFocus()) focusMediaCard(0);
                 if (watchFeedback!=null) watchFeedback.resume();
             }).start();
         } else handler.postDelayed(startupCheck,80);
@@ -792,7 +792,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             });
         } else if (mediaRepo!=null) {
             selectMediaCategory(currentMediaCategory);
-            if (filterTabs[lastFilterTab] != null) {
+            if (!gridMode()) recommendationRail.post(() -> focusMediaCard(0));
+            else if (filterTabs[lastFilterTab] != null) {
                 filterTabs[lastFilterTab].requestFocus();
                 filterTabs[lastFilterTab].post(() -> filterTabs[lastFilterTab].requestFocus());
             }
@@ -1519,6 +1520,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         recommendationHint.setTextSize(historyActive?14:11);
         recommendationHint.setText(notice); recommendationHint.setVisibility(notice.isEmpty()?View.GONE:View.VISIBLE);
         if (gridMode()) {
+            discoveryGrid.showTypeBadge(showTypeBadge());
             discoveryGrid.annotate(historyActive?item -> profiles.model.historySummary(profiles.model.selected().id,item.imdbId):null);
             discoveryGrid.moreState(searchResultsActive?titleSearch.hasMore():!watchLaterActive&&!historyActive,searchResultsActive?titleSearch.loading():gridLoading,searchResultsActive?(titleSearch.failed()?"Tentar carregar mais resultados":"Carregar mais resultados"):gridMoreLabel);
             discoveryGrid.bind(list,0,mediaRepo,historyActive?"Nenhum título registrado neste perfil.":searchResultsActive?"Nenhum resultado para esta pesquisa.":watchLaterActive?"Sua lista está vazia. Salve filmes e séries pelos detalhes.":gridLoading?"Buscando títulos do catálogo…":"Nenhuma descoberta com estas escolhas");
@@ -1551,8 +1553,17 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         int page = categoryPageOffset[mediaPageSlot()] % totalTrios;
         int baseIdx = page * 3;
 
+        recommendationRail.showTypeBadge(showTypeBadge());
         recommendationRail.bind(list,baseIdx,recommendationProfileId+":"+currentMediaCategory+":"+currentMediaType);
         rememberRailExposure(recommendationRail.visibleItems());
+    }
+
+    private boolean showTypeBadge() {
+        if (!gridMode()) return currentMediaType==MediaRepository.TYPE_ALL;
+        if (historyActive||watchLaterActive) return true;
+        if (browsingCatalog) return "all".equals(browseType);
+        if (searchResultsActive) return titleSearch==null||titleSearch.searchesAllTypes();
+        return discoveryQuery==null||discoveryQuery.type==null||discoveryQuery.type.isEmpty();
     }
 
     static java.util.Set<String> recommendationIds(String saved,int limit) {

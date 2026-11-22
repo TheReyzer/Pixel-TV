@@ -96,6 +96,7 @@ final class TitleSearchController {
     boolean hasMore() { return state.more; }
     boolean loading() { return state.loading; }
     boolean failed() { return state.failed; }
+    boolean searchesAllTypes() { return "all".equals(state.type); }
     void loadMore() { loadMore(false); }
     void nearEnd() { loadMore(true); }
     private void loadMore(boolean automatically) {
