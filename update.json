@@ -1,11 +1,11 @@
 {
-  "versionCode": 8,
-  "versionName": "3.0.5",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.5/pixel-tv-3.0.5.apk",
-  "summary": "A verificação de atualização acontece assim que a Home termina de carregar.",
+  "versionCode": 9,
+  "versionName": "3.0.6",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.6/pixel-tv-3.0.6.apk",
+  "summary": "A TV verifica atualizações sempre que a Home é aberta ou retomada.",
   "changelog": [
-    "A TV consulta a atualização no primeiro carregamento da Home.",
-    "O aviso aparece sem esperar os horários programados.",
-    "Perfis, histórico, favoritos e recomendações continuam preservados."
+    "A TV verifica a versão ao ligar e ao retornar para a Home.",
+    "Não existem mais horários fixos para consultar atualizações.",
+    "Se não houver versão nova, nenhum aviso é mostrado."
   ]
 }

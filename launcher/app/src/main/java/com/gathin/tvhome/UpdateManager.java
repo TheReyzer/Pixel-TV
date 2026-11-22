@@ -1,9 +1,6 @@
 package com.gathin.tvhome;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -16,7 +13,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -43,25 +39,6 @@ final class UpdateManager {
     }
 
     interface Callback { void done(Update update); }
-
-    static void schedule(Context context) {
-        AlarmManager alarm=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        if (alarm==null) return;
-        for (int hour:new int[]{9,21}) {
-            Calendar next=Calendar.getInstance(); next.set(Calendar.HOUR_OF_DAY,hour); next.set(Calendar.MINUTE,0); next.set(Calendar.SECOND,0); next.set(Calendar.MILLISECOND,0);
-            if (next.getTimeInMillis()<=System.currentTimeMillis()) next.add(Calendar.DATE,1);
-            Intent intent=new Intent(context,UpdateCheckReceiver.class).setAction("com.gathin.tvhome.UPDATE_CHECK_"+hour);
-            PendingIntent pending=PendingIntent.getBroadcast(context,9000+hour,intent,PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
-            alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,next.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pending);
-        }
-    }
-
-    static void checkIfDue(Context context,Callback callback) {
-        String windowKey=Calendar.getInstance().get(Calendar.YEAR)+"-"+Calendar.getInstance().get(Calendar.DAY_OF_YEAR)+"-"+(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)<14?"morning":"night");
-        android.content.SharedPreferences p=context.getSharedPreferences(PREFS,Context.MODE_PRIVATE);
-        if (windowKey.equals(p.getString("last_window",""))) { if (callback!=null) main.post(() -> callback.done(available(context))); return; }
-        p.edit().putString("last_window",windowKey).apply(); checkNow(context,callback);
-    }
 
     static void checkNow(Context context,Callback callback) {
         worker.execute(() -> {

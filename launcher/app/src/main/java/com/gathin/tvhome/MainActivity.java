@@ -447,7 +447,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (contentReady&&startupContentReadyAt==0) startupContentReadyAt=now;
         if (startupCanReveal(contentReady,recommendationRail!=null&&recommendationRail.readyForStartup(true),startupContentReadyAt==0?0:now-startupContentReadyAt)) {
             startupVisible=false; startupDismissedAt=now; markStartupShown(); startupMark("home-visible");
-            UpdateManager.checkIfDue(this,this::onUpdateChecked);
+            UpdateManager.checkNow(this,this::onUpdateChecked);
             startupOverlay.animate().alpha(0).setDuration(180).withEndAction(() -> {
                 if (startupOverlay.getParent() instanceof android.view.ViewGroup) ((android.view.ViewGroup)startupOverlay.getParent()).removeView(startupOverlay);
                 if (!activityResumed||isDestroyed()) return;
@@ -705,8 +705,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             public boolean onPreDraw(){ root.getViewTreeObserver().removeOnPreDrawListener(this); startupMark("home-layout-frame"); return true; }
         });
         homeInitialized=true;
-        UpdateManager.schedule(this);
-        if (activityResumed&&!startupVisible) UpdateManager.checkIfDue(this,this::onUpdateChecked);
+        if (activityResumed&&!startupVisible) UpdateManager.checkNow(this,this::onUpdateChecked);
         if (activityResumed) resumeHome();
     }
 
@@ -718,7 +717,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             if (pendingUpdateApk!=null && (android.os.Build.VERSION.SDK_INT<26 || getPackageManager().canRequestPackageInstalls())) {
                 java.io.File apk=pendingUpdateApk; pendingUpdateApk=null; installUpdate(apk);
             }
-            UpdateManager.checkIfDue(this,this::onUpdateChecked);
+            UpdateManager.checkNow(this,this::onUpdateChecked);
         }
     }
     private void resumeHome() {

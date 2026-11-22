@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.0.6
+
+- A TV verifica a versão ao ligar e ao retornar para a Home.
+- Não existem mais horários fixos para consultar atualizações.
+- Se não houver versão nova, nenhum aviso é mostrado.
+
 ## 3.0.5
 
 - A TV consulta a atualização no primeiro carregamento da Home.
