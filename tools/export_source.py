@@ -8,7 +8,7 @@ import shutil
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ROOT_FILES = {'README.md','PROMPT.md','AGENTS.md','CONTRIBUTING.md','LICENSE','PRIVACY.md','SECURITY.md','.gitignore'}
+ROOT_FILES = {'README.md','PROMPT.md','AGENTS.md','CONTRIBUTING.md','CHANGELOG.md','LICENSE','PRIVACY.md','SECURITY.md','update.json','.gitignore'}
 TOOLS = {'install.py','export_source.py'}
 PRIVATE_TEXT = (re.compile(r'-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----'),
                 re.compile(r'(?i)C:[/\\]Users[/\\]'), re.compile(r'(?i)(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}'))

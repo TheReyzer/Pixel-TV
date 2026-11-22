@@ -1,3 +1,97 @@
+TV VIBEHACK ATTRIBUTION-SHAREALIKE LICENSE 1.0
+
+Copyright (c) 2026 Gathin and contributors
+
+This is a source-available license. It is not an OSI-approved Open Source
+license. It is intended to keep this project publicly readable while
+requiring attribution for forks, copies, derivative works, and implementations
+that materially build on this project.
+
+1. Definitions
+
+"Work" means the original material in this repository that is not identified
+as third-party material or as material retained under another license.
+
+"Covered Materials" means the Work and any substantial portion, adaptation,
+translation, port, fork, or derivative work of the Work.
+
+"Inspired Implementation" means a separately written implementation that
+materially reproduces or relies on the Work's non-trivial visual design,
+screen composition, distinctive interaction flow, documentation, assets,
+selection or arrangement of content, or other expressive elements. A mere use
+of the same idea, algorithm, standard, protocol, general feature, or product
+category is not an Inspired Implementation.
+
+"Attribution Notice" means this readable statement, or an equivalent notice:
+
+    Based on TV VibeHack by Gathin and contributors.
+    Source: https://github.com/TheReyzer/Pixel-TV
+
+2. Copyright permission
+
+Subject to the conditions below, permission is granted, worldwide and without
+royalty, to use, reproduce, modify, merge, publish, distribute, display, and
+run the Covered Materials, including in commercial products and services.
+
+3. Conditions
+
+You must:
+
+ a. keep the copyright notices, this license, and all applicable third-party
+    notices with every copy or substantial portion of the Covered Materials;
+
+ b. include the Attribution Notice in the README or equivalent project
+    documentation of every source distribution, fork, or derivative work;
+
+ c. include the Attribution Notice in an easily discoverable About, Legal, or
+    Credits screen and in public product documentation when Covered Materials
+    or an Inspired Implementation is distributed as an application, device
+    image, website, service, or other product;
+
+ d. clearly identify material changes and keep the source code of Covered
+    Materials available under this license when you distribute a derivative
+    work or Inspired Implementation;
+
+ e. license your additions that form part of a derivative work or Inspired
+    Implementation under this license, or a later version of this license;
+
+ f. keep separate third-party material under its own license. In particular,
+    the combined Android application and NewPipeExtractor remain subject to
+    the GNU GPL version 3 or later as described in launcher/LICENSE,
+    launcher/COPYING, and launcher/THIRD_PARTY_NOTICES.md; and
+
+ g. not state or imply that Gathin, the contributors, or TV VibeHack endorse
+    your product without written permission.
+
+4. Trademarks
+
+This license does not grant permission to use the TV VibeHack name, logos,
+images, or other marks except as reasonably necessary to provide the required
+Attribution Notice. Do not present a fork or derivative as the official
+project.
+
+5. Termination
+
+Any permission granted by this license terminates automatically if you fail to
+meet its conditions. It may be reinstated only if the copyright holders give
+you written permission or you permanently cure the violation within 30 days
+after receiving notice from a copyright holder.
+
+6. Disclaimer
+
+THE COVERED MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. TO THE MAXIMUM
+EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDERS AND CONTRIBUTORS ARE NOT LIABLE
+FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE MATERIALS OR THEIR
+USE.
+
+7. Upstream MIT notice
+
+Portions derived from Gathin23/tv-vibehack retain the following original MIT
+notice. This notice must remain with those portions; nothing in this license
+removes rights already granted by that upstream license.
+
 MIT License
 
 Copyright (c) 2026 Gathin
@@ -14,14 +108,12 @@ copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT WILL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
-
 The Outfit typeface in launcher/app/src/main/res/font/outfit.ttf is copyright
-The Outfit Project Authors and licensed under the SIL Open Font License 1.1,
+The Outfit Project Authors and licensed under the SIL Open Font License 1.1;
 see launcher/FONT-LICENSE-OFL.txt.

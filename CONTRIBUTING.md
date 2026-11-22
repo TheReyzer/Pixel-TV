@@ -8,4 +8,4 @@ Prefira detecção de capacidades e configuração por dispositivo. Uma melhoria
 
 Não limpe dados nem desinstale para contornar assinatura de atualização. Não desative pacotes automaticamente. Mantenha validação HTTPS e respeite os limites de memória da TV.
 
-Preserve avisos MIT herdados e a GPL-3.0-or-later do aplicativo combinado, além das licenças de fontes/assets em launcher/THIRD_PARTY_NOTICES.md.
+Preserve a licença principal, os avisos MIT herdados e a GPL-3.0-or-later do aplicativo combinado, além das licenças de fontes/assets em launcher/THIRD_PARTY_NOTICES.md.

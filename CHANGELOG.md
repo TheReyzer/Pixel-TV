@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.0.4
+
+- A atualização mantém perfis, histórico, favoritos e recomendações.
+- O aplicativo retoma a Home sem exigir uma nova configuração.
+- O canal de atualização recebe uma nova versão para teste na TV.
+
 ## 3.0.3
 
 - O PIXEL TV libera capas e caches de memória ao sair para outro aplicativo.

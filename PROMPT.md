@@ -4,7 +4,7 @@ Copie o roteiro abaixo para uma IA com terminal e acesso ao repositório.
 
 ---
 
-Instale este projeto na minha Android TV/Google TV. Leia README.md, AGENTS.md, docs/INSTALL.md, docs/COMPATIBILITY.md e docs/RECOMENDACOES.md antes de agir.
+Instale este projeto na minha Android TV/Google TV. Leia README.md, AGENTS.md, docs/INSTALL.md e docs/COMPATIBILITY.md antes de agir.
 
 1. Reutilize o aplicativo existente; não substitua seus recursos por um launcher simplificado. Não copie perfis, cidades ou configurações de outro usuário.
 2. Verifique Python 3.10+, JDK 17, SDK Android 34/build-tools 34.0.0 e platform-tools. Prepare requisitos usando distribuidores oficiais, conforme as permissões do ambiente, sem supor caminhos de outro computador.

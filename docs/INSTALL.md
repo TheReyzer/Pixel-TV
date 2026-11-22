@@ -36,6 +36,21 @@ Copie docs/device-config.example.json para um arquivo device-config.local.json f
 
 O arquivo não tem dados de perfis e é escrito no armazenamento privado do app. Configuração inválida é rejeitada pelo instalador. No aplicativo, arquivo inválido usa defaults genéricos.
 
+## Sincronização Google por perfil
+
+Cada perfil individual pode ser vinculado a uma conta Google existente. O perfil `Geral` não é vinculado. Na TV, abra `Perfil → Contas Google e sincronização`; a autorização usa um código exibido na TV e é concluída pelo navegador do celular ou computador.
+
+Antes de compilar uma versão com sincronização, crie no Google Cloud um cliente OAuth do tipo `TVs e dispositivos com entrada limitada`, ative a Drive API e configure as propriedades locais do Gradle:
+
+```properties
+tvVibehackGoogleClientId=SEU_CLIENT_ID
+tvVibehackGoogleClientSecret=SEU_CLIENT_SECRET_OPCIONAL
+```
+
+Essas propriedades podem ficar no `gradle.properties` do usuário ou no arquivo local de Gradle que não será publicado. Sem o client ID, a interface continua disponível, mas informa que a sincronização ainda não foi configurada. O app usa o escopo estreito `drive.file` e cria uma pasta visível `TV VibeCheck` com um arquivo `perfil.json` por conta. Tokens de atualização ficam cifrados no Android Keystore.
+
+O vínculo importa e mescla dados de perfis já existentes; não substitui silenciosamente avaliações, histórico ou listas locais. Depois do vínculo, a inicialização, avaliações, registros de assistidos, alterações de lista e edição de perfil acionam a sincronização de todos os perfis vinculados. Sem internet, as alterações ficam locais e são reenviadas quando houver conexão.
+
 ## Atualização e restauração
 
 O instalador cria backup/install-DATA/ antes das alterações, com inventário, Home anterior e diário. Use a mesma chave de assinatura nas atualizações. Uma chave diferente causa erro; nunca desinstale ou limpe dados para contornar. Builds de CI não estabelecem um canal permanente de atualização assinado.

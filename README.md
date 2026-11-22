@@ -1,59 +1,12 @@
-<div align="center">
+# TV VibeHack
 
-  <img src="docs/favicon.png" alt="Logo PIXEL TV" width="76" height="76" />
-
-  # PIXEL TV
-  ### Uma Home com alma de cinema para Android TV e Google TV
-
-  Catálogo oficial do **IMDb** com aviso de disponibilidade nos apps instalados na sua TV, recomendações por afinidade individual, busca por voz, trailers embutidos e automação direta para seus streamings — **100% código aberto e zero telemetria**.
-
-  <p>
-    <a href="https://thereyzer.github.io/Pixel-TV/">
-      <img src="https://img.shields.io/badge/%F0%9F%8C%90_ACESSAR_SITE_OFICIAL-thereyzer.github.io%2FPixel--TV-70e1ff?style=for-the-badge&labelColor=0b0d13" alt="Acessar Site Oficial" />
-    </a>
-    <a href="https://github.com/TheReyzer/Pixel-TV/releases">
-      <img src="https://img.shields.io/badge/Vers%C3%A3o-v3.0.3-58b878?style=for-the-badge&labelColor=0b0d13" alt="Releases v3.0.3" />
-    </a>
-    <a href="https://thereyzer.github.io/Pixel-TV/#instalacao">
-      <img src="https://img.shields.io/badge/Instala%C3%A7%C3%A3o-Assistida_por_IA_ou_CLI-ffffff?style=for-the-badge&labelColor=0b0d13" alt="Guia de Instalação" />
-    </a>
-  </p>
-
-  <p>
-    <a href="https://thereyzer.github.io/Pixel-TV/"><strong>🌐 Site Oficial & Demonstração Interativa</strong></a> ·
-    <a href="https://thereyzer.github.io/Pixel-TV/#galeria">Galeria de Telas</a> ·
-    <a href="https://thereyzer.github.io/Pixel-TV/#instalacao">Como Instalar</a> ·
-    <a href="https://thereyzer.github.io/Pixel-TV/#faq">Perguntas Frequentes (FAQ)</a> ·
-    <a href="https://github.com/TheReyzer/Pixel-TV/releases">Baixar APK</a>
-  </p>
-
-  <br />
-
-  <a href="https://thereyzer.github.io/Pixel-TV/">
-    <img src="docs/screen-home.webp" alt="Prévia da interface do PIXEL TV — Clique para abrir o site oficial" width="100%" />
-  </a>
-
-  <sub>👆 Clique na imagem acima ou acesse <a href="https://thereyzer.github.io/Pixel-TV/"><strong>thereyzer.github.io/Pixel-TV</strong></a> para explorar todas as telas, arquitetura, FAQ e o guia interativo de instalação.</sub>
-
-</div>
-
----
-
-## 🌐 Conheça pelo Site Oficial
-
-A apresentação completa do sistema — com prévia interativa de todas as telas, detalhes do motor de afinidade por perfil, sincronização via QR Code no Google Drive (`pasta PIXEL TV`), otimizações para TVs de **2 GB de RAM** e passo a passo de instalação — está disponível em:
-
-👉 **[https://thereyzer.github.io/Pixel-TV/](https://thereyzer.github.io/Pixel-TV/)**
-
----
+Launcher para **Android TV e Google TV**, com interface em português brasileiro, recomendações por perfil, busca por voz, trailers no modal, listas e atalhos para streaming.
 
 ## Instalar com uma IA
 
-Abra este repositório no seu assistente de programação (Claude Code, Antigravity, Cursor ou Windsurf) e envie:
+Abra este repositório no assistente de programação e envie:
 
-```text
-Clone https://github.com/TheReyzer/Pixel-TV e instale na minha Android TV/Google TV. Leia PROMPT.md, identifique a TV e siga o instalador e a verificação deste repositório. Preserve meus aplicativos, perfis e o launcher original.
-```
+> Instale este projeto na minha Android TV/Google TV. Leia PROMPT.md, identifique a TV e siga o instalador e a verificação deste repositório. Preserve meus aplicativos, perfis e o launcher original.
 
 A IA prepara o ambiente, compila, instala e verifica. Você precisa habilitar a depuração e autorizar o computador na TV; alguns modelos exigem pareamento ADB com código. Essas autorizações pertencem ao Android e não podem ser puladas.
 
@@ -67,7 +20,7 @@ O roteiro está em [PROMPT.md](PROMPT.md), e os comandos em [docs/INSTALL.md](do
 - Entradas, canais, volume, voz e abertura de conteúdo em outro app dependem das interfaces e permissões do fabricante/aplicativo.
 - Interface e catálogo priorizam PT-BR e disponibilidade brasileira. Fontes externas podem limitar ou mudar suas respostas.
 
-Veja [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) e [docs/RECOMENDACOES.md](docs/RECOMENDACOES.md) (como funcionam os pesos e regras de recomendação).
+Veja [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 
 ## Primeiro acesso
 
@@ -141,10 +94,14 @@ Não use git push no origin herdado sem conferir o destino. A exportação não 
 
 [PRIVACY.md](PRIVACY.md) explica dados e permissões; [SECURITY.md](SECURITY.md) descreve cuidados e relatos privados.
 
+Perfis individuais podem ser vinculados a contas Google em `Perfil → Contas Google e sincronização`. A configuração OAuth necessária está em [docs/INSTALL.md](docs/INSTALL.md); sem ela, o launcher permanece local.
+
 Cada instalação produz backup/install-DATA/restore.json. Restaure com `python tools/install.py --device SERIAL --restore backup/install-DATA`. A restauração conserva app e perfis. Os utilitários antigos de debloat são operações manuais separadas e não fazem parte do fluxo recomendado.
 
 ## Créditos e licenças
 
-Derivado de [Gathin23/tv-vibehack](https://github.com/Gathin23/tv-vibehack). A licença MIT e os avisos originais foram preservados em [LICENSE](LICENSE).
+Este projeto usa a [TV VibeHack Attribution-ShareAlike License 1.0](LICENSE). Forks, cópias, derivados e implementações que reproduzam elementos não triviais do projeto precisam manter o aviso de crédito, indicar as mudanças, disponibilizar o código correspondente e mostrar o crédito em um local visível do produto. Uma implementação independente que apenas use ideias gerais, algoritmos, padrões ou a mesma categoria de produto não é considerada derivada pela licença.
 
-O aplicativo combina NewPipeExtractor, GPL-3.0-or-later. A distribuição do aplicativo combinado segue [launcher/LICENSE](launcher/LICENSE) e [launcher/COPYING](launcher/COPYING), incluindo os fontes correspondentes e avisos das dependências. Veja [THIRD_PARTY_NOTICES.md](launcher/THIRD_PARTY_NOTICES.md). Um APK desta versão não contém somente código MIT.
+O texto também preserva os avisos MIT herdados de [Gathin23/tv-vibehack](https://github.com/Gathin23/tv-vibehack). A licença não substitui licenças de terceiros nem concede uso das marcas do projeto.
+
+O aplicativo combina NewPipeExtractor, GPL-3.0-or-later. A distribuição do aplicativo combinado segue [launcher/LICENSE](launcher/LICENSE) e [launcher/COPYING](launcher/COPYING), incluindo os fontes correspondentes e avisos das dependências. Veja [THIRD_PARTY_NOTICES.md](launcher/THIRD_PARTY_NOTICES.md). Um APK desta versão não contém somente código coberto pela licença principal.

@@ -322,6 +322,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     // Wi-Fi drop/reconnect tracking
     private boolean netInitialized = false;
     private boolean netOnline = true;
+    private static final long NETWORK_LOSS_CONFIRM_MS = 1500L;
 
     // HDMI hotplug detection
     private TvInputManager tvInputManager;
@@ -348,9 +349,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         @Override
         public void onAvailable(@NonNull Network network) {
             handler.post(() -> {
+                handler.removeCallbacks(confirmNetworkLoss);
                 if (netInitialized && !netOnline) {
                     netOnline = true;
-                    showGlassNotice(R.drawable.ic_wifi, "Wi-Fi GFENIX", "Reconectado", true);
+                    if (activityResumed) showGlassNotice(R.drawable.ic_wifi, "Wi-Fi GFENIX", "Reconectado", true);
                 }
                 netInitialized = true;
                 netOnline = true;
@@ -366,13 +368,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
         @Override
         public void onLost(@NonNull Network network) {
-            handler.post(() -> {
-                if (netInitialized && netOnline) {
-                    netOnline = false;
-                    showGlassNotice(R.drawable.ic_wifi, "Wi-Fi GFENIX caiu", "Sem conexão", false);
-                }
-                updateWifiLabel();
-            });
+            handler.removeCallbacks(confirmNetworkLoss);
+            handler.postDelayed(confirmNetworkLoss, NETWORK_LOSS_CONFIRM_MS);
         }
     };
 
@@ -418,8 +415,24 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private long startupBegan,startupFirstFrameAt,startupContentReadyAt,startupDismissedAt;
     private View startupOverlay;
     private boolean homeInitialized,activityResumed,startupVisible=true,startupSearchPreparing,startupSearchPrepared;
+    private final Runnable confirmNetworkLoss = () -> {
+        ConnectivityManager cm = getSystemService(ConnectivityManager.class);
+        Network active = cm == null ? null : cm.getActiveNetwork();
+        NetworkCapabilities caps = active == null || cm == null ? null : cm.getNetworkCapabilities(active);
+        if (hasUsableNetwork(active != null, caps != null && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))) {
+            netOnline = true;
+            updateWifiLabel();
+            return;
+        }
+        if (netInitialized && netOnline) {
+            netOnline = false;
+            if (activityResumed) showGlassNotice(R.drawable.ic_wifi, "Wi-Fi GFENIX caiu", "Sem conexão", false);
+        }
+        updateWifiLabel();
+    };
     private final Runnable startupCheck=this::checkStartup;
     static boolean startupCanReveal(boolean contentReady,boolean artworkReady,long waitMillis) { return contentReady&&(artworkReady||waitMillis>=4000); }
+    static boolean hasUsableNetwork(boolean activeNetwork,boolean hasInternet) { return activeNetwork&&hasInternet; }
     private void checkStartup() {
         if (!startupVisible||!homeInitialized||!activityResumed||isFinishing()||isDestroyed()) return;
         boolean contentReady=adapter.readyForStartup()&&recommendationRail!=null&&recommendationRail.readyForStartup(false);
@@ -875,6 +888,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     @Override
     protected void onDestroy() {
         handler.removeCallbacks(startupCheck);
+        handler.removeCallbacks(confirmNetworkLoss);
         if (!homeInitialized) { catalogWorker.shutdownNow(); super.onDestroy(); return; }
         if (adapter!=null) adapter.destroy();
         if (mediaBackground!=null) mediaBackground.destroy();
