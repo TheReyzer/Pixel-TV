@@ -1,5 +1,11 @@
 # Changelog do PIXEL TV
 
+## 3.0.9
+
+- Cada recomendação fica limitada a três exibições por dia.
+- A contagem é persistida por perfil e reinicia automaticamente no dia seguinte.
+- O histórico, as avaliações e as listas continuam preservados.
+
 ## 3.0.8
 
 - A blacklist de recomendações passa a durar 30 dias após uma avaliação.

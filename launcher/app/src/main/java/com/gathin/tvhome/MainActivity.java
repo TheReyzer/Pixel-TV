@@ -118,6 +118,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private static final long MINUTE_MS = 60_000L;
     private static final long WEATHER_REFRESH_MS = 30 * 60_000L;
     private static final String PREFS_NAME = "tvhome_prefs";
+    static final int MAX_DAILY_RECOMMENDATION_EXPOSURES = 3;
+    private static final String DAILY_EXPOSURE_DAY_KEY = "daily_exposure_day";
+    private static final String DAILY_EXPOSURE_PREFIX = "daily_exposure_";
 
     private DeviceConfig deviceConfig;
 
@@ -216,6 +219,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private final java.util.Map<String,java.util.Set<String>> lastProfileRecommendations=new java.util.HashMap<>();
     private SharedPreferences recommendationExposurePrefs;
     private java.util.Set<String> lastVisibleRecommendations=new java.util.LinkedHashSet<>();
+    private final java.util.Map<String,Integer> dailyRecommendationExposures=new java.util.HashMap<>();
+    private String recommendationExposureDay="";
+    private java.util.Set<String> lastExposedRecommendations=new java.util.LinkedHashSet<>();
+    private String lastExposureContext="";
     private boolean gridBackAtOrigin;
     private boolean inMediaDetailView = false;
     private int lastClickedMediaCardIdx = 0;
@@ -533,6 +540,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         recommendationProfileId=profiles.model.selected().id;
         recommendationFeedbackVersion=profiles.model.feedbackVersion();
         recommendationExposurePrefs=getSharedPreferences("home_exposure_v1",MODE_PRIVATE);
+        loadDailyRecommendationExposures();
         lastVisibleRecommendations=recommendationIds(recommendationExposurePrefs.getString("screen",""),4);
         varyProfilePage=true;
         btnProfile.setOnClickListener(v -> profiles.showProfiles());
@@ -727,7 +735,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (!startupVisible) root.post(() -> profiles.ensureFirstProfile());
         boolean keepSearch=titleSearch!=null&&titleSearch.isKeepingSearch();
         boolean externalVisit=WatchMonitor.get(this).consumeExternalVisit();
-        if (homeResumed&&externalVisit&&!keepSearch) pendingHomePageAdvance=true;
+        if (homeResumed&&externalVisit&&!keepSearch) { pendingHomePageAdvance=true; lastExposedRecommendations.clear(); }
         homeResumed=true;
         if (!keepSearch) { WatchMonitor.get(this).returnedHome(); if (watchFeedback!=null) watchFeedback.resume(); }
         if (titleSearch!=null) titleSearch.resumed();
@@ -1330,6 +1338,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (preferencesChanged) {
             recommendationProfileId=selected;
             recommendationFeedbackVersion=feedback;
+            loadDailyRecommendationExposures();
             varyProfilePage=true;
             pendingProfileRecommendations=true;
         }
@@ -1515,6 +1524,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             discoveryGrid.bind(list,0,mediaRepo,historyActive?"Nenhum título registrado neste perfil.":searchResultsActive?"Nenhum resultado para esta pesquisa.":watchLaterActive?"Sua lista está vazia. Salve filmes e séries pelos detalhes.":gridLoading?"Buscando títulos do catálogo…":"Nenhuma descoberta com estas escolhas");
             return;
         }
+        ensureDailyRecommendationExposure();
+        List<MediaRepository.MediaItem> eligible=new java.util.ArrayList<>();
+        for (MediaRepository.MediaItem item:list) if (recommendationWithinDailyLimit(item.imdbId,dailyRecommendationExposures)) eligible.add(item);
+        if (eligible.size()!=list.size()) list=eligible;
+        String exposureContext=recommendationProfileId+":"+currentMediaCategory+":"+currentMediaType;
+        if (!exposureContext.equals(lastExposureContext)) { lastExposedRecommendations.clear(); lastExposureContext=exposureContext; }
         if (varyProfilePage) {
             profilePageAvoid=new java.util.HashSet<>(recentRecommendations());
             List<String> recent=new java.util.ArrayList<>(recentRecommendations());
@@ -1546,17 +1561,60 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         while(ids.size()>Math.max(0,limit)) ids.remove(ids.iterator().next());
         return ids;
     }
+    static java.util.Map<String,Integer> recommendationExposureCounts(String saved) {
+        java.util.Map<String,Integer> counts=new java.util.LinkedHashMap<>();
+        if (saved!=null) for (String entry:saved.split(",")) {
+            int separator=entry.indexOf('=');
+            if (separator<=0||separator>=entry.length()-1) continue;
+            String id=entry.substring(0,separator);
+            try {
+                int count=Integer.parseInt(entry.substring(separator+1));
+                if (id.matches("tt[0-9]{5,12}")&&count>0) counts.put(id,Math.min(MAX_DAILY_RECOMMENDATION_EXPOSURES,count));
+            } catch (NumberFormatException ignored) { }
+        }
+        return counts;
+    }
+    static String recommendationExposureString(java.util.Map<String,Integer> counts) {
+        StringBuilder saved=new StringBuilder();
+        for (java.util.Map.Entry<String,Integer> entry:counts.entrySet()) if (entry.getKey()!=null&&entry.getKey().matches("tt[0-9]{5,12}")&&entry.getValue()!=null&&entry.getValue()>0) {
+            if (saved.length()>0) saved.append(',');
+            saved.append(entry.getKey()).append('=').append(Math.min(MAX_DAILY_RECOMMENDATION_EXPOSURES,Math.max(1,entry.getValue())));
+        }
+        return saved.toString();
+    }
+    static boolean recommendationWithinDailyLimit(String imdb,java.util.Map<String,Integer> counts) {
+        return imdb!=null&&imdb.matches("tt[0-9]{5,12}")&&counts.getOrDefault(imdb,0)<MAX_DAILY_RECOMMENDATION_EXPOSURES;
+    }
+    private static String recommendationDay() { return new SimpleDateFormat("yyyy-MM-dd",Locale.US).format(new Date()); }
+    private void loadDailyRecommendationExposures() {
+        if (recommendationExposurePrefs==null||recommendationProfileId==null) return;
+        String today=recommendationDay(),stored=recommendationExposurePrefs.getString(DAILY_EXPOSURE_DAY_KEY,"");
+        dailyRecommendationExposures.clear();
+        if (today.equals(stored)) dailyRecommendationExposures.putAll(recommendationExposureCounts(recommendationExposurePrefs.getString(DAILY_EXPOSURE_PREFIX+recommendationProfileId,"")));
+        else recommendationExposurePrefs.edit().putString(DAILY_EXPOSURE_DAY_KEY,today).apply();
+        recommendationExposureDay=today;
+        lastExposedRecommendations.clear();
+    }
+    private void ensureDailyRecommendationExposure() {
+        if (!recommendationDay().equals(recommendationExposureDay)) loadDailyRecommendationExposures();
+    }
     private java.util.Set<String> recentRecommendations() {
         return lastProfileRecommendations.computeIfAbsent(recommendationProfileId,id -> recommendationIds(recommendationExposurePrefs.getString("profile_"+id,""),12));
     }
     private void rememberRailExposure(List<MediaRepository.MediaItem> visible) {
+        ensureDailyRecommendationExposure();
         for (int i=0;i<3;i++) currentTrio[i]=i<visible.size()?visible.get(i):null;
         java.util.Set<String> shown=new java.util.LinkedHashSet<>(recentRecommendations());
         lastVisibleRecommendations=new java.util.LinkedHashSet<>();
-        for (MediaRepository.MediaItem item:visible) { shown.remove(item.imdbId); shown.add(item.imdbId); lastVisibleRecommendations.add(item.imdbId); }
+        java.util.Set<String> visibleIds=new java.util.LinkedHashSet<>();
+        for (MediaRepository.MediaItem item:visible) { shown.remove(item.imdbId); shown.add(item.imdbId); visibleIds.add(item.imdbId); lastVisibleRecommendations.add(item.imdbId); }
+        if (!visibleIds.equals(lastExposedRecommendations)) {
+            for (String id:visibleIds) if (!lastExposedRecommendations.contains(id)) dailyRecommendationExposures.put(id,Math.min(MAX_DAILY_RECOMMENDATION_EXPOSURES,dailyRecommendationExposures.getOrDefault(id,0)+1));
+            lastExposedRecommendations=new java.util.LinkedHashSet<>(visibleIds);
+        }
         while (shown.size()>12) shown.remove(shown.iterator().next());
         lastProfileRecommendations.put(recommendationProfileId,shown);
-        recommendationExposurePrefs.edit().putString("profile_"+recommendationProfileId,String.join(",",shown)).putString("screen",String.join(",",lastVisibleRecommendations)).apply();
+        recommendationExposurePrefs.edit().putString(DAILY_EXPOSURE_DAY_KEY,recommendationExposureDay).putString(DAILY_EXPOSURE_PREFIX+recommendationProfileId,recommendationExposureString(dailyRecommendationExposures)).putString("profile_"+recommendationProfileId,String.join(",",shown)).putString("screen",String.join(",",lastVisibleRecommendations)).apply();
     }
     private void retryVisibleArtwork() {
         if (mediaRepo==null) return;
@@ -1625,6 +1683,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         dismissTrailerModal(); cancelRelated();
         if (!detailParents.isEmpty()) { RelatedDetailState previous=detailParents.removeFirst(); openMediaDetailView(previous.item,lastClickedMediaCardIdx,previous); return; }
         inMediaDetailView = false;
+        lastExposedRecommendations.clear();
         if (pendingHomePageAdvance&&!gridMode()) bindMediaTrio(false);
         else refreshMediaRecommendations(true);
         mediaDetailContainer.setVisibility(View.GONE);

@@ -1,11 +1,11 @@
 {
-  "versionCode": 11,
-  "versionName": "3.0.8",
-  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.8/pixel-tv-3.0.8.apk",
-  "summary": "Títulos avaliados ficam fora das recomendações por um mês.",
+  "versionCode": 12,
+  "versionName": "3.0.9",
+  "apkUrl": "https://github.com/TheReyzer/Pixel-TV/releases/download/v3.0.9/pixel-tv-3.0.9.apk",
+  "summary": "Cada recomendação aparece no máximo três vezes por dia.",
   "changelog": [
-    "A blacklist de recomendações passa a durar 30 dias após uma avaliação.",
-    "O histórico, as notas e as listas continuam preservados.",
-    "Depois do cooldown, o título volta como opção de menor prioridade."
+    "Cada recomendação fica limitada a três exibições por dia.",
+    "A contagem é persistida por perfil e reinicia automaticamente no dia seguinte.",
+    "O histórico, as avaliações e as listas continuam preservados."
   ]
 }
